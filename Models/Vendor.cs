@@ -10,9 +10,6 @@ public class Vendor : User
     {
         public string AreaOfHouse {get; set;}
         public string BusinessCategory {get; set;}
-        public List<Event> PendingEvents {get; set;}
-        public List<Event> ConfimedEvents {get; set;}
-        
-
+        public List<Event> Events {get; set;}
     }   
 }

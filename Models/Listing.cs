@@ -9,7 +9,6 @@ namespace Infinterest.Models
     public class Listing : BaseEntity
     {   
         public int ListingId {get; set;}
-        public string MLSNumber {get; set;}
         public string MLSLink {get; set;}
         public string AreaOfHouseToFeature {get; set;}
         public int Price {get; set;}

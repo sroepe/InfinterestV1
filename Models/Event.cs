@@ -9,9 +9,11 @@ namespace Infinterest.Models
     public class Event : BaseEntity
     {
         public int EventId {get; set;}
+        public Boolean Confimed {get;set;}
         public int ListingId {get; set;}
         public Listing Listing {get;set;}
         public DateTime OpenHouseDate {get; set;}
-        public EventVendors EventVendors {get; set;}
+        // public List<Vendor> RequestedVendors {get;set;}
+        // public List<Vendor> ConfrimedVendors {get;set;}
     }
 }

@@ -31,16 +31,8 @@ namespace Infinterest.Controllers
             ViewBag.ErrorReg = TempData["ErrorReg"];
             return View("Index");
         }
-        [HttpGet("vendor-registration")]
-        public IActionResult VendorRegistration()
-        {
-            return View();
-        }
-        [HttpGet("broker-registration")]
-        public IActionResult BrokerRegistration()
-        {
-            return View("BrokerRegistration");
-        }
+        // vendor reg moved to vendor controller
+        // broker reg moved to broker controller
 
         [HttpGet("broker-profile")]
         public IActionResult BrokerProfile1()
@@ -168,13 +160,16 @@ namespace Infinterest.Controllers
         [HttpGet("dashboard")]
         public IActionResult Dashboard()
         {
+            // if user is broker show broker dash
+            // if user is vendor show vendor dash
+            // if not send back to browse or something
             return View();
         }
-        [HttpGet("messaging")]
-        public IActionResult Messaging()
-        {
-            return View();
-        }
+        // [HttpGet("messaging")]
+        // public IActionResult Messaging()
+        // {
+        //     return View();
+        // }
 
         [HttpGet("profile")]
         public IActionResult Profile()
@@ -187,11 +182,7 @@ namespace Infinterest.Controllers
             return View();
         }
 
-        [Route("add-listings")]
-        public IActionResult AddEvents()
-        {
-            return View();
-        }
+        // add listings moved to broker
 
         [HttpGet("search")]
         public IActionResult AfterSearch()

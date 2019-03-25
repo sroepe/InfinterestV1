@@ -14,6 +14,18 @@ namespace Infinterest.Controllers
 {
     public class VendorController : Controller
     {
+        private Context _context;
+        public VendorController(Context context)
+        {
+            _context = context;
+        }
+
+        [HttpGet("vendor-registration")]
+        public IActionResult VendorRegistration()
+        {
+            return View();
+        }
+
         
     }
 }

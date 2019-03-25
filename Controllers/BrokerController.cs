@@ -14,6 +14,35 @@ namespace Infinterest.Controllers
 {
     public class BrokerController : Controller
     {
-        
+        private Context _context;
+        public BrokerController(Context context)
+        {
+            _context = context;
+        }
+
+        [HttpGet("broker-registration")]
+        public IActionResult BrokerRegistration()
+        {
+            return View("BrokerRegistration");
+        }
+
+        [HttpGet("brokerdashboard")]
+        public IActionResult DashboardBroker()
+        {
+            DashboardBrokerView DisplayModel = new DashboardBrokerView();
+// example only
+            // DisplayModel.UsersListings = _context.brokers
+            //                             .Where(broker => broker.BrokerId == 1)
+            //                             .Include(broker => broker.listings)
+            //                             .ToList();
+            return View();
+        }
+
+        [Route("add-listings")]
+        // will need to split into listings and events
+        public IActionResult AddEvents()
+        {
+            return View();
+        }
     }
 }
