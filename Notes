@@ -1,0 +1,121 @@
+Things to consider:
+    Reviews?
+
+
+------------
+
+Controllers
+
+------------
+
+Broker controller
+    Handles broker actions, creating broker account, adding listing, adding event, choosing vendors, search feature? Shows broker pages with broker information 
+Home controller
+    Handles navigation, delivers models, search?
+Vendor controller
+    Create vendor account, join events, show events they have signed up for or are confirmed for. Shows vendor pages.
+
+------------
+
+Models
+
+------------
+
+Base Entity - useless little created at edited at timestamp
+
+User
+{
+    ID
+    Type
+    Name
+    Contact info
+    Bio
+    Password
+    Email
+    Img
+    Code
+    Company
+    Website
+    Subscription Status
+}
+    Broker : User
+    {
+        ID
+        Listings
+        Pending Events
+        Finalized Events
+    }
+    Vendor : User
+    {
+        ID
+        House Area
+        Business Category
+        Events Requested
+        Events Confirmed
+    }
+
+
+Listing
+{
+    ID
+    MLS Link
+    Avalibility Bool?
+    Area Of House (To Feature)
+    Price
+    Zip
+    Img
+    Broker
+    Events
+}
+	Event
+    {
+        ID
+        Confirmed/Unconfirmed
+        Listing
+        Open house date
+        Requested Vendors
+        Confirmed vendors
+    }
+
+
+Big Models:
+
+------------
+
+Views
+
+------------
+
+Browse (Confirmed events for all users/non-signed in)
+    Model:
+    Upcoming Events
+    Past Events
+
+    Shows all in a list, past events listed seperatly
+
+Dashboard - Broker
+    Model:
+    User's Listings
+    User's pending events (Maybe even seperate for ones that have unconfimed vendors)
+    Users Finalized events (Maybe even seperate into upcoming and past)
+    Vendor list
+
+    View:
+    search bar?
+    All Vendors (or searched)
+    Pending events, Finalized Events
+    Add new listing
+    Users Listings
+        - from there we can add new events on to listings
+
+Dashboard - Vendor
+    Model:
+    Confrimed Events
+    Requested Events
+    All Events
+
+    View:
+    Search bar?
+    All events (or searched)
+    Confirmed events, Requested events
+
