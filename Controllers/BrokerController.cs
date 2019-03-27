@@ -35,7 +35,11 @@ namespace Infinterest.Controllers
             //                             .Where(broker => broker.BrokerId == 1)
             //                             .Include(broker => broker.listings)
             //                             .ToList();
-            return View();
+
+            DisplayModel.AvailibleVendors = _context.vendors.ToList();
+
+            
+            return View(DisplayModel);
         }
 
         [Route("add-listings")]

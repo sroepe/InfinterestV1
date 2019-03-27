@@ -13,7 +13,7 @@ namespace Infinterest.Models
         public int ListingId {get; set;}
         public Listing Listing {get;set;}
         public DateTime OpenHouseDate {get; set;}
-        // public List<Vendor> RequestedVendors {get;set;}
-        // public List<Vendor> ConfrimedVendors {get;set;}
+        public List<Vendor> RequestedVendors {get;set;}
+        public List<Vendor> ConfrimedVendors {get;set;}
     }
 }
