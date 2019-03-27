@@ -13,6 +13,7 @@ namespace Infinterest.Models
         public string AreaOfHouseToFeature {get; set;}
         public int Price {get; set;}
         public int Zip {get; set;}
+        public Address Address {get;set;}
         public string ImgUrl { get; set; }
 
         public int BrokerId {get; set;}

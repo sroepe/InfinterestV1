@@ -115,71 +115,26 @@
     </div>
     <div>
        <div id="middlesection">
-            <div class="share">
-                <h3><span class="name">Lisa Jones</span> added a new event.</h3>
-                <div class="result">
-                    <img src="../images/kitchen-1799712_960_720.jpg" alt="kitchenpic" class="respic">
-                    <div class="resinfo">
-                        <h4>42352 43rd Ave SE</h4>
-                        <h4>Belletown, WA 90528</h4>
-                        <h6>June 2, 2019</h6>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac est odio. Fusce lacus diam, elementum eget elit in, ultrices consectetur sapien. Aenean tincidunt hendrerit tempus.</p>
-                        <a href="/event-detail"><h5>Details</h5></a>
+            
+            @{
+                foreach (Vendor vend in Model.AvailibleVendors)
+                {
+                    <div class="share">
+                        <div class="result">
+                            <img src="@vend.ImgUrl" alt="" class="respic">
+                            <div class="resinfo">
+                                <h4>@vend.Company</h4>
+                                <h4>@vend.BusinessCategory</h4>
+                                <h6>@vend.FirstName @vend.LastName</h6>
+                                <p>@vend.Bio</p>
+                                <a href="/event-detail"><h5>Details</h5></a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="share">
-                <h3><span class="name">Brady Mitchell</span> reviewed a broker near you.</h3>
-                <div class="result">
-                    <img src="../images/home2.jpg" alt="kitchenpic" class="respic">
-                    <div class="resinfo">
-                        <h4>44 Main St</h4>
-                        <h4>Town Center, WA 90543</h4>
-                        <h6>July 16, 2019</h6>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac est odio. Fusce lacus diam, elementum eget elit in, ultrices consectetur sapien. Aenean tincidunt hendrerit tempus.</p>
-                        <a href="/event-detail"><h5>Details</h5></a>
-                    </div>
-                </div>
-            </div>
-            <div class="share">
-                <h3><span class="name">Lisa Jones</span> added a new event.</h3>
-                <div class="result">
-                    <img src="../images/home3.jpg" alt="kitchenpic" class="respic">
-                    <div class="resinfo">
-                        <h4>1234 Address Way</h4>
-                        <h4>Cityville, WA 90528</h4>
-                        <h6>August 28, 2019</h6>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac est odio. Fusce lacus diam, elementum eget elit in, ultrices consectetur sapien. Aenean tincidunt hendrerit tempus.</p>
-                        <a href="/event-detail"><h5>Details</h5></a>
-                    </div>
-                </div>
-            </div>
-            <div class="share">
-                <h3><span class="name">Lisa Jones</span> added a new event.</h3>
-                <div class="result">
-                    <img src="../images/home4.jpg" alt="kitchenpic" class="respic">
-                    <div class="resinfo">
-                        <h4>1234 Address Way</h4>
-                        <h4>Cityville, WA 90528</h4>
-                        <h6>Nov. 6, 2019</h6>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac est odio. Fusce lacus diam, elementum eget elit in, ultrices consectetur sapien. Aenean tincidunt hendrerit tempus.</p>
-                        <a href="/event-detail"><h5>Details</h5></a>
-                    </div>
-                </div>
-            </div>
-            <div class="share">
-                <h3><span class="name">Lisa Jones</span> added a new event.</h3>
-                <div class="result">
-                    <img src="../images/home5.jpg" alt="kitchenpic" class="respic">
-                    <div class="resinfo">
-                        <h4>3511 2nd Street West</h4>
-                        <h4>Seattle, WA 90528</h4>
-                        <h6>December 5, 2019</h6>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac est odio. Fusce lacus diam, elementum eget elit in, ultrices consectetur sapien. Aenean tincidunt hendrerit tempus.</p>
-                        <a href="/event-detail"><h5>Details</h5></a>
-                    </div>
-                </div>
-            </div>
+                }
+            }
+
+
         </div>
         <div id="rightsection">
             <div class="calendar">
@@ -237,27 +192,39 @@
             </div> 
 
             <div>
-                <label class="price upevents">Your Upcoming Events</label>
-                <div class="result">
-                    <img src="../images/home6.jpg" alt="kitchenpic" class="respic">
-                    <div class="resinfo">
-                        <h4>23 5th St</h4>
-                        <h4>Seattle, WA 98005</h4>
-                        <h6>January 10, 2019</h6>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                        <a href="/event-detail"><h5>Details</h5></a>
-                    </div>
-                </div>
-                <div class="result">
-                    <img src="../images/home7.jpg" alt="kitchenpic" class="respic">
-                    <div class="resinfo">
-                        <h4>92 5th Ave W</h4>
-                        <h4>Seattle, WA 90528</h4>
-                        <h6>January 19, 2019</h6>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                        <a href="/event-detail"><h5>Details</h5></a>
-                    </div>
-                </div>
+                <label class="price upevents">Your Pending Events</label>
+                @{
+                    foreach(Event pending in Model.PendingEvents)
+                    {
+                        <div class="result">
+                            <img src="@pending.Listing.ImgUrl" alt="" class="respic">
+                            <div class="resinfo">
+                                <h4>@pending.Listing.Address.addressLine1</h4>
+                                <h4>@pending.Listing.Address.city, @pending.Listing.Address.state @pending.Listing.Address.postalCode</h4>
+                                <h6>@pending.OpenHouseDate</h6>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                                <a href="/event-detail"><h5>Details</h5></a>
+                            </div>
+                        </div>
+                    }
+                }
+                <label class="price upevents">Your Finalized Events</label>
+                @{
+                    foreach(Event finalized in Model.FinalizedEvents)
+                    {
+                        <div class="result">
+                            <img src="@finalized.Listing.ImgUrl" alt="" class="respic">
+                            <div class="resinfo">
+                                <h4>@finalized.Listing.Address.addressLine1</h4>
+                                <h4>@finalized.Listing.Address.city, @finalized.Listing.Address.state @finalized.Listing.Address.postalCode</h4>
+                                <h6>@finalized.OpenHouseDate</h6>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                                <a href="/event-detail"><h5>Details</h5></a>
+                            </div>
+                        </div>
+                    }
+                }
+                
                 <a class="btn btn-primary" href="/add-listings">Create Event</a>
             </div>
                 
