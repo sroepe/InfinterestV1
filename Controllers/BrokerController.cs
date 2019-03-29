@@ -33,19 +33,19 @@ namespace Infinterest.Controllers
 // example only
 
             Broker user = _context.brokers
-                            .Where(broker => broker.UserId == 1)
-                            .FirstOrDefault();
+                .Where(broker => broker.UserId == 1)
+                .FirstOrDefault();
 
 
             DisplayModel.UsersListings = user.Listings;
 
             DisplayModel.PendingEvents = user.Events
-                                        .Where(thisEvent => thisEvent.Confimed == false)
-                                        .ToList();
+                .Where(thisEvent => thisEvent.Confimed == false)
+                .ToList();
 
             DisplayModel.FinalizedEvents = user.Events
-                                        .Where(thisEvent => thisEvent.Confimed == true)
-                                        .ToList();
+                .Where(thisEvent => thisEvent.Confimed == true)
+                .ToList();
 
             DisplayModel.AvailibleVendors = _context.vendors.ToList();
 
@@ -58,7 +58,7 @@ namespace Infinterest.Controllers
         public IActionResult AddListing(Listing newListing)
         {
             // create listing
-            return Redirect("brokerdashboard");
+            return RedirectToAction("Dashboard");
         }
     }
 }

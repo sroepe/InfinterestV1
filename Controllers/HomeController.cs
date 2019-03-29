@@ -34,21 +34,45 @@ namespace Infinterest.Controllers
         // vendor reg moved to vendor controller
         // broker reg moved to broker controller
 
-        [HttpGet("broker-profile")]
-        public IActionResult BrokerProfile1()
+        [HttpGet("broker-profile/{id}")]
+        public IActionResult BrokerProfile(String id)
         {
-            return View("BrokerProfile");
+            if(Int32.TryParse(id, out int userid))
+            {
+                Broker thisBroker = _context.brokers
+                    .Where(broker => broker.UserId == userid)
+                    .FirstOrDefault();
+                return View("BrokerProfile", thisBroker);
+            }
+            
+            return RedirectToAction ("Dashboard");
         }
-        [HttpGet("vendor-profile")]
-        public IActionResult VendorProfile()
+        [HttpGet("vendor-profile/{id}")]
+        public IActionResult VendorProfile(String id)
         {
-            return View();
+            if(Int32.TryParse(id, out int userid))
+            {
+                Vendor thisVendor = _context.vendors
+                    .Where(vendor => vendor.UserId == userid)
+                    .FirstOrDefault();
+                return View("VendorProfile", thisVendor);
+            }
+            
+            return RedirectToAction ("Dashboard");
+
         }
 
-        [HttpGet("event-detail")]
-        public IActionResult EventDetail()
+        [HttpGet("event-detail/{eventId}")]
+        public IActionResult EventDetail(String eventId)
         {
-            return View();
+            if(Int32.TryParse(eventId, out int id))
+            {
+                Event thisEvent = _context.events
+                    .Where(ev => ev.EventId == id)
+                    .FirstOrDefault();
+                return View(thisEvent);
+            }
+            return RedirectToAction ("Dashboard");
         }
 
         
