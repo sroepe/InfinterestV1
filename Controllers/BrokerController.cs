@@ -55,9 +55,10 @@ namespace Infinterest.Controllers
 
         [Route("add-listings")]
         // will need to split into listings and events
-        public IActionResult AddEvents()
+        public IActionResult AddListing(Listing newListing)
         {
-            return View();
+            // create listing
+            return Redirect("brokerdashboard");
         }
     }
 }

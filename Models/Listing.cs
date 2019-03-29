@@ -10,7 +10,6 @@ namespace Infinterest.Models
     {   
         public int ListingId {get; set;}
         public string MLSLink {get; set;}
-        public string AreaOfHouseToFeature {get; set;}
         public int Price {get; set;}
         public int Zip {get; set;}
         public Address Address {get;set;}
