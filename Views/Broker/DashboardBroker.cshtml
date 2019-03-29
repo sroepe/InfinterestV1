@@ -67,7 +67,27 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                @{
+                                <div class="modal-result">
+                                    <img src="../images/kitchen-1799712_960_720.jpg" alt="kitchenpic" >
+                                    <div>
+                                        <h4>42352 43rd Ave SE</h4>
+                                        <h4>Belletown, WA 90528</h4>
+                                        <h6>June 2, 2019</h6>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac est odio. Fusce lacus diam, elementum eget elit in, ultrices consectetur sapien. Aenean tincidunt hendrerit tempus.</p>
+                                        <a href="/event-detail"><h5>Details</h5></a>
+                                    </div>
+                                </div>
+                                <div class="modal-result">
+                                    <img src="../images/home2.jpg" alt="kitchenpic" class="respic">
+                                    <div>
+                                        <h4>44 Main St</h4>
+                                        <h4>Town Center, WA 90543</h4>
+                                        <h6>July 16, 2019</h6>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac est odio. Fusce lacus diam, elementum eget elit in, ultrices consectetur sapien. Aenean tincidunt hendrerit tempus.</p>
+                                        <a href="/event-detail"><h5>Details</h5></a>
+                                    </div>
+                                </div>
+                                <!-- @{
                                     foreach (Vendor vendor in Model.AvailibleVendors)
                                     {
                                         <div class="modal-result">
@@ -81,7 +101,7 @@
                                             </div>
                                         </div>
                                     }
-                                }
+                                } -->
                                 
                             </div>
                             <div class="modal-footer">
@@ -93,7 +113,9 @@
 
             </form>
         </div>
-        <div class="pref">
+    </div>
+    <div>
+       <div id="middlesection">
             <label for="price" class="preftitle">Associated Vendors</label>
             <div class="prefpics">
                 <a href="/vendor-profile"><img src="../images/jimmyjohns.jpg" alt="" class="preferred"></a>
@@ -102,21 +124,7 @@
                 <a href="/vendor-profile"><img src="../images/cupcake.png" alt="" class="preferred"></a>
 
             </div>
-            <label for="price" class="preftitle">Preferred Brokers</label>
-            <div class="prefpics">
-                <a href="/broker-profile"><img src="../images/headshot1.jpg" alt="" class="preferred"></a>
-                <a href="/broker-profile"><img src="../images/headshot2.jpg" alt="" class="preferred"></a>
-                <a href="/broker-profile"><img src="../images/headshot3.jpg" alt="" class="preferred"></a>
-                <a href="/broker-profile"><img src="../images/headshot4.jpg" alt="" class="preferred"></a>
-                <a href="/broker-profile"><img src="../images/headshot5.jpg" alt="" class="preferred"></a>
-                <a href="/broker-profile"><img src="../images/headshot6.jpg" alt="" class="preferred"></a>
-            </div>
-        </div>
-    </div>
-    <div>
-       <div id="middlesection">
-            
-            @{
+            <!-- @{
                 foreach (Vendor vend in Model.AvailibleVendors)
                 {
                     <div class="share">
@@ -132,68 +140,47 @@
                         </div>
                     </div>
                 }
-            }
+            } -->
 
 
         </div>
         <div id="rightsection">
-            <div class="calendar">
-                <div class="month"> 
-                    <ul>
-                        <li class="prev">&#10094;</li>
-                        <li class="next">&#10095;</li>
-                        <li>January<br><span style="font-size:18px">2019</span></li>
-                    </ul>
-                </div>
-
-                <ul class="weekdays">
-                    <li>Mo</li>
-                    <li>Tu</li>
-                    <li>We</li>
-                    <li>Th</li>
-                    <li>Fr</li>
-                    <li>Sa</li>
-                    <li>Su</li>
-                </ul>
-
-                <ul class="days"> 
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
-                    <li>5</li>
-                    <li>6</li>
-                    <li>7</li>
-                    <li>8</li>
-                    <li>9</li>
-                    <li><span class="active">10</span></li>
-                    <li>11</li>
-                    <li>12</li>
-                    <li>13</li>
-                    <li>14</li>
-                    <li>15</li>
-                    <li>16</li>
-                    <li>17</li>
-                    <li>18</li>
-                    <li><span class="active">19</span></li>
-                    <li>20</li>
-                    <li>21</li>
-                    <li>22</li>
-                    <li>23</li>
-                    <li>24</li>
-                    <li>25</li>
-                    <li>26</li>
-                    <li>27</li>
-                    <li>28</li>
-                    <li>29</li>
-                    <li><span class="active">30</span></li>
-                    <li>31</li>
-                </ul>
-            </div> 
-
             <div>
-                <label class="price upevents">Your Pending Events</label>
-                @{
+                <label class="price listings">Your Listings</label>
+                <div class="mylistings">
+                    <div class="listingdetails">
+                        <img src="../images/home3.jpg" alt="kitchenpic" class="respic">
+                        <h4>93754 39th Ave W</h4>
+                        <h4>Centerville, WA 90528</h4>
+                        <h6>$849,000</h6>
+                        <h6>Listed on January 19, 2019</h6>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                        <p>MLS 34683</p>
+                    </div>
+                    <div class="listingdetails">
+                        <img src="../images/home3.jpg" alt="kitchenpic" class="respic">
+                        <h4>93754 39th Ave W</h4>
+                        <h4>Centerville, WA 90528</h4>
+                        <h6>$849,000</h6>
+                        <h6>Listed on January 19, 2019</h6>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                        <p>MLS 34683</p>
+                    </div>
+                </div>
+                <label class="price upevents">Your Events</label>
+                <div class="myevents">
+                    <div class="event"></div>
+                        <img src="../images/home3.jpg" alt="kitchenpic" class="respic">
+                        <div class="resinfo"></div>
+                            <h4>1234 Address Way</h4>
+                            <h4>Cityville, WA 90528</h4>
+                            <h6>August 28, 2019</h6>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac est odio. Fusce lacus diam, elementum eget elit in, ultrices consectetur sapien. Aenean tincidunt hendrerit tempus.</p>
+                            <a href="/event-detail"><h5>Details</h5></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- @{
                     foreach(Event pending in Model.PendingEvents)
                     {
                         <div class="result">
@@ -207,8 +194,8 @@
                             </div>
                         </div>
                     }
-                }
-                <label class="price upevents">Your Finalized Events</label>
+                } -->
+                <!-- <label class="price upevents">Your Finalized Events</label>
                 @{
                     foreach(Event finalized in Model.FinalizedEvents)
                     {
@@ -223,7 +210,7 @@
                             </div>
                         </div>
                     }
-                }
+                } -->
                 
                 <a class="btn btn-primary" href="/add-listings">Create Event</a>
             </div>
