@@ -199,6 +199,33 @@ maybe move the left section to the top, search and prefpics becomes inline-block
     padding: 20px;
 }
 
+#event-details .listingheader h4 {
+    background-color: black;
+    height: 60px;
+    color: whitesmoke;
+    padding: 10px 10px 0px 10px;
+    text-align: center;
+    display: inline-block;
+    width: auto;
+    margin-bottom: -10px;
+}
+
+
+
+.listingevents {
+    background-color: rgba(0, 0, 0, 0.747);
+    width: 25%;
+    text-align: right;
+    padding: 5px;
+    margin-left: 244px;
+    margin-bottom: 15px;
+}
+
+.listingevents li {
+    border: 1px solid black;
+    
+}
+
 .respic{
     /* margin: 3%; */
     height: auto;
@@ -222,7 +249,7 @@ maybe move the left section to the top, search and prefpics becomes inline-block
 #event-details h4 {
     color: black;
     /* font-weight: bold; */
-    font-size: 28px;
+    font-size: 24px;
     line-height: 30px;
     text-align: center;
 }

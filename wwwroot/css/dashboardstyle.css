@@ -72,10 +72,10 @@ body, html, #dashboardcontainer{
 
 #rightsection{
     width: 23%;
-    height: 400px;
+    height: auto;
     /* outline: 2px dotted red; */
     display: inline-block;
-    float: right;
+    /* float: right; */
     /* padding-top: 1%; */
     padding-top: 73px;
     /* vertical-align: top; */
@@ -236,7 +236,7 @@ body, html, #dashboardcontainer{
 }
 
 #leftsection .btn-primary{
-    margin-left: 60%;
+    margin-left: 30%;
     margin-top: 3%;
     background-color: #35BFFF;
     color: whitesmoke;

@@ -87,21 +87,7 @@
                                         <a href="/event-detail"><h5>Details</h5></a>
                                     </div>
                                 </div>
-                                <!-- @{
-                                    foreach (Vendor vendor in Model.AvailibleVendors)
-                                    {
-                                        <div class="modal-result">
-                                            <img src="@vendor.ImgUrl" alt="" >
-                                            <div>
-                                                <h4>@vendor.Company</h4>
-                                                <h4>@vendor.BusinessCategory</h4>
-                                                <h6>@vendor.FirstName @vendor.LastName</h6>
-                                                <p>@vendor.Bio</p>
-                                                <a href="/event-detail"><h5>Details</h5></a>
-                                            </div>
-                                        </div>
-                                    }
-                                } -->
+                             
                                 
                             </div>
                             <div class="modal-footer">
@@ -124,24 +110,7 @@
                 <a href="/vendor-profile"><img src="../images/cupcake.png" alt="" class="preferred"></a>
 
             </div>
-            <!-- @{
-                foreach (Vendor vend in Model.AvailibleVendors)
-                {
-                    <div class="share">
-                        <div class="result">
-                            <img src="@vend.ImgUrl" alt="" class="respic">
-                            <div class="resinfo">
-                                <h4>@vend.Company</h4>
-                                <h4>@vend.BusinessCategory</h4>
-                                <h6>@vend.FirstName @vend.LastName</h6>
-                                <p>@vend.Bio</p>
-                                <a href="/event-detail"><h5>Details</h5></a>
-                            </div>
-                        </div>
-                    </div>
-                }
-            } -->
-
+           
 
         </div>
         <div id="rightsection">
@@ -179,40 +148,11 @@
                             <a href="/event-detail"><h5>Details</h5></a>
                         </div>
                     </div>
+                    <a class="btn btn-primary" href="/add-listings">Create Event</a>
                 </div>
-                <!-- @{
-                    foreach(Event pending in Model.PendingEvents)
-                    {
-                        <div class="result">
-                            <img src="@pending.Listing.ImgUrl" alt="" class="respic">
-                            <div class="resinfo">
-                                <h4>@pending.Listing.Address.addressLine1</h4>
-                                <h4>@pending.Listing.Address.city, @pending.Listing.Address.state @pending.Listing.Address.postalCode</h4>
-                                <h6>@pending.OpenHouseDate</h6>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                                <a href="/event-detail"><h5>Details</h5></a>
-                            </div>
-                        </div>
-                    }
-                } -->
-                <!-- <label class="price upevents">Your Finalized Events</label>
-                @{
-                    foreach(Event finalized in Model.FinalizedEvents)
-                    {
-                        <div class="result">
-                            <img src="@finalized.Listing.ImgUrl" alt="" class="respic">
-                            <div class="resinfo">
-                                <h4>@finalized.Listing.Address.addressLine1</h4>
-                                <h4>@finalized.Listing.Address.city, @finalized.Listing.Address.state @finalized.Listing.Address.postalCode</h4>
-                                <h6>@finalized.OpenHouseDate</h6>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                                <a href="/event-detail"><h5>Details</h5></a>
-                            </div>
-                        </div>
-                    }
-                } -->
+              
                 
-                <a class="btn btn-primary" href="/add-listings">Create Event</a>
+                
             </div>
                 
         </div>
