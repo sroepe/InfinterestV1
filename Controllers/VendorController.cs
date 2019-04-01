@@ -23,11 +23,43 @@ namespace Infinterest.Controllers
         [HttpGet("vendor-registration")]
         public IActionResult VendorRegistration()
         {
+
             return View();
+        }
+        [HttpPost("vendor-registration")]
+        public IActionResult CreateVendor(UserValidator NewVendor)
+        {
+            if (ModelState.IsValid)
+            {
+                if(_context.vendors.Any(u => u.Email == NewVendor.Email))
+            {
+                ModelState.AddModelError("Email", "Email already in use!");
+                return View("vendor-registation");
+            }
+            else
+            {
+                Vendor ThisVendor = new Vendor();
+                ThisVendor.FirstName = NewVendor.FirstName;
+                ThisVendor.LastName = NewVendor.LastName;
+                ThisVendor.ImgUrl = NewVendor.ImgUrl;
+                ThisVendor.UserType = "Vendor";
+                ThisVendor.Bio = NewVendor.Bio;
+                // and so on
+                PasswordHasher<Vendor> Hasher = new PasswordHasher<Vendor>();
+                ThisVendor.Password = Hasher.HashPassword(ThisVendor, NewVendor.Password);
+                _context.Add(ThisVendor);
+                _context.SaveChanges();
+                HttpContext.Session.SetInt32("userid", ThisVendor.UserId);
+                return Redirect("/success"); //This doesn't exist yet
+            }
+            }
+            else
+            {
+                return View("vendor-registration");
+            }
         }
 
         
-        // what exactly is this doing???
         // [HttpPost("vendor")]
         // public IActionResult NewVendor(Vendor NewVendor)
         // {

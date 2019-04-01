@@ -32,6 +32,9 @@ namespace Infinterest.Models
         [DataType(DataType.Text)]
         [Display(Name = "Your bio:")]
         public string Bio { get; set; }
+        [DataType(DataType.Text)]
+        [Display(Name = "ImgUrl")]
+        public string ImgUrl { get; set; }
 
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email:")]
@@ -44,9 +47,10 @@ namespace Infinterest.Models
         // [RegularExpression("^(?=.*[a-zA-Z])(?=.*[^a-zA-Z])(.{8,15})$", ErrorMessage = "Your password must contain an upper case letter, lower case letter, and special character or number")]
         // [RegularExpression("^(?=.*[a-zA-Z])(?=.*[0-9])(.{8,15})$", ErrorMessage = "Your password must contain an upper case letter, lower case letter, and special character or number")]
         // [RegularExpression("^(?=.*[a-zA-Z])(?=.*[0-9])(.{8,15})$", ErrorMessage = "Your password must contain an upper case letter, lower case letter, and special character or number")]
-        // [MinLength(8, ErrorMessage = "Your password must be at least 8 characters long")]
+        [MinLength(8, ErrorMessage = "Your password must be at least 8 characters long")]
         public string Password { get; set; }
 
+// unmapped
         [DataType(DataType.Password)]
         [Display(Name = "Confirm your password:")]
         [Required(ErrorMessage = "A password is required")]
