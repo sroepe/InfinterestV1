@@ -173,10 +173,25 @@ namespace Infinterest.Controllers
         [HttpGet("dashboard")]
         public IActionResult Dashboard()
         {
-            // if user is broker show broker dash
-            // if user is vendor show vendor dash
-            // if not send back to browse or something
-            return View();
+            int? ID = HttpContext.Session.GetInt32("userid");
+
+            User CurrentUser = _context.users
+            .Where(user => user.UserId == ID)
+            .FirstOrDefault();
+
+            if(CurrentUser.UserType == "Vendor")
+            {
+                return View("dashboardvendor");
+            }
+            else if(CurrentUser.UserType == "Broker")
+            {
+                return View("DashboardBroker");
+            }
+            else
+            {
+                //fake code
+                return Redirect("login");
+            }
         }
         
         // [HttpGet("messaging")]

@@ -20,6 +20,26 @@ namespace Infinterest.Controllers
             _context = context;
         }
 
+        [HttpGet("dashboardvendor")]
+        public IActionResult DashboardVendor()
+        {
+
+            int? ID = HttpContext.Session.GetInt32("userid");            
+
+            DashboardVendorView viewModel = new DashboardVendorView();
+            
+            viewModel.allListings = _context.listings
+                                    .ToList();
+
+            Vendor user = _context.vendors
+                        .Where(vend => vend.UserId == ID)
+                        .FirstOrDefault();
+
+            viewModel.usersEvents = user.Events;
+
+            return View ("DashboardVendor", viewModel);
+        }
+
         [HttpGet("vendor-registration")]
         public IActionResult VendorRegistration()
         {
@@ -50,7 +70,7 @@ namespace Infinterest.Controllers
                 _context.Add(ThisVendor);
                 _context.SaveChanges();
                 HttpContext.Session.SetInt32("userid", ThisVendor.UserId);
-                return Redirect("/success"); //This doesn't exist yet
+                return Redirect("/dashboard"); //This doesn't exist yet
             }
             }
             else
