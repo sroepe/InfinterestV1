@@ -8,8 +8,10 @@ namespace Infinterest.Models
 {
 public class Vendor : User
     {
-        public string AreaOfHouse {get; set;}
-        public string BusinessCategory {get; set;}
+        // turn to lists
+        public List<String> AreaOfHouse {get; set;}
+        public List<String> BusinessCategory {get; set;}
         public List<Event> Events {get; set;}
+
     }   
 }

@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace Infinterest.Models
 {
-   public class UserValidator
+public class UserValidator
     {   
         [DataType(DataType.Text)]
         [Required(ErrorMessage = "A type is required")]
@@ -44,9 +44,7 @@ namespace Infinterest.Models
         [DataType(DataType.Password)]
         [Display(Name = "Password:")]
         [Required(ErrorMessage = "A password is required")]
-        // [RegularExpression("^(?=.*[a-zA-Z])(?=.*[^a-zA-Z])(.{8,15})$", ErrorMessage = "Your password must contain an upper case letter, lower case letter, and special character or number")]
-        // [RegularExpression("^(?=.*[a-zA-Z])(?=.*[0-9])(.{8,15})$", ErrorMessage = "Your password must contain an upper case letter, lower case letter, and special character or number")]
-        // [RegularExpression("^(?=.*[a-zA-Z])(?=.*[0-9])(.{8,15})$", ErrorMessage = "Your password must contain an upper case letter, lower case letter, and special character or number")]
+        [RegularExpression("^(?=.*[a-zA-Z])(?=.*[^a-zA-Z])(.{8,15})$", ErrorMessage = "Your password must contain an upper case letter, lower case letter, and special character or number")]
         [MinLength(8, ErrorMessage = "Your password must be at least 8 characters long")]
         public string Password { get; set; }
 
@@ -57,6 +55,4 @@ namespace Infinterest.Models
         [Compare(nameof(Password), ErrorMessage = "Your passwords need to match")]        
         public string PasswordConfirm { get; set; }
     }
-
-   
 }
