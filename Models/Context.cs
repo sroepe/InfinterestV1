@@ -20,6 +20,32 @@ namespace Infinterest.Models
 // create seeds
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<ConfimedVendors>()
+                .HasKey(x => new { x.VendorId, x.EventId });
+
+            modelBuilder.Entity<ConfimedVendors>()
+                .HasOne<Event>(s => s.Event)
+                .WithMany(c => c.ConfrimedVendors)
+                .HasForeignKey(y => y.VendorId);
+            
+            modelBuilder.Entity<ConfimedVendors>()
+                .HasOne<Vendor>(s => s.Vendor)
+                .WithMany(c => c.ConfirmedEvents)
+                .HasForeignKey(y => y.EventId);
+
+            modelBuilder.Entity<PendingVendors>()
+                .HasKey(x => new { x.VendorId, x.EventId });
+
+            modelBuilder.Entity<PendingVendors>()
+                .HasOne<Event>(s => s.Event)
+                .WithMany(c => c.RequestedVendors)
+                .HasForeignKey(y => y.VendorId);
+            
+            modelBuilder.Entity<PendingVendors>()
+                .HasOne<Vendor>(s => s.Vendor)
+                .WithMany(c => c.RequestedEvents)
+                .HasForeignKey(y => y.EventId);
         //     // Configure User, Broker, and Vendor entity
         //     modelBuilder.Entity<User>()
         //                 .HasOptional(u => u.Vendor) // Mark Vendor and Broker properties optional in User entity
@@ -27,31 +53,31 @@ namespace Infinterest.Models
         //                 .WithRequired(b => b.User)
         //                 .WithRequired(v => v.User); // mark Broker and Vendor properties as required in User entity. Cannot save Broker or Vendor without User
         
-        modelBuilder.Entity<Broker>().HasData(
-                new Broker() 
-                {
-                    UserId = 1,
-                    FirstName = "Josh",
-                    LastName = "McGee",
-                    ImgUrl = "../images/headshot2.jpg",
-                    Company = "Remax",
-                    Bio ="Working in Seattle and the Eastside for 20 years.",
-                    Contact = "(206)708-6836"
-                }
-            );
-        modelBuilder.Entity<Listing>().HasData(
-                new Listing() 
-                {
-                    ListingId = 1,
+        // modelBuilder.Entity<Broker>().HasData(
+        //         new Broker() 
+        //         {
+        //             UserId = 1,
+        //             FirstName = "Josh",
+        //             LastName = "McGee",
+        //             ImgUrl = "../images/headshot2.jpg",
+        //             Company = "Remax",
+        //             Bio ="Working in Seattle and the Eastside for 20 years.",
+        //             Contact = "(206)708-6836"
+        //         }
+        //     );
+        // modelBuilder.Entity<Listing>().HasData(
+        //         new Listing() 
+        //         {
+        //             ListingId = 1,
                     
-                }
-            );
-        modelBuilder.Entity<Event>().HasData(
-                new Event() 
-                {
+        //         }
+        //     );
+        // modelBuilder.Entity<Event>().HasData(
+        //         new Event() 
+        //         {
                     
-                }
-            );
+        //         }
+        //     );
         }
 
 

@@ -44,7 +44,7 @@ namespace Infinterest.Controllers
                         .Where(vend => vend.UserId == ID)
                         .FirstOrDefault();
 
-            viewModel.usersEvents = user.Events;
+            // viewModel.usersEvents = user.ConfirmedEvents;
 
             return View ("DashboardVendor", viewModel);
         }
@@ -73,6 +73,8 @@ namespace Infinterest.Controllers
                 ThisVendor.ImgUrl = NewVendor.ImgUrl;
                 ThisVendor.UserType = "Vendor";
                 ThisVendor.Bio = NewVendor.Bio;
+                // ThisVendor.RequestedEvents = new List<Event>();
+                // ThisVendor.ConfirmedEvents = new List<Event>();
                 // and so on
                 PasswordHasher<Vendor> Hasher = new PasswordHasher<Vendor>();
                 ThisVendor.Password = Hasher.HashPassword(ThisVendor, NewVendor.Password);

@@ -9,9 +9,10 @@ namespace Infinterest.Models
 public class Vendor : User
     {
         // turn to lists
-        public List<String> AreaOfHouse {get; set;}
-        public List<String> BusinessCategory {get; set;}
-        public List<Event> Events {get; set;}
+        // public List<String> AreaOfHouse {get; set;}
+        // public List<String> BusinessCategory {get; set;}
+        public virtual IEnumerable<PendingVendors> RequestedEvents {get; set;}
+        public virtual IEnumerable<ConfimedVendors> ConfirmedEvents {get; set;}
 
     }   
 }
