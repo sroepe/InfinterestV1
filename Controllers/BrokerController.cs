@@ -29,34 +29,32 @@ namespace Infinterest.Controllers
         [HttpGet("brokerdashboard")]
         public IActionResult DashboardBroker()
         {
-            return View ("DashboardBroker");
-        }
-//         {
-             
-//             DashboardBrokerView DisplayModel = new DashboardBrokerView();
-// // example only
-
-//             Broker user = _context.brokers
-//                 .Where(broker => broker.UserId == 1)
-//                 .FirstOrDefault();
-
-
-//             DisplayModel.UsersListings = user.Listings;
-
-//             DisplayModel.PendingEvents = user.Events
-//                 .Where(thisEvent => thisEvent.Confimed == false)
-//                 .ToList();
-
-//             DisplayModel.FinalizedEvents = user.Events
-//                 .Where(thisEvent => thisEvent.Confimed == true)
-//                 .ToList();
-
-//             DisplayModel.AvailibleVendors = _context.vendors.ToList();
-
-//             // probably needs to account for being in a different controlelr
-//             return View("DashboardBroker", DisplayModel);
             
-//         }
+             
+             DashboardBrokerView DisplayModel = new DashboardBrokerView();
+              // example only
+
+             Broker user = _context.brokers
+                 .Where(broker => broker.UserId == 1)
+                 .FirstOrDefault();
+
+
+             DisplayModel.UsersListings = user.Listings;
+
+             DisplayModel.PendingEvents = user.Events
+                 .Where(thisEvent => thisEvent.Confimed == false)
+                 .ToList();
+
+             DisplayModel.FinalizedEvents = user.Events
+                 .Where(thisEvent => thisEvent.Confimed == true)
+                 .ToList();
+
+             DisplayModel.AvailibleVendors = _context.vendors.ToList();
+
+             // probably needs to account for being in a different controlelr
+             return View("DashboardBroker", DisplayModel);
+            
+         }
 
         //temporary to show add event page
         [HttpGet("add-event")]
