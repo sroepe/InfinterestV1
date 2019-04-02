@@ -21,33 +21,33 @@ namespace Infinterest.Controllers
         }
 
         //temporary for front-end work to be replaced by next get method for "dashboardvendor"
-        [HttpGet("dashboardvendor")]
-        public IActionResult DashboardVendor()
-        {
-
-            return View();
-        }
-
-
         // [HttpGet("dashboardvendor")]
         // public IActionResult DashboardVendor()
         // {
 
-        //     int? ID = HttpContext.Session.GetInt32("userid");            
-
-        //     DashboardVendorView viewModel = new DashboardVendorView();
-            
-        //     viewModel.allListings = _context.listings
-        //                             .ToList();
-
-        //     Vendor user = _context.vendors
-        //                 .Where(vend => vend.UserId == ID)
-        //                 .FirstOrDefault();
-
-        //     viewModel.usersEvents = user.Events;
-
-        //     return View ("DashboardVendor", viewModel);
+        //     return View();
         // }
+
+
+        [HttpGet("dashboardvendor")]
+        public IActionResult DashboardVendor()
+        {
+
+            int? ID = HttpContext.Session.GetInt32("userid");            
+
+            DashboardVendorView viewModel = new DashboardVendorView();
+            
+            viewModel.allListings = _context.listings
+                                    .ToList();
+
+            Vendor user = _context.vendors
+                        .Where(vend => vend.UserId == ID)
+                        .FirstOrDefault();
+
+            viewModel.usersEvents = user.Events;
+
+            return View ("DashboardVendor", viewModel);
+        }
 
         [HttpGet("vendor-registration")]
         public IActionResult VendorRegistration()

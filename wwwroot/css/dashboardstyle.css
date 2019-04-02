@@ -279,6 +279,10 @@ body, html, #dashboardcontainer{
     margin-top:4%;
 }
 
+.listingdetails {
+    margin-bottom: 4%;
+}
+
 ul {
     list-style-type: none;
 }
