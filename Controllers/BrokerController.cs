@@ -63,12 +63,19 @@ namespace Infinterest.Controllers
             return View ("AddEvents");
         }
 
-        [Route("add-listings")]
-        // will need to split into listings and events
-        public IActionResult AddListing(Listing newListing)
+        //temporary to show add listing page
+         [HttpGet("add-listings")]
+        public IActionResult AddListingTemp(String listingId)
         {
-            // create listing
-            return RedirectToAction("Dashboard");
+            return View ("AddListing");
         }
+        // [Route("add-listings")]
+        // // will need to split into listings and events
+        // public IActionResult AddListing(Listing newListing)
+        // {
+            
+        //     // create listing
+        //     return RedirectToAction("Dashboard");
+        // }
     }
 }

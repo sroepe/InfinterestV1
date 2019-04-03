@@ -11,8 +11,8 @@ namespace Infinterest.Models
         public int ListingId {get; set;}
         public string MLSLink {get; set;}
         public int Price {get; set;}
-        public int Zip {get; set;}
-        // public Address Address {get;set;}
+        public int Zip {get; set;}  //do we need to have zip as well on the listing since it pulls postalCode from Address??
+        public Address Address {get;set;}
         public string ImgUrl { get; set; }
 
         public int BrokerId {get; set;}
