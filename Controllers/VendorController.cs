@@ -44,7 +44,10 @@ namespace Infinterest.Controllers
                         .Where(vend => vend.UserId == ID)
                         .FirstOrDefault();
 
-            // viewModel.usersEvents = user.ConfirmedEvents;
+            if(user.ConfirmedEvents != null)
+            {
+                viewModel.usersEvents = user.ConfirmedEvents.Select(s => s.Event).ToList();
+            }
 
             return View ("DashboardVendor", viewModel);
         }
@@ -53,41 +56,47 @@ namespace Infinterest.Controllers
         public IActionResult VendorRegistration()
         {
 
-            return View();
+            return View("VendorRegistration2");
         }
-        [HttpPost("vendor-registration")]
+        [HttpGet("Vendor/vendor-registration")]
+        public IActionResult VendorVendorRegistration()
+        {
+
+            return View("VendorRegistration2");
+        }
+        [HttpPost("Vendor/vendor-registration")]
         public IActionResult CreateVendor(UserValidator NewVendor)
         {
             if (ModelState.IsValid)
             {
+                System.Console.WriteLine("Model IS Valid");
                 if(_context.vendors.Any(u => u.Email == NewVendor.Email))
-            {
-                ModelState.AddModelError("Email", "Email already in use!");
-                return View("vendor-registation");
+                {
+                    ModelState.AddModelError("Email", "Email already in use!");
+                }
+                else
+                {
+                    System.Console.WriteLine("Creating");
+                    Vendor ThisVendor = new Vendor();
+                    ThisVendor.FirstName = NewVendor.FirstName;
+                    ThisVendor.LastName = NewVendor.LastName;
+                    ThisVendor.ImgUrl = NewVendor.ImgUrl;
+                    ThisVendor.UserType = "Vendor";
+                    ThisVendor.Bio = NewVendor.Bio;
+                    ThisVendor.RequestedEvents = new List<PendingVendors>();
+                    ThisVendor.ConfirmedEvents = new List<ConfimedVendors>();
+                    // and so on
+                    PasswordHasher<Vendor> Hasher = new PasswordHasher<Vendor>();
+                    ThisVendor.Password = Hasher.HashPassword(ThisVendor, NewVendor.Password);
+                    _context.vendors.Add(ThisVendor);
+                    _context.users.Add(ThisVendor);
+                    _context.SaveChanges();
+                    HttpContext.Session.SetInt32("userid", ThisVendor.UserId);
+                    return RedirectToAction("DashboardVendor");
+                }
             }
-            else
-            {
-                Vendor ThisVendor = new Vendor();
-                ThisVendor.FirstName = NewVendor.FirstName;
-                ThisVendor.LastName = NewVendor.LastName;
-                ThisVendor.ImgUrl = NewVendor.ImgUrl;
-                ThisVendor.UserType = "Vendor";
-                ThisVendor.Bio = NewVendor.Bio;
-                // ThisVendor.RequestedEvents = new List<Event>();
-                // ThisVendor.ConfirmedEvents = new List<Event>();
-                // and so on
-                PasswordHasher<Vendor> Hasher = new PasswordHasher<Vendor>();
-                ThisVendor.Password = Hasher.HashPassword(ThisVendor, NewVendor.Password);
-                _context.Add(ThisVendor);
-                _context.SaveChanges();
-                HttpContext.Session.SetInt32("userid", ThisVendor.UserId);
-                return Redirect("/dashboard"); //This doesn't exist yet
-            }
-            }
-            else
-            {
-                return View("vendor-registration");
-            }
+            System.Console.WriteLine("Not valid");
+            return View("VendorRegistration2", NewVendor);
         }
 
         

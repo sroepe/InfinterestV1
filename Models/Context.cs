@@ -20,7 +20,8 @@ namespace Infinterest.Models
 // create seeds
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+// many to many
+// confimed vendors
             modelBuilder.Entity<ConfimedVendors>()
                 .HasKey(x => new { x.VendorId, x.EventId });
 
@@ -34,6 +35,7 @@ namespace Infinterest.Models
                 .WithMany(c => c.ConfirmedEvents)
                 .HasForeignKey(y => y.EventId);
 
+// pending vendors
             modelBuilder.Entity<PendingVendors>()
                 .HasKey(x => new { x.VendorId, x.EventId });
 

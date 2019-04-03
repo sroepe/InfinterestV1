@@ -30,8 +30,6 @@
                     <div class="result">
                         <img src="@finalized.Listing.ImgUrl" alt="" class="respic">
                         <div class="resinfo">
-                            <h4>@finalized.Listing.Address.addressLine1</h4>
-                            <h4>@finalized.Listing.Address.city, @finalized.Listing.Address.state @finalized.Listing.Address.postalCode</h4>
                             <h6>@finalized.OpenHouseDate</h6>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
                             <a href="event-detail{@finalized.EventId}"><h5>Details</h5></a>
@@ -83,7 +81,6 @@
                     </div>
                 </div>
 
-            </form>
         </div>
     </div>
     <div>
@@ -95,7 +92,6 @@
                 <div class="listingdetails">
                   <img src="@list.ImgUrl" alt="" >
                   <div>
-                    <h4>@list.Address</h4>
                     <h4>@list.Zip</h4>
                     <h4>@list.Price</h4>
                     <h4>@list.ListingId</h4>
@@ -119,8 +115,6 @@
                         <div class="result">
                             <img src="@pending.Listing.ImgUrl" alt="" class="respic">
                             <div class="resinfo">
-                                <h4>@pending.Listing.Address.addressLine1</h4>
-                                <h4>@pending.Listing.Address.city, @pending.Listing.Address.state @pending.Listing.Address.postalCode</h4>
                                 <h6>@pending.OpenHouseDate</h6>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
                                 <a href="event-detail{@pending.EventId}"><h5>Details</h5></a>
