@@ -20,12 +20,6 @@ namespace Infinterest.Models
 // create seeds
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasData(
-                new User() 
-                {
-                    UserId = 1,
-                }
-            );
 // many to many
 // confimed vendors
             modelBuilder.Entity<ConfirmedVendors>()
