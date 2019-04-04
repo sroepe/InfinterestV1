@@ -16,6 +16,6 @@ namespace Infinterest.Models
 
         public DateTime OpenHouseDate {get; set;}
         public virtual IEnumerable<PendingVendors> RequestedVendors {get;set;}
-        public virtual IEnumerable<ConfimedVendors> ConfrimedVendors {get;set;}
+        public virtual IEnumerable<ConfirmedVendors> ConfrimedVendors {get;set;}
     }
 }

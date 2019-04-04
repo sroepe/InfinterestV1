@@ -1,6 +1,6 @@
 namespace Infinterest.Models
 {
-    public class ConfimedVendors
+    public class ConfirmedVendors
     {
         public int VendorId {get;set;}
         public Vendor Vendor {get;set;}

@@ -37,17 +37,17 @@ namespace Infinterest.Controllers
 
             DashboardVendorView viewModel = new DashboardVendorView();
             
-            viewModel.allListings = _context.listings
-                                    .ToList();
+            // viewModel.allListings = _context.listings
+            //                         .ToList();
 
-            Vendor user = _context.vendors
-                        .Where(vend => vend.UserId == ID)
-                        .FirstOrDefault();
+            // // Vendor user = _context.vendors
+            // //             .Where(vend => vend.UserId == ID)
+            // //             .FirstOrDefault();
 
-            if(user.ConfirmedEvents != null)
-            {
-                viewModel.usersEvents = user.ConfirmedEvents.Select(s => s.Event).ToList();
-            }
+            // if(user.ConfirmedEvents != null)
+            // {
+            //     viewModel.usersEvents = user.ConfirmedEvents.Select(s => s.Event).ToList();
+            // }
 
             return View ("DashboardVendor", viewModel);
         }
@@ -58,46 +58,82 @@ namespace Infinterest.Controllers
 
             return View("VendorRegistration2");
         }
-        [HttpGet("Vendor/vendor-registration")]
-        public IActionResult VendorVendorRegistration()
-        {
 
-            return View("VendorRegistration2");
+        [HttpGet("Vendor/vendor-registration")]
+        public IActionResult CreateVendor()
+        {
+            User NewVendor = new User();
+            return View(NewVendor);
         }
+
         [HttpPost("Vendor/vendor-registration")]
-        public IActionResult CreateVendor(UserValidator NewVendor)
+        public IActionResult CreateVendor(User NewVendor)
         {
             if (ModelState.IsValid)
             {
-                System.Console.WriteLine("Model IS Valid");
-                if(_context.vendors.Any(u => u.Email == NewVendor.Email))
-                {
-                    ModelState.AddModelError("Email", "Email already in use!");
-                }
-                else
-                {
+                // System.Console.WriteLine("Model IS VALID");
+                // if(_context.users.Any(u => u.Email == NewVendor.Email))
+                // {
+                //     ModelState.AddModelError("Email", "Email already in use!");
+                // }
+                // else
+                // {
                     System.Console.WriteLine("Creating");
-                    Vendor ThisVendor = new Vendor();
+                    User ThisVendor = new User();
                     ThisVendor.FirstName = NewVendor.FirstName;
                     ThisVendor.LastName = NewVendor.LastName;
                     ThisVendor.ImgUrl = NewVendor.ImgUrl;
                     ThisVendor.UserType = "Vendor";
                     ThisVendor.Bio = NewVendor.Bio;
-                    ThisVendor.RequestedEvents = new List<PendingVendors>();
-                    ThisVendor.ConfirmedEvents = new List<ConfimedVendors>();
-                    // and so on
-                    PasswordHasher<Vendor> Hasher = new PasswordHasher<Vendor>();
-                    ThisVendor.Password = Hasher.HashPassword(ThisVendor, NewVendor.Password);
-                    _context.vendors.Add(ThisVendor);
-                    _context.users.Add(ThisVendor);
-                    _context.SaveChanges();
-                    HttpContext.Session.SetInt32("userid", ThisVendor.UserId);
                     return RedirectToAction("DashboardVendor");
-                }
-            }
+                // }
+            } 
             System.Console.WriteLine("Not valid");
             return View("VendorRegistration2", NewVendor);
+            
         }
+
+        // [HttpGet("Vendor/vendor-registration")]
+        // public IActionResult VendorVendorRegistration()
+        // {
+               
+        //     return View("VendorRegistration2");
+        // }
+
+        // [HttpPost("Vendor/vendor-registration")]
+        // public IActionResult CreateVendor(UserValidator NewVendor)
+        // {
+        //     if (ModelState.IsValid)
+        //     {
+        //         System.Console.WriteLine("Model IS Valid");
+        //         if(_context.vendors.Any(u => u.Email == NewVendor.Email))
+        //         {
+        //             ModelState.AddModelError("Email", "Email already in use!");
+        //         }
+        //         else
+        //         {
+        //             System.Console.WriteLine("Creating");
+        //             Vendor ThisVendor = new Vendor();
+        //             ThisVendor.FirstName = NewVendor.FirstName;
+        //             ThisVendor.LastName = NewVendor.LastName;
+        //             ThisVendor.ImgUrl = NewVendor.ImgUrl;
+        //             ThisVendor.UserType = "Vendor";
+        //             ThisVendor.Bio = NewVendor.Bio;
+        //             ThisVendor.RequestedEvents = new List<PendingVendors>();
+        //             ThisVendor.ConfirmedEvents = new List<ConfimedVendors>();
+        //             // and so on
+        //             PasswordHasher<Vendor> Hasher = new PasswordHasher<Vendor>();
+        //             ThisVendor.Password = Hasher.HashPassword(ThisVendor, NewVendor.Password);
+        //             _context.vendors.Add(ThisVendor);
+        //             _context.users.Add(ThisVendor);
+        //             _context.SaveChanges();
+        //             HttpContext.Session.SetInt32("userid", ThisVendor.UserId);
+        //             return RedirectToAction("DashboardVendor");
+        //         }
+        //     }
+        //     System.Console.WriteLine("Not valid");
+        //     return View("VendorRegistration2", NewVendor);
+        // }
 
         
         // [HttpPost("vendor")]

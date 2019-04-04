@@ -20,17 +20,23 @@ namespace Infinterest.Models
 // create seeds
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>().HasData(
+                new User() 
+                {
+                    UserId = 1,
+                }
+            );
 // many to many
 // confimed vendors
-            modelBuilder.Entity<ConfimedVendors>()
+            modelBuilder.Entity<ConfirmedVendors>()
                 .HasKey(x => new { x.VendorId, x.EventId });
 
-            modelBuilder.Entity<ConfimedVendors>()
+            modelBuilder.Entity<ConfirmedVendors>()
                 .HasOne<Event>(s => s.Event)
                 .WithMany(c => c.ConfrimedVendors)
                 .HasForeignKey(y => y.VendorId);
             
-            modelBuilder.Entity<ConfimedVendors>()
+            modelBuilder.Entity<ConfirmedVendors>()
                 .HasOne<Vendor>(s => s.Vendor)
                 .WithMany(c => c.ConfirmedEvents)
                 .HasForeignKey(y => y.EventId);

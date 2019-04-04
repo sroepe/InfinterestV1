@@ -12,7 +12,7 @@ public class Vendor : User
         // public List<String> AreaOfHouse {get; set;}
         // public List<String> BusinessCategory {get; set;}
         public virtual IEnumerable<PendingVendors> RequestedEvents {get; set;}
-        public virtual IEnumerable<ConfimedVendors> ConfirmedEvents {get; set;}
+        public virtual IEnumerable<ConfirmedVendors> ConfirmedEvents {get; set;}
 
     }   
 }
