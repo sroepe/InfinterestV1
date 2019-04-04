@@ -103,13 +103,41 @@
          <div>
           <label class="price listings">New Events</label>
           <div class="alllistings">
-            -->
+            @{
+              foreach (Listing list in Model.allListings)
+              {
+                <div class="listingdetails">
+                  <img src="@list.ImgUrl" alt="" >
+                  <div>
+                    <h4>@list.Zip</h4>
+                    <h4>@list.Price</h4>
+                    <h4>@list.ListingId</h4>
+                    <h4>@list.MLSLink</h4>
+                    <a href="broker-profile/{id}"><h6>@list.Broker</h6></a>
+                    <a href="event-detail/{eventId}"><h6>@list.Events</h6></a>
+                  </div>
+                </div>
+              }
+            }
           </div>
         </div>
         <div id="rightsection">
             <label class="price upevents">Your Events</label>
             <div class="myevents">
-              
+              @{
+                foreach (Event events in Model.usersEvents)
+                {
+                  <div class="event">
+                    <div>
+                      <h4>@events.OpenHouseDate</h4>
+                      <h4>@events.Listing</h4>
+                      <h4>@events.AreaOfHouseToFeature</h4>
+                      <h4>@events.ConfrimedVendors</h4>
+                      <a href="event-detail/{@events.EventId}"><h6>@events.EventId</h6></a>
+                    </div>
+                  </div>
+                }
+              }    
                     
             </div>   
         </div>     
