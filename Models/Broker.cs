@@ -16,17 +16,18 @@ public class Broker : User
 
         public Broker()
         {
+            // this happens for the overloaded call too right?
             UserType = "Broker";
             Listings = new List<Listing>();
             Events = new List<Event>();
 
-            PasswordHasher<Broker> Hasher = new PasswordHasher<Broker>();
-            Password = Hasher.HashPassword(this, Password);
+// Not sure if this would have any data passed to it at first
+            // PasswordHasher<Broker> Hasher = new PasswordHasher<Broker>();
+            // Password = Hasher.HashPassword(this, Password);
         }
 
         public Broker(User input)
         {
-            UserType = "Broker";
             FirstName = input.FirstName;
             LastName = input.LastName;
             Email = input.Email;
@@ -37,8 +38,6 @@ public class Broker : User
             Bio = input.Bio;
             Company = input.Company;
             Website = input.Website;
-            Listings = new List<Listing>();
-            Events = new List<Event>();
         }
     }   
 }

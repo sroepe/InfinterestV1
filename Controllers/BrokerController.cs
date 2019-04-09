@@ -39,7 +39,7 @@ namespace Infinterest.Controllers
                 {
                     Broker NewBroker = new Broker(UserInput);
                     // only need one?
-                    _context.brokers.Add(NewBroker);
+                    // _context.brokers.Add(NewBroker);
                     _context.users.Add(NewBroker);
 
                     _context.SaveChanges();
