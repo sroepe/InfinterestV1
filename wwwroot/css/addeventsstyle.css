@@ -54,6 +54,7 @@ a:hover{
     margin: 3% 10%;
     padding: 0% 3%  1em;
     display: inline-block; 
+    width: 500px;
 }
 
 .regbox h4 {

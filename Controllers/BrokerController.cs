@@ -25,6 +25,7 @@ namespace Infinterest.Controllers
         {
             return View("BrokerRegistration");
         }
+
         [HttpPost("broker-registration")]
         public IActionResult DoesBrokerRegistration(User UserInput)
         {
@@ -52,6 +53,8 @@ namespace Infinterest.Controllers
                 return View("BrokerRegistration");
             }
         }
+
+        
 
         [HttpGet("brokerdashboard")]
         public IActionResult DashboardBroker()
