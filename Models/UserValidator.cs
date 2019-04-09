@@ -51,7 +51,7 @@ public class UserValidator
 // unmapped
         [DataType(DataType.Password)]
         [Display(Name = "Confirm your password:")]
-        [Required(ErrorMessage = "A password is required")]
+        [Required(ErrorMessage = "Please Confirm Password")]
         [Compare(nameof(Password), ErrorMessage = "Your passwords need to match")]        
         public string PasswordConfirm { get; set; }
     }

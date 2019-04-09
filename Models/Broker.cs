@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,32 @@ public class Broker : User
         public List<Event> Events {get; set;}
         
 
+
+        public Broker()
+        {
+            UserType = "Broker";
+            Listings = new List<Listing>();
+            Events = new List<Event>();
+
+            PasswordHasher<Broker> Hasher = new PasswordHasher<Broker>();
+            Password = Hasher.HashPassword(this, Password);
+        }
+
+        public Broker(User input)
+        {
+            UserType = "Broker";
+            FirstName = input.FirstName;
+            LastName = input.LastName;
+            Email = input.Email;
+            PasswordHasher<Broker> Hasher = new PasswordHasher<Broker>();
+            Password = Hasher.HashPassword(this, input.Password);
+            ImgUrl = input.ImgUrl;
+            Contact = input.Contact;
+            Bio = input.Bio;
+            Company = input.Company;
+            Website = input.Website;
+            Listings = new List<Listing>();
+            Events = new List<Event>();
+        }
     }   
 }

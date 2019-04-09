@@ -25,36 +25,63 @@ namespace Infinterest.Controllers
         {
             return View("BrokerRegistration");
         }
+        [HttpPost("broker-registration")]
+        public IActionResult DoesBrokerRegistration(User UserInput)
+        {
+            if(ModelState.IsValid)
+            {
+                if(_context.users.Any(u => u.Email == UserInput.Email))
+                {
+                    ModelState.AddModelError("Email", "Email already in use");
+                    return View("BrokerRegistration");
+                }
+                else
+                {
+                    Broker NewBroker = new Broker(UserInput);
+                    // only need one?
+                    _context.brokers.Add(NewBroker);
+                    _context.users.Add(NewBroker);
+
+                    _context.SaveChanges();
+                    HttpContext.Session.SetInt32("userid", NewBroker.UserId);
+                    return RedirectToAction("DashboardBroker");
+                }
+            }
+            else
+            {
+                return View("BrokerRegistration");
+            }
+        }
 
         [HttpGet("brokerdashboard")]
         public IActionResult DashboardBroker()
         {
             
-             
-             DashboardBrokerView DisplayModel = new DashboardBrokerView();
-              // example only
-
-             Broker user = _context.brokers
-                 .Where(broker => broker.UserId == 1)
-                 .FirstOrDefault();
-
-
-             DisplayModel.UsersListings = user.Listings;
-
-             DisplayModel.PendingEvents = user.Events
-                 .Where(thisEvent => thisEvent.Confimed == false)
-                 .ToList();
-
-             DisplayModel.FinalizedEvents = user.Events
-                 .Where(thisEvent => thisEvent.Confimed == true)
-                 .ToList();
-
-             DisplayModel.AvailibleVendors = _context.vendors.ToList();
-
-             // probably needs to account for being in a different controlelr
-             return View("DashboardBroker", DisplayModel);
             
-         }
+            DashboardBrokerView DisplayModel = new DashboardBrokerView();
+            // example only
+
+            Broker user = _context.brokers
+                .Where(broker => broker.UserId == 1)
+                .FirstOrDefault();
+
+
+            DisplayModel.UsersListings = user.Listings;
+
+            DisplayModel.PendingEvents = user.Events
+                .Where(thisEvent => thisEvent.Confimed == false)
+                .ToList();
+
+            DisplayModel.FinalizedEvents = user.Events
+                .Where(thisEvent => thisEvent.Confimed == true)
+                .ToList();
+
+            DisplayModel.AvailibleVendors = _context.vendors.ToList();
+
+            // probably needs to account for being in a different controlelr
+            return View("DashboardBroker", DisplayModel);
+        
+        }
 
         //temporary to show add event page
         [HttpGet("add-event")]
