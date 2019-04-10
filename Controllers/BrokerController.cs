@@ -87,24 +87,28 @@ namespace Infinterest.Controllers
         }
 
         //temporary to show add event page
-        [HttpGet("add-event")]
-        public IActionResult AddEventTemp()
+        [HttpGet("add-event/{listingId}")]
+        public IActionResult AddEventTemp(String listingId)
         {
             return View ("AddEvents");
         }
 
-        [HttpPost("add-event")]
-        public IActionResult CreateEvent(Event NewEvent)
+        [HttpPost("add-event/{listingId}")]
+        public IActionResult CreateEvent(Event NewEvent, String ListingId)
         {
             if (ModelState.IsValid)
             {
-                _context.events.Add(NewEvent);
-                return RedirectToAction ("Dashboard");                
+                if(Int32.TryParse(ListingId, out int id))
+                {
+                    NewEvent.ListingId = id;
+
+                    NewEvent.Listing = _context.listings
+                    .FirstOrDefault(l => l.ListingId == id);
+                    _context.events.Add(NewEvent);
+                    return RedirectToAction ("Dashboard");                
+                }
             }
-            else
-            {
-                return View ("AddEvents");
-            }
+            return View ("AddEvents");
         }
 
         //temporary to show add listing page
@@ -113,7 +117,7 @@ namespace Infinterest.Controllers
         {
             return View ("AddListing");
         }
-        
+
         [HttpPost("add-listings")]
         public IActionResult CreateListing(Listing NewListing)
         {
