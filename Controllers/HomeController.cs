@@ -136,32 +136,32 @@ namespace Infinterest.Controllers
         //     }
         // }
 
-        //POST Login user
-        // [HttpPost("existing-user")]
-        // public IActionResult ExistingUser(string PasswordLogin, string EmailLogin)
-        // {   
-        //     if(EmailLogin != null && PasswordLogin != null)
-        //     {   
-        //        User User =_context.users.SingleOrDefault(user => user.Email == EmailLogin);
-        //         if(User != null){
-        //             var Hasher = new PasswordHasher<User>();
+        // POST Login user
+        [HttpPost("existing-user")]
+        public IActionResult ExistingUser(string PasswordLogin, string EmailLogin)
+        {   
+            if(EmailLogin != null && PasswordLogin != null)
+            {   
+                User User =_context.users.SingleOrDefault(user => user.Email == EmailLogin);
+                if(User != null){
+                    var Hasher = new PasswordHasher<User>();
                 
-        //             if(0 != Hasher.VerifyHashedPassword(User, User.Password, PasswordLogin))
-        //             {
-        //                 HttpContext.Session.SetString("Login", "True");
-        //                 HttpContext.Session.SetInt32("UserId", User.UserId);
-        //                 return RedirectToAction("Dashboard");
-        //             }
-        //         }
-        //         TempData["Error"] = "Your email or password are not correct";
-        //         return RedirectToAction("Index");      
-        //     }
-        //     else 
-        //     {   
-        //         TempData["Error"] = "An email and password are required";
-        //         return RedirectToAction("Index");
-        //     }
-        // }
+                    if(0 != Hasher.VerifyHashedPassword(User, User.Password, PasswordLogin))
+                    {
+                        HttpContext.Session.SetString("Login", "True");
+                        HttpContext.Session.SetInt32("UserId", User.UserId);
+                        return RedirectToAction("Dashboard");
+                    }
+                }
+                TempData["Error"] = "Your email or password are not correct";
+                return RedirectToAction("Index");      
+            }
+            else 
+            {   
+                TempData["Error"] = "An email and password are required";
+                return RedirectToAction("Index");
+            }
+        }
         //GET Logoff
         [HttpGet("logoff")]
         public IActionResult Logoff()
@@ -179,19 +179,19 @@ namespace Infinterest.Controllers
             .Where(user => user.UserId == ID)
             .FirstOrDefault();
 
-            if(CurrentUser.UserType == "Vendor")
+            if(CurrentUser != null)
             {
-                return View("dashboardvendor");
+                if(CurrentUser.UserType == "Vendor")
+                {
+                    return View("dashboardvendor");
+                }
+                else if(CurrentUser.UserType == "Broker")
+                {
+                    return View("DashboardBroker");
+                }
             }
-            else if(CurrentUser.UserType == "Broker")
-            {
-                return View("DashboardBroker");
-            }
-            else
-            {
                 //fake code
-                return Redirect("login");
-            }
+                return Redirect("/");
         }
         
         // [HttpGet("messaging")]
