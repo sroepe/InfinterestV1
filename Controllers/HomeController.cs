@@ -22,11 +22,11 @@ namespace Infinterest.Controllers
         // Signin and login page
         public IActionResult Index()
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
-            {
-                HttpContext.Session.SetString("Login", "False");
-                HttpContext.Session.SetInt32("UserId", 0);
-            }  
+            // if (string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
+            // {
+            //     HttpContext.Session.SetString("Login", "False");
+            //     HttpContext.Session.SetInt32("UserId", 0);
+            // }  
             ViewBag.Error = TempData["Error"];
             ViewBag.ErrorReg = TempData["ErrorReg"];
             return View("Index");
@@ -173,7 +173,7 @@ namespace Infinterest.Controllers
         [HttpGet("dashboard")]
         public IActionResult Dashboard()
         {
-            int? ID = HttpContext.Session.GetInt32("userid");
+            int? ID = HttpContext.Session.GetInt32("UserId");
 
             User CurrentUser = _context.users
             .Where(user => user.UserId == ID)

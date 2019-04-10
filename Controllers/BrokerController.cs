@@ -88,24 +88,45 @@ namespace Infinterest.Controllers
 
         //temporary to show add event page
         [HttpGet("add-event")]
-        public IActionResult AddEventTemp(String eventId)
+        public IActionResult AddEventTemp()
         {
             return View ("AddEvents");
         }
 
+        [HttpPost("add-event")]
+        public IActionResult CreateEvent(Event NewEvent)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.events.Add(NewEvent);
+                return RedirectToAction ("Dashboard");                
+            }
+            else
+            {
+                return View ("AddEvents");
+            }
+        }
+
         //temporary to show add listing page
-         [HttpGet("add-listings")]
-        public IActionResult AddListingTemp(String listingId)
+        [HttpGet("add-listings")]
+        public IActionResult AddListingTemp()
         {
             return View ("AddListing");
         }
-        // [Route("add-listings")]
-        // // will need to split into listings and events
-        // public IActionResult AddListing(Listing newListing)
-        // {
-            
-        //     // create listing
-        //     return RedirectToAction("Dashboard");
-        // }
+        
+        [HttpPost("add-listings")]
+        public IActionResult CreateListing(Listing NewListing)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.listings.Add(NewListing);
+                return RedirectToAction ("Dashboard");
+            }
+            else
+            {
+                return View ("AddListing");
+            }
+        }
+        
     }
 }
