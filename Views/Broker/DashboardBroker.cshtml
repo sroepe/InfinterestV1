@@ -98,8 +98,20 @@
                     <h4>@list.MLSLink</h4>
                     /*<a href="broker-profile/{id}"><h6>@list.Broker</h6></a>*/
 
-                    //need to add code here to display multiple events per listing
-                    <a href="event-detail/{eventId}"><h6>@list.Events</h6></a>
+                   @{
+                    foreach (Event finalized in Model.FinalizedEvents)
+                    {     
+                    <a href="event-detail/{eventId}"><h6>@finalized.OpenHouseDate</h6><h6>@finalized.OpenHouseTime</h6></a>
+                    }
+                    }
+                    @{
+                    foreach (Event pending in Model.PendingEvents)
+                    {     
+                    <a href="event-detail/{eventId}"><h6>@pending.OpenHouseDate</h6><h6>@pending.OpenHouseTime</h6></a>
+                    }
+                    }
+                    </div>
+                    
                     <button type="submit" class="btn btn-secondary" formaction="add-event">Add Event</button>
                   </div>
                 </div>
