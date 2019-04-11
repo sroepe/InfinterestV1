@@ -87,13 +87,19 @@ namespace Infinterest.Controllers
         }
 
         //temporary to show add event page
-        [HttpGet("add-event/{listingId}")]
+        [HttpGet("add-event")]
         public IActionResult AddEventTemp(String listingId)
         {
             return View ("AddEvents");
         }
 
-        [HttpPost("add-event/{listingId}")]
+        // [HttpGet("add-event/{ListingId}")]
+        // public IActionResult AddEvent(String listingId)
+        // {
+        //     return View ("AddEvents");
+        // }
+
+        [HttpPost("add-event/{ListingId}")]
         public IActionResult CreateEvent(Event NewEvent, String ListingId)
         {
             if (ModelState.IsValid)

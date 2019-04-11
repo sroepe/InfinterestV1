@@ -15,6 +15,7 @@ namespace Infinterest.Models
         public string AreaOfHouseToFeature {get; set;}
 
         public DateTime OpenHouseDate {get; set;}
+        public DateTime OpenHouseTime {get; set;}
         public virtual IEnumerable<PendingVendors> RequestedVendors {get;set;}
         public virtual IEnumerable<ConfirmedVendors> ConfrimedVendors {get;set;}
     }

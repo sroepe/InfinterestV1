@@ -26,6 +26,10 @@ label{
     color: #202020;
 }
 
+select#AreaOfHouse.form-control {
+    height: 35px;
+}
+
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #202020;
     opacity: 1; /* Firefox */
