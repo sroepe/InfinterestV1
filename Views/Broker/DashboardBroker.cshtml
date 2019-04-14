@@ -25,6 +25,7 @@
 <div id="dashboardcontainer">
     <div id="leftsection">
         <h1>Welcome @Context.Session.GetString("name")!</h1>
+        <h1>User ID is @Context.Session.GetInt32("userid")!</h1>
         <label class="price upevents">Your Finalized Events</label>
         @{
                 foreach(Event finalized in Model.FinalizedEvents)
