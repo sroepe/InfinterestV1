@@ -41,10 +41,12 @@ namespace Infinterest.Controllers
                     Broker NewBroker = new Broker(UserInput);
                     // only need one?
                     // _context.brokers.Add(NewBroker);
+                    
                     _context.users.Add(NewBroker);
-
+                    HttpContext.Session.SetString("name", UserInput.FirstName);
+                    Console.Write(HttpContext.Session.GetString("name"));
                     _context.SaveChanges();
-                    HttpContext.Session.SetInt32("userid", NewBroker.UserId);
+
                     return RedirectToAction("DashboardBroker");
                 }
             }

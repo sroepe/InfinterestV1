@@ -8,6 +8,7 @@ namespace Infinterest.Models
 {
     public class DashboardBrokerView
     {
+
         public List<Listing> UsersListings {get;set;}
         public List<Event> PendingEvents {get;set;}
         public List<Event> FinalizedEvents {get;set;}
