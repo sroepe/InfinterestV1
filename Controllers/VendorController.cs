@@ -106,7 +106,7 @@ namespace Infinterest.Controllers
             if (ModelState.IsValid)
             {
                 System.Console.WriteLine("Model IS Valid");
-                if(_context.vendors.Any(u => u.Email == NewVendor.Email))
+                if(_context.users.Any(u => u.Email == NewVendor.Email))
                 {
                     ModelState.AddModelError("Email", "Email already in use!");
                 }
@@ -126,7 +126,7 @@ namespace Infinterest.Controllers
                     ThisVendor.Password = Hasher.HashPassword(ThisVendor, NewVendor.Password);
 
                     // do we need vendor and user db? Just user? Then sort by type?
-                    _context.vendors.Add(ThisVendor);
+                    // _context.vendors.Add(ThisVendor);
                     _context.users.Add(ThisVendor);
                     _context.SaveChanges();
                     HttpContext.Session.SetInt32("userid", ThisVendor.UserId);
@@ -150,7 +150,7 @@ namespace Infinterest.Controllers
                 @ViewBag.User = User;
 
                 NewVendor.UserId = UserId;
-                _context.vendors.Add(NewVendor);
+                _context.users.Add(NewVendor);
                 _context.SaveChanges();
                 return RedirectToAction("Dashboard");
             }
