@@ -14,7 +14,7 @@ namespace Infinterest.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Infinterest.Models.ConfirmedVendors", b =>
@@ -27,7 +27,7 @@ namespace Infinterest.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.ToTable("ConfirmedVendors");
+                    b.ToTable("confirmedvendors");
                 });
 
             modelBuilder.Entity("Infinterest.Models.Event", b =>
@@ -100,7 +100,7 @@ namespace Infinterest.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.ToTable("PendingVendors");
+                    b.ToTable("pendingvendors");
                 });
 
             modelBuilder.Entity("Infinterest.Models.User", b =>

@@ -39,7 +39,8 @@ namespace Infinterest.Controllers
         {
             if(Int32.TryParse(id, out int userid))
             {
-                Broker thisBroker = _context.brokers
+                Broker thisBroker = _context.users
+                .OfType<Broker>()                
                     .Where(broker => broker.UserId == userid)
                     .FirstOrDefault();
                 return View("BrokerProfile", thisBroker);
@@ -52,7 +53,8 @@ namespace Infinterest.Controllers
         {
             if(Int32.TryParse(id, out int userid))
             {
-                Vendor thisVendor = _context.vendors
+                Vendor thisVendor = _context.users
+                .OfType<Vendor>()
                     .Where(vendor => vendor.UserId == userid)
                     .FirstOrDefault();
                 return View("VendorProfile", thisVendor);

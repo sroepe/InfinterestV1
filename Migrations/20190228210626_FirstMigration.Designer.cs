@@ -224,7 +224,7 @@ namespace Infinterest.Migrations
             modelBuilder.Entity("Infinterest.Models.Vendor", b =>
                 {
                     b.HasOne("Infinterest.Models.EventVendors")
-                        .WithMany("ConfimedVendors")
+                        .WithMany("ConfirmedVendors")
                         .HasForeignKey("EventVendorsId");
 
                     b.HasOne("Infinterest.Models.EventVendors")

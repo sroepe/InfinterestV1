@@ -125,8 +125,6 @@ namespace Infinterest.Controllers
                     PasswordHasher<Vendor> Hasher = new PasswordHasher<Vendor>();
                     ThisVendor.Password = Hasher.HashPassword(ThisVendor, NewVendor.Password);
 
-                    // do we need vendor and user db? Just user? Then sort by type?
-                    // _context.vendors.Add(ThisVendor);
                     _context.users.Add(ThisVendor);
                     _context.SaveChanges();
                     HttpContext.Session.SetInt32("userid", ThisVendor.UserId);

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infinterest.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190402183758_doubletrouble")]
-    partial class doubletrouble
+    [Migration("20190418193743_manytomanydb")]
+    partial class manytomanydb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,7 +19,7 @@ namespace Infinterest.Migrations
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("Infinterest.Models.confirmedvendors", b =>
+            modelBuilder.Entity("Infinterest.Models.ConfirmedVendors", b =>
                 {
                     b.Property<int>("VendorId");
 
@@ -29,7 +29,7 @@ namespace Infinterest.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.ToTable("confirmedvendors");
+                    b.ToTable("confirmedVendors");
                 });
 
             modelBuilder.Entity("Infinterest.Models.Event", b =>
@@ -41,7 +41,7 @@ namespace Infinterest.Migrations
 
                     b.Property<int?>("BrokerUserId");
 
-                    b.Property<bool>("Confimed");
+                    b.Property<bool>("Confirmed");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd();
@@ -49,6 +49,8 @@ namespace Infinterest.Migrations
                     b.Property<int>("ListingId");
 
                     b.Property<DateTime>("OpenHouseDate");
+
+                    b.Property<DateTime>("OpenHouseTime");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate();
@@ -100,7 +102,7 @@ namespace Infinterest.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.ToTable("PendingVendors");
+                    b.ToTable("pendingVendors");
                 });
 
             modelBuilder.Entity("Infinterest.Models.User", b =>
@@ -122,15 +124,20 @@ namespace Infinterest.Migrations
                     b.Property<string>("Discriminator")
                         .IsRequired();
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired();
 
-                    b.Property<string>("FirstName");
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(45);
 
                     b.Property<string>("ImgUrl");
 
-                    b.Property<string>("LastName");
+                    b.Property<string>("LastName")
+                        .IsRequired();
 
-                    b.Property<string>("Password");
+                    b.Property<string>("Password")
+                        .IsRequired();
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate();
@@ -166,7 +173,7 @@ namespace Infinterest.Migrations
                     b.HasDiscriminator().HasValue("Vendor");
                 });
 
-            modelBuilder.Entity("Infinterest.Models.confirmedvendors", b =>
+            modelBuilder.Entity("Infinterest.Models.ConfirmedVendors", b =>
                 {
                     b.HasOne("Infinterest.Models.Vendor", "Vendor")
                         .WithMany("ConfirmedEvents")
@@ -174,7 +181,7 @@ namespace Infinterest.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Infinterest.Models.Event", "Event")
-                        .WithMany("ConfrimedVendors")
+                        .WithMany("ConfirmedVendors")
                         .HasForeignKey("VendorId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

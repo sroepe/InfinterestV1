@@ -11,10 +11,11 @@ namespace Infinterest.Models
     // base() calls the parent class' constructor passing the "options" parameter along
         public Context(DbContextOptions<Context> options) : base(options) { }
         public DbSet<User> users { get; set; }
-        public DbSet<Vendor> vendors { get; set; }
-        public DbSet<Broker> brokers { get; set; }
         public DbSet<Listing> listings { get; set; }
         public DbSet<Event> events { get; set; }
+
+        public DbSet<ConfirmedVendors> confirmedvendors {get;set;}
+        public DbSet<PendingVendors> pendingvendors {get;set;}
 
 
 // create seeds

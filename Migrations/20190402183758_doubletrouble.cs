@@ -40,7 +40,7 @@ namespace Infinterest.Migrations
                 nullable: true);
 
             migrationBuilder.CreateTable(
-                name: "ConfimedVendors",
+                name: "ConfirmedVendors",
                 columns: table => new
                 {
                     VendorId = table.Column<int>(nullable: false),
@@ -48,15 +48,15 @@ namespace Infinterest.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ConfimedVendors", x => new { x.VendorId, x.EventId });
+                    table.PrimaryKey("PK_confirmedvendors", x => new { x.VendorId, x.EventId });
                     table.ForeignKey(
-                        name: "FK_ConfimedVendors_users_EventId",
+                        name: "FK_confirmedvendors_users_EventId",
                         column: x => x.EventId,
                         principalTable: "users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ConfimedVendors_events_VendorId",
+                        name: "FK_confirmedvendors_events_VendorId",
                         column: x => x.VendorId,
                         principalTable: "events",
                         principalColumn: "EventId",
@@ -88,8 +88,8 @@ namespace Infinterest.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ConfimedVendors_EventId",
-                table: "ConfimedVendors",
+                name: "IX_confirmedvendors_EventId",
+                table: "confirmedvendors",
                 column: "EventId");
 
             migrationBuilder.CreateIndex(
@@ -101,7 +101,7 @@ namespace Infinterest.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ConfimedVendors");
+                name: "confirmedvendors");
 
             migrationBuilder.DropTable(
                 name: "PendingVendors");
