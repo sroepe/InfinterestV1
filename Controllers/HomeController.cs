@@ -140,29 +140,28 @@ namespace Infinterest.Controllers
 
         // POST Login user
         [HttpPost("existing-user")]
-        public IActionResult ExistingUser(string PasswordLogin, string EmailLogin)
+        public IActionResult ExistingUser(User userInput)
         {   
-            if(EmailLogin != null && PasswordLogin != null)
+            if(userInput.Email != null && userInput.Password != null)
             {   
-                User User =_context.users.SingleOrDefault(user => user.Email == EmailLogin);
+                User User =_context.users.SingleOrDefault(user => user.Email == userInput.Email);
                 if(User != null){
                     var Hasher = new PasswordHasher<User>();
                 
-                    if(0 != Hasher.VerifyHashedPassword(User, User.Password, PasswordLogin))
+                    if(0 != Hasher.VerifyHashedPassword(User, User.Password, userInput.Password))
                     {
                         HttpContext.Session.SetString("Login", "True");
                         HttpContext.Session.SetInt32("UserId", User.UserId);
-                        return RedirectToAction("Dashboard");
+                        return Redirect("/dashboard");
                     }
                 }
-                TempData["Error"] = "Your email or password are not correct";
-                return RedirectToAction("Index");      
+                TempData["Error"] = "Your email or password are not correct";      
             }
             else 
             {   
                 TempData["Error"] = "An email and password are required";
-                return RedirectToAction("Index");
             }
+            return RedirectToAction("Index");
         }
         //GET Logoff
         [HttpGet("logoff")]
@@ -185,11 +184,11 @@ namespace Infinterest.Controllers
             {
                 if(CurrentUser.UserType == "Vendor")
                 {
-                    return View("dashboardvendor");
+                    return RedirectToAction("DashboardVendor", "Vendor");
                 }
                 else if(CurrentUser.UserType == "Broker")
                 {
-                    return View("DashboardBroker");
+                    return RedirectToAction("DashboardBroker", "Broker");
                 }
             }
                 //fake code
