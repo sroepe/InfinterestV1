@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 
+@model User
 @section css {
     <link href="@Url.Content("~/css/indexstyle.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/css/nav.css")" rel="stylesheet" type="text/css" />
@@ -40,15 +41,17 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form role="form" action="/dashboard" method="get">
+            <form role="form" action="/existing-user" method="POST">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="usrname">Username</label>
-                        <input type="text" class="form-control" id="usrname" placeholder="Enter email">
+                        <span asp-validation-for="Email"></span>
+                        <label asp-for="Email">Email</label>
+                        <input asp-for="Email" class="form-control" placeholder="Enter email">
                     </div>
                     <div class="form-group">
-                        <label for="psw">Password</label>
-                        <input type="text" class="form-control" id="psw" placeholder="Enter password">
+                        <span asp-validation-for="Password"></span>
+                        <label asp-for="Password">Password</label>
+                        <input asp-for="Password" class="form-control" placeholder="Enter password">
                     </div>
                     <div class="checkbox">
                         <label><input type="checkbox" value="" checked>Remember me</label>

@@ -3,14 +3,16 @@ using System;
 using Infinterest.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infinterest.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20190418154732_sarasmigrations2nd41819")]
+    partial class sarasmigrations2nd41819
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,7 +41,7 @@ namespace Infinterest.Migrations
 
                     b.Property<int?>("BrokerUserId");
 
-                    b.Property<bool>("Confirmed");
+                    b.Property<bool>("Confimed");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd();
@@ -179,7 +181,7 @@ namespace Infinterest.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Infinterest.Models.Event", "Event")
-                        .WithMany("ConfirmedVendors")
+                        .WithMany("ConfrimedVendors")
                         .HasForeignKey("VendorId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

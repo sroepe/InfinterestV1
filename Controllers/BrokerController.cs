@@ -76,14 +76,14 @@ namespace Infinterest.Controllers
             DisplayModel.UsersListings = user.Listings;
 
             DisplayModel.PendingEvents = user.Events
-                .Where(thisEvent => thisEvent.Confimed == false)
+                .Where(thisEvent => thisEvent.Confirmed == false)
                 .ToList();
 
             DisplayModel.FinalizedEvents = user.Events
-                .Where(thisEvent => thisEvent.Confimed == true)
+                .Where(thisEvent => thisEvent.Confirmed == true)
                 .ToList();
 
-            DisplayModel.AvailibleVendors = _context.users
+            DisplayModel.AvailableVendors = _context.users
             .OfType<Vendor>()
             .ToList();
 

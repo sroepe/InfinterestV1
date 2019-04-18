@@ -17,7 +17,7 @@ public class Broker : User
         public Broker()
         {
             // this happens for the overloaded call too right?
-            UserType = "Broker";
+            
             Listings = new List<Listing>();
             Events = new List<Event>();
 
@@ -28,6 +28,7 @@ public class Broker : User
 
         public Broker(User input)
         {
+            UserType = "Broker";
             FirstName = input.FirstName;
             LastName = input.LastName;
             Email = input.Email;

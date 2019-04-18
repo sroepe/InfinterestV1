@@ -14,7 +14,7 @@
     <nav>
       <ul>
         <li><a href="http://infinterest.com/#home">About</a></li>
-        <li><a href="broker-profile/{UserId}">My Profile</a></li>
+        <li><a href="broker-profile/{UserId}">@Context.Session.GetString("name") Profile</a></li>
         <li><a href="/logoff">Sign out</a></li>
       </ul>
     </nav>

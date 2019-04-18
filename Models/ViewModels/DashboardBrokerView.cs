@@ -12,6 +12,6 @@ namespace Infinterest.Models
         public List<Listing> UsersListings {get;set;}
         public List<Event> PendingEvents {get;set;}
         public List<Event> FinalizedEvents {get;set;}
-        public List<Vendor> AvailibleVendors {get;set;}
+        public List<Vendor> AvailableVendors {get;set;}
     }
 }
