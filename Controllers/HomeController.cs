@@ -144,14 +144,15 @@ namespace Infinterest.Controllers
         {   
             if(userInput.Email != null && userInput.Password != null)
             {   
-                User User =_context.users.SingleOrDefault(user => user.Email == userInput.Email);
-                if(User != null){
+                User ThisUser =_context.users.SingleOrDefault(user => user.Email == userInput.Email);
+                if(ThisUser != null)
+                {
                     var Hasher = new PasswordHasher<User>();
                 
-                    if(0 != Hasher.VerifyHashedPassword(User, User.Password, userInput.Password))
+                    if(0 != Hasher.VerifyHashedPassword(ThisUser, ThisUser.Password, userInput.Password))
                     {
                         HttpContext.Session.SetString("Login", "True");
-                        HttpContext.Session.SetInt32("UserId", User.UserId);
+                        HttpContext.Session.SetInt32("userid", ThisUser.UserId);
                         return Redirect("/dashboard");
                     }
                 }
@@ -161,7 +162,8 @@ namespace Infinterest.Controllers
             {   
                 TempData["Error"] = "An email and password are required";
             }
-            return RedirectToAction("Index");
+            return Redirect("/fail");
+            // return RedirectToAction("Index");
         }
         //GET Logoff
         [HttpGet("logoff")]
@@ -174,7 +176,7 @@ namespace Infinterest.Controllers
         [HttpGet("dashboard")]
         public IActionResult Dashboard()
         {
-            int? ID = HttpContext.Session.GetInt32("UserId");
+            int? ID = HttpContext.Session.GetInt32("userid");
 
             User CurrentUser = _context.users
             .Where(user => user.UserId == ID)
@@ -192,7 +194,7 @@ namespace Infinterest.Controllers
                 }
             }
                 //fake code
-                return Redirect("/");
+                return Redirect("/dashboardfail");
         }
         
         // [HttpGet("messaging")]

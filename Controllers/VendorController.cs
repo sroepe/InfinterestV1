@@ -33,7 +33,17 @@ namespace Infinterest.Controllers
         public IActionResult DashboardVendor()
         {
 
-            int? ID = HttpContext.Session.GetInt32("userid");            
+            int? ID = HttpContext.Session.GetInt32("userid");           
+
+            Vendor user = _context.users
+                .OfType<Vendor>()
+                .Where(vendor => vendor.UserId == ID)
+                .FirstOrDefault();
+            
+            if (user == null)
+            {
+                return Redirect("/");
+            }
 
             DashboardVendorView viewModel = new DashboardVendorView();
             
@@ -141,7 +151,7 @@ namespace Infinterest.Controllers
         {
             if(ModelState.IsValid)  
             {   
-                int UserId = (int)HttpContext.Session.GetInt32("UserId");
+                int UserId = (int)HttpContext.Session.GetInt32("userid");
                 User User =_context.users.SingleOrDefault(user => user.UserId == UserId);
                 
                 HttpContext.Session.SetInt32("UserId", UserId);

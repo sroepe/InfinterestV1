@@ -64,15 +64,21 @@ namespace Infinterest.Controllers
         {
             
             
-            DashboardBrokerView DisplayModel = new DashboardBrokerView();
-            // example only
+            int? ID = HttpContext.Session.GetInt32("userid");           
+
 
             Broker user = _context.users
                 .OfType<Broker>()
-                .Where(broker => broker.UserId == 1)
+                .Where(broker => broker.UserId == ID)
                 .FirstOrDefault();
 
+            if (user == null)
+            {
+                return Redirect("/");
+            }
 
+            DashboardBrokerView DisplayModel = new DashboardBrokerView();
+            // example only
             DisplayModel.UsersListings = user.Listings;
 
             DisplayModel.PendingEvents = user.Events
