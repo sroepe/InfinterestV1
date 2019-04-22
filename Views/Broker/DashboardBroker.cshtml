@@ -119,6 +119,7 @@
             foreach (Vendor vendorAvailable in Model.AvailableVendors)
             {     
             <div class="vendordetails">
+                <img src="@vendorAvailable.ImgUrl" alt="">
                 <h4>@vendorAvailable.FirstName @vendorAvailable.LastName</h4>
                 <h4>@vendorAvailable.Company</h4>
                 <h4>@vendorAvailable.Contact</h4>
@@ -138,21 +139,10 @@
             <div class="listingdetails">
                 <img src="@list.ImgUrl" alt="" >
                 <div>
-                    //address
-                    <a href="listing-detail/{@list.ListingId}">Address</a>
+                <a href="listing-detail/@list.ListingId">Address</a>
                 <h4>@list.Zip</h4>
                 <h4>@list.Price</h4>
-                <h4>@list.ListingId</h4>
                 <h4>@list.MLSLink</h4>
-                /*<a href="broker-profile/{id}"><h6>@list.Broker</h6></a>*/
-                    <div>
-                    @{
-                    foreach (Event listevent in list.Events)
-                    {     
-                    <h6>@listevent.OpenHouseDate</h6><h6>@listevent.OpenHouseTime</h6>
-                    }
-                    }
-                    </div>
                     
                 </div>
                 

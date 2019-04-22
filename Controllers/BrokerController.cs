@@ -80,7 +80,9 @@ namespace Infinterest.Controllers
             DashboardBrokerView DisplayModel = new DashboardBrokerView();
             DisplayModel.CurrentUser = user;
 
-            DisplayModel.UsersListings = user.Listings;
+            DisplayModel.UsersListings = _context.listings
+                .Where(lis => lis.BrokerId == user.UserId)
+                .ToList();
 
             DisplayModel.PendingEvents = user.Events
                 .Where(thisEvent => thisEvent.Confirmed == false)
