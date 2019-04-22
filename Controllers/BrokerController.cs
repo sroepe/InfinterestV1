@@ -142,8 +142,24 @@ namespace Infinterest.Controllers
         {
             if (ModelState.IsValid)
             {
+                int? ID = HttpContext.Session.GetInt32("userid");           
+
+                Broker user = _context.users
+                    .OfType<Broker>()
+                    .Where(broker => broker.UserId == ID)
+                    .FirstOrDefault();
+                
+                //Add listing to db
+                NewListing.Broker = user;
+                NewListing.BrokerId = user.UserId;
+                NewListing.Events = new List<Event>();
                 _context.listings.Add(NewListing);
-                return RedirectToAction ("Dashboard");
+
+                // add to broker's listings
+                user.Listings.Add(NewListing);
+                _context.SaveChanges();
+
+                return Redirect ("/dashboard");
             }
             else
             {
