@@ -37,7 +37,7 @@ namespace Infinterest.Migrations
 
                     b.Property<string>("AreaOfHouseToFeature");
 
-                    b.Property<int?>("BrokerUserId");
+                    b.Property<int>("BrokerId");
 
                     b.Property<bool>("Confirmed");
 
@@ -55,7 +55,7 @@ namespace Infinterest.Migrations
 
                     b.HasKey("EventId");
 
-                    b.HasIndex("BrokerUserId");
+                    b.HasIndex("BrokerId");
 
                     b.HasIndex("ListingId");
 
@@ -186,9 +186,10 @@ namespace Infinterest.Migrations
 
             modelBuilder.Entity("Infinterest.Models.Event", b =>
                 {
-                    b.HasOne("Infinterest.Models.Broker")
+                    b.HasOne("Infinterest.Models.Broker", "Broker")
                         .WithMany("Events")
-                        .HasForeignKey("BrokerUserId");
+                        .HasForeignKey("BrokerId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Infinterest.Models.Listing", "Listing")
                         .WithMany("Events")

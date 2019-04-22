@@ -65,8 +65,6 @@ namespace Infinterest.Controllers
             
             
             int? ID = HttpContext.Session.GetInt32("userid");           
-
-
             Broker user = _context.users
                 .OfType<Broker>()
                 .Where(broker => broker.UserId == ID)
@@ -84,11 +82,13 @@ namespace Infinterest.Controllers
                 .Where(lis => lis.BrokerId == user.UserId)
                 .ToList();
 
-            DisplayModel.PendingEvents = user.Events
+            DisplayModel.PendingEvents = _context.events
+                .Where(eve => eve.BrokerId == user.UserId)
                 .Where(thisEvent => thisEvent.Confirmed == false)
                 .ToList();
 
-            DisplayModel.FinalizedEvents = user.Events
+            DisplayModel.FinalizedEvents = _context.events
+                .Where(eve => eve.BrokerId == user.UserId)
                 .Where(thisEvent => thisEvent.Confirmed == true)
                 .ToList();
 
@@ -125,6 +125,17 @@ namespace Infinterest.Controllers
 
                     NewEvent.Listing = _context.listings
                     .FirstOrDefault(l => l.ListingId == id);
+                    
+                    int? ID = HttpContext.Session.GetInt32("userid");           
+                    Broker user = _context.users
+                        .OfType<Broker>()
+                        .Where(broker => broker.UserId == ID)
+                        .FirstOrDefault();
+
+                    NewEvent.Broker = user;
+                    NewEvent.BrokerId = user.UserId;
+
+
                     _context.events.Add(NewEvent);
                     return RedirectToAction ("Dashboard");                
                 }

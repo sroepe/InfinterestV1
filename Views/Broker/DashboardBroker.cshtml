@@ -133,8 +133,7 @@
                 <button type="submit" class="btn btn-secondary" formaction="/add-listings">Add New Listing</button>
             </form>
             <h4>Your Listings</h4>
-            @{
-            foreach (Listing list in Model.CurrentUser.Listings)
+            @{foreach (Listing list in Model.UsersListings)
             {
             <div class="listingdetails">
                 <img src="@list.ImgUrl" alt="" >
@@ -148,6 +147,21 @@
                 
                 <button type="submit" class="btn btn-secondary" formaction="add-event">Add Event</button>
             
+            </div>
+            }
+            }
+            <h4>Your Events</h4>
+            @{foreach (Event eve in Model.PendingEvents)
+            {
+            <div class="listingdetails">
+                <img src="@eve.Listing.ImgUrl" alt="" >
+                <div>
+                    <a href="event-detail/@eve.EventId">Address</a>
+                    <h4>@eve.OpenHouseDate</h4>
+                    <h4>@eve.OpenHouseTime</h4>
+                    
+                    <h4>Requests: @eve.RequestedVendors.Count()</h4>
+                </div>            
             </div>
             }
         }

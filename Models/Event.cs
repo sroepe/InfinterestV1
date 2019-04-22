@@ -12,6 +12,8 @@ namespace Infinterest.Models
         public Boolean Confirmed {get;set;}
         public int ListingId {get; set;}
         public Listing Listing {get;set;}
+        public int BrokerId {get; set;}
+        public Broker Broker {get; set;}
         public string AreaOfHouseToFeature {get; set;}
 
         public DateTime OpenHouseDate {get; set;}

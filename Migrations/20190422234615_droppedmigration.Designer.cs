@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infinterest.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190325211137_eventvendors")]
-    partial class eventvendors
+    [Migration("20190422234615_droppedmigration")]
+    partial class droppedmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,14 +19,29 @@ namespace Infinterest.Migrations
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("Infinterest.Models.ConfirmedVendors", b =>
+                {
+                    b.Property<int>("VendorId");
+
+                    b.Property<int>("EventId");
+
+                    b.HasKey("VendorId", "EventId");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("confirmedvendors");
+                });
+
             modelBuilder.Entity("Infinterest.Models.Event", b =>
                 {
                     b.Property<int>("EventId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BrokerUserId");
+                    b.Property<string>("AreaOfHouseToFeature");
 
-                    b.Property<bool>("Confimed");
+                    b.Property<int>("BrokerId");
+
+                    b.Property<bool>("Confirmed");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd();
@@ -35,18 +50,16 @@ namespace Infinterest.Migrations
 
                     b.Property<DateTime>("OpenHouseDate");
 
+                    b.Property<DateTime>("OpenHouseTime");
+
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate();
 
-                    b.Property<int?>("VendorUserId");
-
                     b.HasKey("EventId");
 
-                    b.HasIndex("BrokerUserId");
+                    b.HasIndex("BrokerId");
 
                     b.HasIndex("ListingId");
-
-                    b.HasIndex("VendorUserId");
 
                     b.ToTable("events");
                 });
@@ -55,8 +68,6 @@ namespace Infinterest.Migrations
                 {
                     b.Property<int>("ListingId")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("AreaOfHouseToFeature");
 
                     b.Property<int>("BrokerId");
 
@@ -81,6 +92,19 @@ namespace Infinterest.Migrations
                     b.ToTable("listings");
                 });
 
+            modelBuilder.Entity("Infinterest.Models.PendingVendors", b =>
+                {
+                    b.Property<int>("VendorId");
+
+                    b.Property<int>("EventId");
+
+                    b.HasKey("VendorId", "EventId");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("pendingvendors");
+                });
+
             modelBuilder.Entity("Infinterest.Models.User", b =>
                 {
                     b.Property<int>("UserId")
@@ -97,20 +121,23 @@ namespace Infinterest.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CustomID");
-
                     b.Property<string>("Discriminator")
                         .IsRequired();
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired();
 
-                    b.Property<string>("FirstName");
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(45);
 
                     b.Property<string>("ImgUrl");
 
-                    b.Property<string>("LastName");
+                    b.Property<string>("LastName")
+                        .IsRequired();
 
-                    b.Property<string>("Password");
+                    b.Property<string>("Password")
+                        .IsRequired();
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate();
@@ -140,29 +167,36 @@ namespace Infinterest.Migrations
                 {
                     b.HasBaseType("Infinterest.Models.User");
 
-                    b.Property<string>("AreaOfHouse");
-
-                    b.Property<string>("BusinessCategory");
 
                     b.ToTable("Vendor");
 
                     b.HasDiscriminator().HasValue("Vendor");
                 });
 
+            modelBuilder.Entity("Infinterest.Models.ConfirmedVendors", b =>
+                {
+                    b.HasOne("Infinterest.Models.Vendor", "Vendor")
+                        .WithMany("ConfirmedEvents")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Infinterest.Models.Event", "Event")
+                        .WithMany("ConfirmedVendors")
+                        .HasForeignKey("VendorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Infinterest.Models.Event", b =>
                 {
-                    b.HasOne("Infinterest.Models.Broker")
+                    b.HasOne("Infinterest.Models.Broker", "Broker")
                         .WithMany("Events")
-                        .HasForeignKey("BrokerUserId");
+                        .HasForeignKey("BrokerId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Infinterest.Models.Listing", "Listing")
                         .WithMany("Events")
                         .HasForeignKey("ListingId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Infinterest.Models.Vendor")
-                        .WithMany("Events")
-                        .HasForeignKey("VendorUserId");
                 });
 
             modelBuilder.Entity("Infinterest.Models.Listing", b =>
@@ -170,6 +204,19 @@ namespace Infinterest.Migrations
                     b.HasOne("Infinterest.Models.Broker", "Broker")
                         .WithMany("Listings")
                         .HasForeignKey("BrokerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Infinterest.Models.PendingVendors", b =>
+                {
+                    b.HasOne("Infinterest.Models.Vendor", "Vendor")
+                        .WithMany("RequestedEvents")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Infinterest.Models.Event", "Event")
+                        .WithMany("RequestedVendors")
+                        .HasForeignKey("VendorId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
