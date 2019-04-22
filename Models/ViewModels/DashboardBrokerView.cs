@@ -11,8 +11,8 @@ namespace Infinterest.Models
         public Broker CurrentUser {get;set;}
 
         public List<Listing> UsersListings {get;set;}
-        // public List<Event> PendingEvents {get;set;}
-        // public List<Event> FinalizedEvents {get;set;}
+        public List<Event> PendingEvents {get;set;}
+        public List<Event> FinalizedEvents {get;set;}
         public List<Vendor> AvailableVendors {get;set;}
     }
 }
