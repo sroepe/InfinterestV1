@@ -139,9 +139,9 @@
                 <img src="@list.ImgUrl" alt="" >
                 <div>
                 <a href="listing-detail/@list.ListingId">Address</a>
-                <h4>@list.Zip</h4>
-                <h4>@list.Price</h4>
-                <h4>@list.MLSLink</h4>
+                <h4>Postal Code: @list.Zip</h4>
+                <h4>$@list.Price</h4>
+                <h4><a href="@list.MLSLink">MLS Link</a></h4>
                     
                     @{
                     foreach (Event listevent in list.Events)
