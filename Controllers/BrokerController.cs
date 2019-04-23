@@ -110,12 +110,6 @@ namespace Infinterest.Controllers
 
         }
 
-        // [HttpGet("add-event/{ListingId}")]
-        // public IActionResult AddEvent(String listingId)
-        // {
-        //     return View ("AddEvents");
-        // }
-
         [HttpPost("add-event/{ListingId}")]
         public IActionResult CreateEvent(Event NewEvent, String ListingId)
         {
@@ -151,7 +145,6 @@ namespace Infinterest.Controllers
             return View ("AddEvents");
         }
 
-        //temporary to show add listing page
         [HttpGet("add-listings")]
         public IActionResult AddListingTemp()
         {

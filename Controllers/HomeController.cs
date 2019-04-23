@@ -77,66 +77,25 @@ namespace Infinterest.Controllers
             return RedirectToAction ("Dashboard");
         }
 
+        [HttpGet("Listing-detail/{listingId}")]
+        public IActionResult ListingDetail(String listingId)
+        {
+            if(Int32.TryParse(listingId, out int id))
+            {
+                Listing thisListing = _context.listings
+                    .Where(lis => lis.ListingId == id)
+                    .FirstOrDefault();
+                return View(thisListing);
+            }
+            return RedirectToAction ("Dashboard");
+        }
+
         //temporary - just for viewing while working
         [HttpGet("event-detail")]
         public IActionResult EventDetailTemp(String eventId)
         {
             return View ("EventDetail");
         }
-
-
-
-        
-
-        //POST Register user  
-        // [HttpPost("new-user")]
-        // public IActionResult NewUser(UserValidator User)
-        // {   
-        //     if(ModelState.IsValid)  
-        //     {   
-        //         User OldUser =_context.users.SingleOrDefault(user => user.Email == User.Email);
-        //         if(OldUser == null){
-        //             User NewUser = new User();
-        //             if(User.UserType == "Vendor"){
-        //                 NewUser.UserType = "V";
-        //             }
-        //             else{
-        //                 User.UserType = "B";
-        //             }
-        //             NewUser.FirstName = User.FirstName;
-        //             NewUser.LastName = User.LastName;
-        //             NewUser.Contact = User.Contact;
-        //             NewUser.Bio = User.Bio;
-        //             NewUser.Email = User.Email;
-        //             // DateTime CurrentTime = DateTime.Now;
-        //             // NewUser.CreatedAt = CurrentTime;
-                    
-        //             PasswordHasher<UserValidator> Hasher = new PasswordHasher<UserValidator>();
-        //             NewUser.Password = Hasher.HashPassword(User, User.Password);
-                    
-        //             _context.users.Add(NewUser);
-        //             _context.SaveChanges();
-        //             HttpContext.Session.SetString("Login", "True");
-        //             HttpContext.Session.SetInt32("UserId", NewUser.UserId);
-        //             if(User.UserType == "Vendor"){
-        //                 return RedirectToAction("Vendor");
-        //             }
-        //             else{
-        //                 return RedirectToAction("Broker");
-        //             }
-
-        //         }
-        //         //if user is found
-        //         else{
-        //             TempData["ErrorReg"] = "That email address already exists";
-        //             return RedirectToAction("Registration");
-        //         }
-        //     }
-        //     else
-        //     {
-        //         return View("Registration");
-        //     }
-        // }
 
         // POST Login user
         [HttpPost("existing-user")]
@@ -162,6 +121,7 @@ namespace Infinterest.Controllers
             {   
                 TempData["Error"] = "An email and password are required";
             }
+            //temp while sorting out error return
             return Redirect("/fail");
             // return RedirectToAction("Index");
         }
@@ -213,8 +173,6 @@ namespace Infinterest.Controllers
         {
             return View();
         }
-
-        // add listings moved to broker
 
         [HttpGet("search")]
         public IActionResult AfterSearch()
