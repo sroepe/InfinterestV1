@@ -14,11 +14,11 @@ namespace Infinterest.Models
         public Listing Listing {get;set;}
         public int BrokerId {get; set;}
         public Broker Broker {get; set;}
-        public string AreaOfHouseToFeature {get; set;}
+        public List<string> AreaOfHouseToFeature {get; set;}
 
         public DateTime OpenHouseDate {get; set;}
         public DateTime OpenHouseTime {get; set;}
-        public virtual IEnumerable<PendingVendors> RequestedVendors {get;set;}
-        public virtual IEnumerable<ConfirmedVendors> ConfirmedVendors {get;set;}
+        public virtual List<PendingVendors> RequestedVendors {get;set;}
+        public virtual List<ConfirmedVendors> ConfirmedVendors {get;set;}
     }
 }

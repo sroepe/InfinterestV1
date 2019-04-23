@@ -20,15 +20,6 @@ namespace Infinterest.Controllers
             _context = context;
         }
 
-        //temporary for front-end work to be replaced by next get method for "dashboardvendor"
-        // [HttpGet("dashboardvendor")]
-        // public IActionResult DashboardVendor()
-        // {
-
-        //     return View();
-        // }
-
-
         [HttpGet("dashboardvendor")]
         public IActionResult DashboardVendor()
         {
@@ -69,80 +60,27 @@ namespace Infinterest.Controllers
             return View("VendorRegistration2");
         }
 
-        // [HttpGet("Vendor/vendor-registration")]
-        // public IActionResult CreateVendor()
-        // {
-        //     User NewVendor = new User();
-        //     return View(NewVendor);
-        // }
-
-        // [HttpPost("Vendor/vendor-registration")]
-        // public IActionResult CreateVendor(User NewVendor)
-        // {
-        //     if (ModelState.IsValid)
-        //     {
-        //         // System.Console.WriteLine("Model IS VALID");
-        //         // if(_context.users.Any(u => u.Email == NewVendor.Email))
-        //         // {
-        //         //     ModelState.AddModelError("Email", "Email already in use!");
-        //         // }
-        //         // else
-        //         // {
-        //             System.Console.WriteLine("Creating");
-        //             User ThisVendor = new User();
-        //             ThisVendor.FirstName = NewVendor.FirstName;
-        //             ThisVendor.LastName = NewVendor.LastName;
-        //             ThisVendor.ImgUrl = NewVendor.ImgUrl;
-        //             ThisVendor.UserType = "Vendor";
-        //             ThisVendor.Bio = NewVendor.Bio;
-        //             return RedirectToAction("DashboardVendor");
-        //         // }
-        //     } 
-        //     System.Console.WriteLine("Not valid");
-        //     return View("VendorRegistration2", NewVendor);
-            
-        // }
-
-        [HttpGet("Vendor/vendor-registration")]
-        public IActionResult VendorVendorRegistration()
-        {
-               
-            return View("VendorRegistration2");
-        }
-
-        [HttpPost("Vendor/vendor-registration")]
-        public IActionResult CreateVendor(UserValidator NewVendor)
+        [HttpPost("vendor-registration")]
+        public IActionResult CreateVendor(User UserInput)
         {
             if (ModelState.IsValid)
             {
                 System.Console.WriteLine("Model IS Valid");
-                if(_context.users.Any(u => u.Email == NewVendor.Email))
+                if(_context.users.Any(u => u.Email == UserInput.Email))
                 {
                     ModelState.AddModelError("Email", "Email already in use!");
                 }
                 else
                 {
-                    System.Console.WriteLine("Creating");
-                    Vendor ThisVendor = new Vendor();
-                    ThisVendor.FirstName = NewVendor.FirstName;
-                    ThisVendor.LastName = NewVendor.LastName;
-                    ThisVendor.ImgUrl = NewVendor.ImgUrl;
-                    ThisVendor.UserType = "Vendor";
-                    ThisVendor.Bio = NewVendor.Bio;
-                    ThisVendor.RequestedEvents = new List<PendingVendors>();
-                    ThisVendor.ConfirmedEvents = new List<ConfirmedVendors>();
-                    // and so on
-                    PasswordHasher<Vendor> Hasher = new PasswordHasher<Vendor>();
-                    ThisVendor.Password = Hasher.HashPassword(ThisVendor, NewVendor.Password);
-
-                    _context.users.Add(ThisVendor);
+                    Vendor NewVendor = new Vendor(UserInput);
+                    _context.users.Add(NewVendor);
                     _context.SaveChanges();
-                    HttpContext.Session.SetInt32("userid", ThisVendor.UserId);
+                    HttpContext.Session.SetInt32("userid", NewVendor.UserId);
                     return RedirectToAction("DashboardVendor");
                 }
             }
             System.Console.WriteLine("Not valid");
-            return View("VendorRegistration2", NewVendor);
+            return View("VendorRegistration2", UserInput);
         }
 
         

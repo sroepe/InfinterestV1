@@ -89,7 +89,7 @@ namespace Infinterest.Controllers
         
         }
 
-        //temporary to show add event page
+        //Events and Listings
         [HttpGet("add-event/{ListingId}")]
         public IActionResult AddEventTemp(String ListingId)
         {
@@ -199,5 +199,7 @@ namespace Infinterest.Controllers
             }
             return Redirect("/dashboard");
         }
+
+        // interact with vendors
     }
 }
