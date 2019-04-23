@@ -143,9 +143,17 @@
                 <h4>@list.Price</h4>
                 <h4>@list.MLSLink</h4>
                     
+                    @{
+                    foreach (Event listevent in list.Events)
+                    {     
+                    <div>
+                    <a href="event-detail/@listevent.EventId"><h6>@listevent.OpenHouseDate</h6><h6>@listevent.OpenHouseTime</h6></a>
+                    </div>
+                    }
+                    }
+                <a href="/add-event/@list.ListingId">Add Event</a>
+                <button type="submit" class="btn btn-secondary" formaction="/add-event/@list.ListingId">Add Event</button>
                 </div>
-                
-                <button type="submit" class="btn btn-secondary" formaction="add-event">Add Event</button>
             
             </div>
             }

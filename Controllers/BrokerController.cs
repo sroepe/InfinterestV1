@@ -45,7 +45,6 @@ namespace Infinterest.Controllers
                     _context.users.Add(NewBroker);
                     
                     _context.SaveChanges();
-                    HttpContext.Session.SetString("name", NewBroker.FirstName);
                     HttpContext.Session.SetInt32("userid", NewBroker.UserId);
 
                     return RedirectToAction("DashboardBroker");
@@ -80,6 +79,7 @@ namespace Infinterest.Controllers
 
             DisplayModel.UsersListings = _context.listings
                 .Where(lis => lis.BrokerId == user.UserId)
+                .Include(lis => lis.Events)
                 .ToList();
 
             DisplayModel.PendingEvents = _context.events
@@ -96,16 +96,17 @@ namespace Infinterest.Controllers
             .OfType<Vendor>()
             .ToList();
 
-            // probably needs to account for being in a different controlelr
             return View("DashboardBroker", DisplayModel);
         
         }
 
         //temporary to show add event page
-        [HttpGet("add-event")]
-        public IActionResult AddEventTemp(String listingId)
+        [HttpGet("add-event/{ListingId}")]
+        public IActionResult AddEventTemp(String ListingId)
         {
-            return View ("AddEvents");
+            ViewBag.listingId = ListingId;
+                return View ("AddEvents");
+
         }
 
         // [HttpGet("add-event/{ListingId}")]
@@ -137,7 +138,7 @@ namespace Infinterest.Controllers
 
 
                     _context.events.Add(NewEvent);
-                    return RedirectToAction ("Dashboard");                
+                    return Redirect ("/dashboard");                
                 }
             }
             return View ("AddEvents");
