@@ -122,10 +122,13 @@ namespace Infinterest.Controllers
             {
                 if(Int32.TryParse(ListingId, out int id))
                 {
+                    NewEvent.RequestedVendors = new List<PendingVendors>();
+                    NewEvent.ConfirmedVendors = new List<ConfirmedVendors>();
                     NewEvent.ListingId = id;
-
-                    NewEvent.Listing = _context.listings
+                    Listing thisListing = _context.listings
                     .FirstOrDefault(l => l.ListingId == id);
+                    NewEvent.Listing = thisListing;
+
                     
                     int? ID = HttpContext.Session.GetInt32("userid");           
                     Broker user = _context.users
@@ -135,9 +138,12 @@ namespace Infinterest.Controllers
 
                     NewEvent.Broker = user;
                     NewEvent.BrokerId = user.UserId;
-
+                    user.Events.Add(NewEvent);
 
                     _context.events.Add(NewEvent);
+                    thisListing.Events.Add(NewEvent);
+
+                    _context.SaveChanges();
                     return Redirect ("/dashboard");                
                 }
             }
