@@ -39,8 +39,6 @@ namespace Infinterest.Controllers
                 else
                 {
                     Broker NewBroker = new Broker(UserInput);
-                    // only need one?
-                    // _context.brokers.Add(NewBroker);
                     
                     _context.users.Add(NewBroker);
                     
@@ -82,16 +80,6 @@ namespace Infinterest.Controllers
                 .Include(lis => lis.Events)
                 .ThenInclude(eve => eve.RequestedVendors)
                 .ToList();
-
-            // DisplayModel.PendingEvents = _context.events
-            //     .Where(eve => eve.BrokerId == user.UserId)
-            //     .Where(thisEvent => thisEvent.Confirmed == false)
-            //     .ToList();
-
-            // DisplayModel.FinalizedEvents = _context.events
-            //     .Where(eve => eve.BrokerId == user.UserId)
-            //     .Where(thisEvent => thisEvent.Confirmed == true)
-            //     .ToList();
 
             DisplayModel.AvailableVendors = _context.users
             .OfType<Vendor>()
@@ -181,5 +169,35 @@ namespace Infinterest.Controllers
             }
         }
         
+        [HttpGet("remove/listing/{ListingId}")]
+        public IActionResult RemoveListing (string ListingId)
+        {
+            if(Int32.TryParse(ListingId, out int id))
+            {
+                Listing listingToDelete = _context.listings
+                    .FirstOrDefault(listing => listing.ListingId == id);
+
+                if(listingToDelete.BrokerId == HttpContext.Session.GetInt32("userid"))
+                {
+                    _context.listings.Remove(listingToDelete);
+                }
+            }
+            return Redirect("/dashboard");
+        }
+        [HttpGet("remove/event/{EventId}")]
+        public IActionResult RemoveEvent (string EventId)
+        {
+            if(Int32.TryParse(EventId, out int id))
+            {
+                Event eventToDelete = _context.events
+                    .FirstOrDefault(eve => eve.EventId == id);
+
+                if(eventToDelete.BrokerId == HttpContext.Session.GetInt32("userid"))
+                {
+                    _context.events.Remove(eventToDelete);
+                }
+            }
+            return Redirect("/dashboard");
+        }
     }
 }
