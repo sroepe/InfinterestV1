@@ -148,6 +148,7 @@
                     {     
                     <div>
                     <a href="event-detail/@listevent.EventId"><h6>@listevent.OpenHouseDate</h6><h6>@listevent.OpenHouseTime</h6></a>
+                    <h6>Requests: @listevent.RequestedVendors.Count()</h6>
                     </div>
                     }
                     }
@@ -158,19 +159,6 @@
             </div>
             }
             }
-            <h4>Your Events</h4>
-            @{foreach (Event eve in Model.PendingEvents)
-            {
-            <div class="listingdetails">
-                <div>
-                    <a href="event-detail/@eve.EventId">Address</a>
-                    <h4>@eve.OpenHouseDate</h4>
-                    <h4>@eve.OpenHouseTime</h4>
-                    
-                </div>            
-            </div>
-            }
-        }
 
            
         </div>    

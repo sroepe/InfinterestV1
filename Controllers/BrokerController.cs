@@ -80,17 +80,18 @@ namespace Infinterest.Controllers
             DisplayModel.UsersListings = _context.listings
                 .Where(lis => lis.BrokerId == user.UserId)
                 .Include(lis => lis.Events)
+                .ThenInclude(eve => eve.RequestedVendors)
                 .ToList();
 
-            DisplayModel.PendingEvents = _context.events
-                .Where(eve => eve.BrokerId == user.UserId)
-                .Where(thisEvent => thisEvent.Confirmed == false)
-                .ToList();
+            // DisplayModel.PendingEvents = _context.events
+            //     .Where(eve => eve.BrokerId == user.UserId)
+            //     .Where(thisEvent => thisEvent.Confirmed == false)
+            //     .ToList();
 
-            DisplayModel.FinalizedEvents = _context.events
-                .Where(eve => eve.BrokerId == user.UserId)
-                .Where(thisEvent => thisEvent.Confirmed == true)
-                .ToList();
+            // DisplayModel.FinalizedEvents = _context.events
+            //     .Where(eve => eve.BrokerId == user.UserId)
+            //     .Where(thisEvent => thisEvent.Confirmed == true)
+            //     .ToList();
 
             DisplayModel.AvailableVendors = _context.users
             .OfType<Vendor>()
