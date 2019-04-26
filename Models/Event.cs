@@ -14,7 +14,7 @@ namespace Infinterest.Models
         public Listing Listing {get;set;}
         public int BrokerId {get; set;}
         public Broker Broker {get; set;}
-        // public List<String> AreaOfHouseToFeature {get; set;}
+        public List<Area> AreaOfHouse {get; set;}
 
         public DateTime OpenHouseDate {get; set;}
         public DateTime OpenHouseTime {get; set;}
