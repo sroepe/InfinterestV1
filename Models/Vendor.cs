@@ -21,7 +21,7 @@ public class Vendor : User
 
         public Vendor(User input)
         {
-            UserType = "Broker";
+            UserType = "Vendor";
             FirstName = input.FirstName;
             LastName = input.LastName;
             Email = input.Email;
@@ -34,6 +34,8 @@ public class Vendor : User
             Website = input.Website;
 
             //area of house and business catagory
+            AreaOfHouse = new List<Area>();
+            BusinessCategory = new List<Business>();
             
             RequestedEvents = new List<PendingVendors>();
             ConfirmedEvents = new List<ConfirmedVendors>();

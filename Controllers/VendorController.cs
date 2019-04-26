@@ -25,7 +25,6 @@ namespace Infinterest.Controllers
         {
 
             int? ID = HttpContext.Session.GetInt32("userid");           
-
             Vendor user = _context.users
                 .OfType<Vendor>()
                 .Where(vendor => vendor.UserId == ID)
@@ -38,17 +37,13 @@ namespace Infinterest.Controllers
 
             DashboardVendorView viewModel = new DashboardVendorView();
             
-            // viewModel.allListings = _context.listings
-            //                         .ToList();
+            viewModel.allListings = _context.listings
+                                    .ToList();
 
-            // // Vendor user = _context.vendors
-            // //             .Where(vend => vend.UserId == ID)
-            // //             .FirstOrDefault();
-
-            // if(user.ConfirmedEvents != null)
-            // {
-            //     viewModel.usersEvents = user.ConfirmedEvents.Select(s => s.Event).ToList();
-            // }
+            if(user.ConfirmedEvents != null)
+            {
+                viewModel.usersEvents = user.ConfirmedEvents.Select(s => s.Event).ToList();
+            }
 
             return View ("DashboardVendor", viewModel);
         }
@@ -57,8 +52,9 @@ namespace Infinterest.Controllers
         public IActionResult VendorRegistration()
         {
 
-            return View("VendorRegistration2");
+            return View();
         }
+        
 
         [HttpPost("vendor-registration")]
         public IActionResult CreateVendor(User UserInput)
@@ -76,11 +72,37 @@ namespace Infinterest.Controllers
                     _context.users.Add(NewVendor);
                     _context.SaveChanges();
                     HttpContext.Session.SetInt32("userid", NewVendor.UserId);
-                    return RedirectToAction("DashboardVendor");
+                    return Redirect("vendor-registration2");
                 }
             }
             System.Console.WriteLine("Not valid");
-            return View("VendorRegistration2", UserInput);
+            return View("VendorRegistration", UserInput);
+        }
+
+        [HttpGet("vendor-registration2")]
+        public IActionResult VendorRegistration2()
+        {
+
+            return View();
+        }
+        [HttpPost("vendor-registration")]
+        public IActionResult AddToVendor(Vendor UserInput)
+        {
+            int? ID = HttpContext.Session.GetInt32("userid");           
+            Vendor user = _context.users
+                .OfType<Vendor>()
+                .Where(vendor => vendor.UserId == ID)
+                .FirstOrDefault();
+            
+            if (user == null)
+            {
+                return Redirect("/");
+            }
+
+            user.AreaOfHouse = UserInput.AreaOfHouse;
+            user.BusinessCategory = UserInput.BusinessCategory;
+            _context.SaveChanges();
+            return Redirect("dashboard");
         }
 
         

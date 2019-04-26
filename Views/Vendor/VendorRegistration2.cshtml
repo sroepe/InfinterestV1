@@ -1,4 +1,4 @@
-@model UserValidator
+@model Vendor
 @{
     ViewData["Title"] = "Vendor Registration";
 }
@@ -29,6 +29,8 @@
         <form asp-action="vendor-registration" asp-controller="Vendor" method="POST">
             <div class="wrapper">
                 <div class="box1">
+                    <!-- put area of house and business catagory here -->
+<!-- and delete all this other stuff -->
                         <span asp-validation-for="FirstName"></span>
                     <div class="form-group">
                         <label asp-for="FirstName">First name</label>
