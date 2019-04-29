@@ -11,8 +11,7 @@ public class Vendor : User
     {
         public List<Area> AreaOfHouse {get; set;}
         public List<Business> BusinessCategory {get; set;}
-        public virtual List<PendingVendors> RequestedEvents {get; set;}
-        public virtual List<ConfirmedVendors> ConfirmedEvents {get; set;}
+        public virtual List<VendorToEvent> Events {get; set;}
 
     public Vendor()
         {
@@ -37,8 +36,7 @@ public class Vendor : User
             AreaOfHouse = new List<Area>();
             BusinessCategory = new List<Business>();
             
-            RequestedEvents = new List<PendingVendors>();
-            ConfirmedEvents = new List<ConfirmedVendors>();
+            Events = new List<VendorToEvent>();
         }
     }
 }

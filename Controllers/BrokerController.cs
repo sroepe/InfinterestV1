@@ -79,7 +79,9 @@ namespace Infinterest.Controllers
                 .Where(lis => lis.BrokerId == user.UserId)
                 .Include(List => List.Address)
                 .Include(lis => lis.Events)
-                .ThenInclude(eve => eve.RequestedVendors)
+                .ThenInclude(eve => eve.EventVendors)
+                // .ThenInclude(ev => ev.Vendor)
+                // for posting venor img or name, for now we're just counting
                 .ToList();
 
             DisplayModel.AvailableVendors = _context.users
@@ -106,8 +108,7 @@ namespace Infinterest.Controllers
             {
                 if(Int32.TryParse(ListingId, out int id))
                 {
-                    NewEvent.RequestedVendors = new List<PendingVendors>();
-                    NewEvent.ConfirmedVendors = new List<ConfirmedVendors>();
+                    NewEvent.EventVendors = new List<VendorToEvent>();
                     NewEvent.ListingId = id;
                     Listing thisListing = _context.listings
                     .FirstOrDefault(l => l.ListingId == id);

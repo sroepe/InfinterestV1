@@ -18,8 +18,7 @@ namespace Infinterest.Models
         public DbSet<Area> areas {get;set;}
         public DbSet<Business> business {get;set;}
 
-        public DbSet<ConfirmedVendors> confirmedvendors {get;set;}
-        public DbSet<PendingVendors> pendingvendors {get;set;}
+        public DbSet<VendorToEvent> eventvendors {get;set;}
 
 
 // create seeds
@@ -27,31 +26,17 @@ namespace Infinterest.Models
         {
 // many to many
 // confimed vendors
-            modelBuilder.Entity<ConfirmedVendors>()
+            modelBuilder.Entity<VendorToEvent>()
                 .HasKey(x => new { x.VendorId, x.EventId });
 
-            modelBuilder.Entity<ConfirmedVendors>()
+            modelBuilder.Entity<VendorToEvent>()
                 .HasOne<Event>(s => s.Event)
-                .WithMany(c => c.ConfirmedVendors)
+                .WithMany(c => c.VendorToEvent)
                 .HasForeignKey(y => y.VendorId);
             
-            modelBuilder.Entity<ConfirmedVendors>()
+            modelBuilder.Entity<VendorToEvent>()
                 .HasOne<Vendor>(s => s.Vendor)
-                .WithMany(c => c.ConfirmedEvents)
-                .HasForeignKey(y => y.EventId);
-
-// pending vendors
-            modelBuilder.Entity<PendingVendors>()
-                .HasKey(x => new { x.VendorId, x.EventId });
-
-            modelBuilder.Entity<PendingVendors>()
-                .HasOne<Event>(s => s.Event)
-                .WithMany(c => c.RequestedVendors)
-                .HasForeignKey(y => y.VendorId);
-            
-            modelBuilder.Entity<PendingVendors>()
-                .HasOne<Vendor>(s => s.Vendor)
-                .WithMany(c => c.RequestedEvents)
+                .WithMany(c => c.VendorToEvent)
                 .HasForeignKey(y => y.EventId);
 
 

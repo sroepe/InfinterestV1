@@ -85,7 +85,8 @@ namespace Infinterest.Controllers
                 Listing thisListing = _context.listings
                     .Include(List => List.Address)
                     .Include(lis => lis.Events)
-                    .ThenInclude(eve => eve.RequestedVendors)
+                    .ThenInclude(eve => eve.EventVendors)
+                    .ThenInclude(ev => ev.Vendor)
                     .FirstOrDefault(lis => lis.ListingId == id);
                 return View(thisListing);
             }

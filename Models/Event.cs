@@ -18,7 +18,6 @@ namespace Infinterest.Models
 
         public DateTime OpenHouseDate {get; set;}
         public DateTime OpenHouseTime {get; set;}
-        public virtual List<PendingVendors> RequestedVendors {get;set;}
-        public virtual List<ConfirmedVendors> ConfirmedVendors {get;set;}
+        public virtual List<VendorToEvent> EventVendors {get;set;}
     }
 }
