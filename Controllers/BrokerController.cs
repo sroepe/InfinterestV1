@@ -77,6 +77,7 @@ namespace Infinterest.Controllers
 
             DisplayModel.UsersListings = _context.listings
                 .Where(lis => lis.BrokerId == user.UserId)
+                .Include(List => List.Address)
                 .Include(lis => lis.Events)
                 .ThenInclude(eve => eve.RequestedVendors)
                 .ToList();

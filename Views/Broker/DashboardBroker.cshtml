@@ -138,7 +138,10 @@
             <div class="listingdetails">
                 <img id="listingimg" src="@list.ImgUrl" alt="" >
                 <div>
-                <a href="/Listing-detail/@list.ListingId">Address</a>
+                <a href="/Listing-detail/@list.ListingId">
+                    <h2>@list.Address.addressLine1</h2>
+                    <h2>@list.Address.addressLine2</h2>
+                </a>
                 <h4>Postal Code: @list.Zip</h4>
                 <h4>$@list.Price</h4>
                 <h4><a href="@list.MLSLink" target="_blank">MLS Link</a></h4>
@@ -159,8 +162,6 @@
             </div>
             }
             }
-
-           
         </div>    
     </div>      
 </div>

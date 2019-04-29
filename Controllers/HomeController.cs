@@ -83,8 +83,10 @@ namespace Infinterest.Controllers
             if(Int32.TryParse(listingId, out int id))
             {
                 Listing thisListing = _context.listings
-                    .Where(lis => lis.ListingId == id)
-                    .FirstOrDefault();
+                    .Include(List => List.Address)
+                    .Include(lis => lis.Events)
+                    .ThenInclude(eve => eve.RequestedVendors)
+                    .FirstOrDefault(lis => lis.ListingId == id);
                 return View(thisListing);
             }
             return RedirectToAction ("Dashboard");
