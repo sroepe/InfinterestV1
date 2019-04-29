@@ -43,36 +43,36 @@
                         <input type="number" asp-for="Price" class="form-control">
                     </div>
 
-                    <!-- commenting out below for now until we get Address model working via Listing -->
-                    <!-- <div class="form-group">
-                        <span asp-validation-for="addressLine1"></span>
-                        <span asp-validation-for="addressLine2"></span>
+                
+                    <div class="form-group">
+                        <span asp-validation-for="Address.addressLine1"></span>
+                        <span asp-validation-for="Address.addressLine2"></span>
                         <label for="Address">Address</label>
-                        <input type="text" asp-for="addressLine1" class="form-control">
-                        <input type="text" asp-for="addressLine2" class="form-control">
+                        <input type="text" asp-for="Address.addressLine1" class="form-control">
+                        <input type="text" asp-for="Address.addressLine2" class="form-control">
                     </div>
                     <div class="form-group">
-                        <span asp-validation-for="City"></span>
+                        <span asp-validation-for="Address.city"></span>
                         <label for="City">City</label>
-                        <input type="text" asp-for="City" class="form-control">
+                        <input type="text" asp-for="Address.city" class="form-control">
                     </div>
                     <div class="form-group">
-                        <span asp-validation-for="State"></span>
+                        <span asp-validation-for="Address.state"></span>
                         <label for="State">State</label>
-                        <input type="text" asp-for="State" class="form-control">
+                        <input type="text" asp-for="Address.state" class="form-control">
                     </div>
                     <div class="form-group">
-                        <span asp-validation-for="postalCode"></span>
+                        <span asp-validation-for="Address.postalCode"></span>
                         <label for="postalCode">Postal Code</label>
-                        <input type="text" asp-for="postalCode" class="form-control">
-                    </div> -->
+                        <input type="text" asp-for="Address.postalCode" class="form-control">
+                    </div>
                     <!-- commenting out above until determine how to pull Address model via Listing -->
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <span asp-validation-for="Zip"></span>
                         <label for="Zip">Zip Code</label>
                         <input type="number" asp-for="Zip" class="form-control">
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <span asp-validation-for="ImgUrl"></span>
                         <label for="ImgUrl">Photo Url</label>

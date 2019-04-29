@@ -136,12 +136,12 @@
             @{foreach (Listing list in Model.UsersListings)
             {
             <div class="listingdetails">
-                <img src="@list.ImgUrl" alt="" >
+                <img id="listingimg" src="@list.ImgUrl" alt="" >
                 <div>
-                <a href="listing-detail/@list.ListingId">Address</a>
+                <a href="/Listing-detail/@list.ListingId">Address</a>
                 <h4>Postal Code: @list.Zip</h4>
                 <h4>$@list.Price</h4>
-                <h4><a href="@list.MLSLink">MLS Link</a></h4>
+                <h4><a href="@list.MLSLink" target="_blank">MLS Link</a></h4>
                     
                     @{
                     foreach (Event listevent in list.Events)
@@ -152,7 +152,7 @@
                     </div>
                     }
                     }
-                <a href="/add-event/@list.ListingId">Add Event</a>
+                <!-- <a href="/add-event/@list.ListingId">Add Event</a> -->
                 <button type="submit" class="btn btn-secondary" formaction="/add-event/@list.ListingId">Add Event</button>
                 </div>
             

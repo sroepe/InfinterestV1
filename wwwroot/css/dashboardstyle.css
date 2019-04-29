@@ -235,7 +235,7 @@ label.sectionlabels {
 #rightsection h4{
     font-weight: bold;
     font-size: 16px;
-    line-height: 4px;
+    line-height: 10px;
 }
 
 #rightsection p{
@@ -307,6 +307,11 @@ label.sectionlabels {
 
 .listingdetails {
     margin-bottom: 4%;
+}
+
+.listingdetails img {
+    height: 200px;
+    width: 100%;
 }
 
 ul {
