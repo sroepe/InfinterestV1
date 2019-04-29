@@ -127,7 +127,7 @@ namespace Infinterest.Controllers
                     thisListing.Events.Add(NewEvent);
 
                     _context.SaveChanges();
-                    return Redirect ("/dashboard");                
+                    return Redirect ("/listing-details/" + id);                
                 }
             }
             return View ("AddEvents");
@@ -140,7 +140,7 @@ namespace Infinterest.Controllers
         }
 
         [HttpPost("add-listings")]
-        public IActionResult CreateListing(Listing NewListing)
+        public IActionResult CreateListing(ListingForm UserInput)
         {
             if (ModelState.IsValid)
             {
@@ -150,18 +150,23 @@ namespace Infinterest.Controllers
                     .OfType<Broker>()
                     .Where(broker => broker.UserId == ID)
                     .FirstOrDefault();
+
+                if(user == null)
+                {
+                    return Redirect("/");
+                }
                 
                 //Add listing to db
+                Listing NewListing = new Listing(UserInput);
                 NewListing.Broker = user;
                 NewListing.BrokerId = user.UserId;
-                NewListing.Events = new List<Event>();
                 _context.listings.Add(NewListing);
 
                 // add to broker's listings
                 user.Listings.Add(NewListing);
                 _context.SaveChanges();
 
-                return Redirect ("/dashboard");
+                return Redirect ("/listing-details/" + NewListing.ListingId);
             }
             else
             {

@@ -20,7 +20,23 @@ namespace Infinterest.Models
 
         public List<Event> Events {get; set;}
         
-        
+        public Listing()
+        {
+            Events = new List<Event>();
+        }
+
+        public Listing(ListingForm UserInput)
+        {
+            Events = new List<Event>();
+            MLSLink = UserInput.MLSLink;
+            Price = UserInput.Price;
+            if(Int32.TryParse(UserInput.postalCode, out int zip))
+            {
+                Zip = zip;
+            }
+            ImgUrl = UserInput.ImgUrl;
+            Address = new Address(UserInput);
+        }
 
     }   
 }
