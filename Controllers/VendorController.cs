@@ -40,9 +40,9 @@ namespace Infinterest.Controllers
             viewModel.allListings = _context.listings
                                     .ToList();
 
-            if(user.ConfirmedEvents != null)
+            if(user.Events != null)
             {
-                viewModel.usersEvents = user.ConfirmedEvents.Select(s => s.Event).ToList();
+                viewModel.usersEvents = user.Events.Select(s => s.Event).ToList();
             }
 
             return View ("DashboardVendor", viewModel);

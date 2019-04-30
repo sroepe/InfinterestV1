@@ -61,19 +61,7 @@
                                         <img src="@vend.Vendor.ImgUrl"> <h4>@vend.Vendor.Company</h4>
                                     }
                                 }
-                                @if(HttpContext.Session.GetInt32("userid") == eve.BrokerId)
-                                {
-                                    <h3>Pending Vendors:</h3>
-                                    @foreach (VendorToEvent vend in eve.EventVendors)
-                                    {
-                                        if(vend.Confirmed == false)
-                                        {
-                                            <img src="@vend.Vendor.ImgUrl"> <h4>@vend.Vendor.Company</h4>
-                                            <a href="fakeconfrimlink">Confrim</a>
-                                            <a href="fakeconfrimlink">Deny</a>
-                                        }
-                                    }
-                                }
+                                
                             }
                         }
                         <li><a href="/add-event/@Model.ListingId"><h5>Create Event</h5></a></li> 

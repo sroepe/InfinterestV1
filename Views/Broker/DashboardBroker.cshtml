@@ -151,7 +151,7 @@
                     {     
                     <div>
                     <a href="event-detail/@listevent.EventId"><h6>@listevent.OpenHouseDate</h6><h6>@listevent.OpenHouseTime</h6></a>
-                    <h6>Requests: @listevent.EventVendors.Where(Confirmed == true).Count()</h6>
+                    //<h6>Requests: @listevent.EventVendors.Where(ev => ev.Confirmed == true).Count()</h6>
                     </div>
                     }
                     }

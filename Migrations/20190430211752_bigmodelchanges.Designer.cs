@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infinterest.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190426201734_fixingmodels")]
-    partial class fixingmodels
+    [Migration("20190430211752_bigmodelchanges")]
+    partial class bigmodelchanges
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -109,19 +109,6 @@ namespace Infinterest.Migrations
                     );
                 });
 
-            modelBuilder.Entity("Infinterest.Models.ConfirmedVendors", b =>
-                {
-                    b.Property<int>("VendorId");
-
-                    b.Property<int>("EventId");
-
-                    b.HasKey("VendorId", "EventId");
-
-                    b.HasIndex("EventId");
-
-                    b.ToTable("confirmedvendors");
-                });
-
             modelBuilder.Entity("Infinterest.Models.Event", b =>
                 {
                     b.Property<int>("EventId")
@@ -184,19 +171,6 @@ namespace Infinterest.Migrations
                     b.ToTable("listings");
                 });
 
-            modelBuilder.Entity("Infinterest.Models.PendingVendors", b =>
-                {
-                    b.Property<int>("VendorId");
-
-                    b.Property<int>("EventId");
-
-                    b.HasKey("VendorId", "EventId");
-
-                    b.HasIndex("EventId");
-
-                    b.ToTable("pendingvendors");
-                });
-
             modelBuilder.Entity("Infinterest.Models.User", b =>
                 {
                     b.Property<int>("UserId")
@@ -245,6 +219,21 @@ namespace Infinterest.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("User");
                 });
 
+            modelBuilder.Entity("Infinterest.Models.VendorToEvent", b =>
+                {
+                    b.Property<int>("VendorId");
+
+                    b.Property<int>("EventId");
+
+                    b.Property<bool>("Confirmed");
+
+                    b.HasKey("VendorId", "EventId");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("eventvendors");
+                });
+
             modelBuilder.Entity("Infinterest.Models.Broker", b =>
                 {
                     b.HasBaseType("Infinterest.Models.User");
@@ -283,19 +272,6 @@ namespace Infinterest.Migrations
                         .HasForeignKey("VendorUserId");
                 });
 
-            modelBuilder.Entity("Infinterest.Models.ConfirmedVendors", b =>
-                {
-                    b.HasOne("Infinterest.Models.Vendor", "Vendor")
-                        .WithMany("ConfirmedEvents")
-                        .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Infinterest.Models.Event", "Event")
-                        .WithMany("ConfirmedVendors")
-                        .HasForeignKey("VendorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("Infinterest.Models.Event", b =>
                 {
                     b.HasOne("Infinterest.Models.Broker", "Broker")
@@ -321,15 +297,15 @@ namespace Infinterest.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Infinterest.Models.PendingVendors", b =>
+            modelBuilder.Entity("Infinterest.Models.VendorToEvent", b =>
                 {
                     b.HasOne("Infinterest.Models.Vendor", "Vendor")
-                        .WithMany("RequestedEvents")
+                        .WithMany("Events")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Infinterest.Models.Event", "Event")
-                        .WithMany("RequestedVendors")
+                        .WithMany("EventVendors")
                         .HasForeignKey("VendorId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

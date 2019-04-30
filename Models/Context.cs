@@ -31,12 +31,12 @@ namespace Infinterest.Models
 
             modelBuilder.Entity<VendorToEvent>()
                 .HasOne<Event>(s => s.Event)
-                .WithMany(c => c.VendorToEvent)
+                .WithMany(c => c.EventVendors)
                 .HasForeignKey(y => y.VendorId);
             
             modelBuilder.Entity<VendorToEvent>()
                 .HasOne<Vendor>(s => s.Vendor)
-                .WithMany(c => c.VendorToEvent)
+                .WithMany(c => c.Events)
                 .HasForeignKey(y => y.EventId);
 
 
