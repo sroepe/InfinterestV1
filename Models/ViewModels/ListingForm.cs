@@ -16,6 +16,7 @@ namespace Infinterest.Models
         public string postalCode {get;set;}
         public string state {get;set;}
         public string ImgUrl { get; set; }
+        public string Description { get; set; }
         
         
 

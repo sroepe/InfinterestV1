@@ -139,8 +139,8 @@
                 <a href="/listing-details/@list.ListingId"><img id="listingimg" src="@list.ImgUrl" alt="" ></a>
                 <div>
                 <a href="/listing-details/@list.ListingId">
-                    <h2>@list.Address.addressLine1</h2>
-                    <h2>@list.Address.addressLine2</h2>
+                    <h2>@list.Address.addressLine1 @list.Address.addressLine2</h2>
+                    <h2>@list.Address.city, @list.Address.state</h2>
                 </a>
                 <h4>Postal Code: @list.Zip</h4>
                 <h4>$@list.Price</h4>
@@ -151,7 +151,7 @@
                     {     
                     <div>
                     <a href="event-detail/@listevent.EventId"><h6>@listevent.OpenHouseDate</h6><h6>@listevent.OpenHouseTime</h6></a>
-                    //<h6>Requests: @listevent.EventVendors.Where(ev => ev.Confirmed == true).Count()</h6>
+                    <h6>Requests: @listevent.EventVendors.Where(ev => ev.Confirmed == true).Count()</h6>
                     </div>
                     }
                     }

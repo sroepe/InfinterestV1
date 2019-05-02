@@ -41,16 +41,41 @@
 
            
                 <div class="listingheader">
-                    <h4>@Model.Address.addressLine1</h4> 
-                    <h4>@Model.Address.addressLine2</h4> 
+                    
                     
                     <!-- <div class="row"> -->
+                    
+                    <!-- </div>             -->
+                </div>
+                
+               
+            <div class="row">
+                <div class="col-sm">
+                    <img src="@Model.ImgUrl" alt="" class="respic">
+                </div>
+                <div class="resinfo col-sm">
+                    <h4>@Model.Address.addressLine1 @Model.Address.addressLine2</h4> 
+                    <h4>@Model.Address.city, @Model.Address.state @Model.Address.postalCode</h4> 
+                    <h6>@Model.Price</h6>
+                    <p>@Model.Description</p>
+                    <p>MLS Listing</p> <!-- not totaly sure how to do this one -->
+                    <p>34683</p>
+                </div>
+            </div>    
+            <div class="row">
+                <div class="vendors-social col-sm">
+                    <h4>Agent</h4>
+                    <h6>@Model.Broker.FirstName @Model.Broker.LastName</h6>
+                    <a href="/broker-profile/@Model.BrokerId"><img src="@Model.Broker.ImgUrl" alt="" class="preferred"></a>
+            
+                </div>
+                <div class="vendors-social col-sm">
                     <div class="listingevents">
-
+                        <h4>Events</h4>
                         @{
                             foreach (Event eve in Model.Events)
                             {
-                                <li><a href="/event-detail">
+                                <li><a href="/event-detail/@eve.EventId">
                                 <h5>Open House @eve.OpenHouseDate @eve.OpenHouseTime</h5>
                                 </a></li>
                                 <h3>Confirmed Vendors:</h3>
@@ -68,36 +93,6 @@
 
 
                     </div>    
-                    <!-- </div>             -->
-                </div>
-                
-               
-            <div class="row">
-                <div class="col-sm">
-                    <img src="../images/home7.jpg" alt="kitchenpic" class="respic">
-                </div>
-                <div class="resinfo col-sm">
-                    <!-- <h4>93754 39th Ave W</h4>
-                    <h4>Centerville, WA 90528</h4> -->
-                    <h6>$849,000</h6>
-                    <h6>January 19, 2019</h6>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                    <p>MLS Listing</p>
-                    <p>34683</p>
-                </div>
-            </div>    
-            <div class="row">
-                <div class="vendors-social col-sm">
-                    <h4>Agent</h4>
-                    <h6>Sarah Thomas</h6>
-                    <a href="/broker-profile"><img src="../images/headshot1.jpg" alt="" class="preferred"></a>
-            
-                </div>
-                <div class="vendors-social col-sm">
-                    <h4>Vendors</h4>
-                    <a href="/vendor-profile" target="_blank"><img src="../images/cupcake.png" alt="" class="vendors"></a>
-                    <a href="/vendor-profile" target="_blank"><img src="../images/jimmyjohns.jpg" alt="" class="vendors"></a>
-                
                     <h5>Share via Social Media or Email</h5>
                     <a href="#share-ig" rel="modal:open"><img src="../images/instagram.png" alt="" class="social"></a>
                     <a href="#share-fb" rel="modal:open"><img src="../images/facebook.png" alt="" class="social"></a>

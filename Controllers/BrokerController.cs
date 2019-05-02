@@ -108,7 +108,7 @@ namespace Infinterest.Controllers
             {
                 if(Int32.TryParse(ListingId, out int id))
                 {
-                  NewEvent.EventVendors = new List<VendorToEvent>();
+                    NewEvent.EventVendors = new List<VendorToEvent>();
                     NewEvent.ListingId = id;
                     Listing thisListing = _context.listings
                     .FirstOrDefault(l => l.ListingId == id);
@@ -121,6 +121,12 @@ namespace Infinterest.Controllers
                         .Where(broker => broker.UserId == ID)
                         .FirstOrDefault();
 
+                    if(thisListing.BrokerId != user.UserId)
+                    {
+                        //fake code
+                        return Redirect("/notrightuser");
+                    }
+
                     NewEvent.Broker = user;
                     NewEvent.BrokerId = user.UserId;
                     user.Events.Add(NewEvent);
@@ -129,7 +135,7 @@ namespace Infinterest.Controllers
                     thisListing.Events.Add(NewEvent);
 
                     _context.SaveChanges();
-                    return Redirect ("/listing-detail/" + id);                
+                    return Redirect ("/listing-details/" + id);                
                 }
             }
             return View ("AddEvents");
@@ -172,7 +178,7 @@ namespace Infinterest.Controllers
                 user.Listings.Add(NewListing);
                 _context.SaveChanges();
 
-                return Redirect ("/listing-detail/" + NewListing.ListingId);
+                return Redirect ("/listing-details/" + NewListing.ListingId);
             }
             else
             {
@@ -210,35 +216,7 @@ namespace Infinterest.Controllers
             }
             return Redirect("/dashboard");
         }
-        [HttpGet("test/listing/{ListingId}")]
-        public IActionResult TestListing (string ListingId)
-        {
-            if(Int32.TryParse(ListingId, out int id))
-            {
-                Listing listingToTest = _context.listings
-                        .Include(lis => lis.Address)
-                        .FirstOrDefault(listing => listing.ListingId == id);
-                return Redirect("/address/" + listingToTest.Address.postalCode);
-            }
-            else
-            {
-                return Redirect("/");
-            }
-        }
-        [HttpGet("test/Address/{ListingId}")]
-        public IActionResult TestAddress (string ListingId)
-        {
-            if(Int32.TryParse(ListingId, out int id))
-            {
-                Address listingToTest = _context.address
-                        .FirstOrDefault(listing => listing.AddressId == id);
-                return Redirect("/address/" + listingToTest.postalCode);
-            }
-            else
-            {
-                return Redirect("/");
-            }
-        }
+        
 
         
         // interact with vendors

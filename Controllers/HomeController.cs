@@ -83,8 +83,9 @@ namespace Infinterest.Controllers
             if(Int32.TryParse(listingId, out int id))
             {
                 Listing thisListing = _context.listings
-                    .Include(List => List.Address)
-                    .Include(lis => lis.Events)
+                    .Include(list => list.Broker)
+                    .Include(list => list.Address)
+                    .Include(list => list.Events)
                     .ThenInclude(eve => eve.EventVendors)
                     .ThenInclude(ev => ev.Vendor)
                     .FirstOrDefault(lis => lis.ListingId == id);
