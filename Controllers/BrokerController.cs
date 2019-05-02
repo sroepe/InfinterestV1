@@ -108,7 +108,7 @@ namespace Infinterest.Controllers
             {
                 if(Int32.TryParse(ListingId, out int id))
                 {
-                    NewEvent.EventVendors = new List<VendorToEvent>();
+                  NewEvent.EventVendors = new List<VendorToEvent>();
                     NewEvent.ListingId = id;
                     Listing thisListing = _context.listings
                     .FirstOrDefault(l => l.ListingId == id);
@@ -129,7 +129,7 @@ namespace Infinterest.Controllers
                     thisListing.Events.Add(NewEvent);
 
                     _context.SaveChanges();
-                    return Redirect ("/listing-details/" + id);                
+                    return Redirect ("/listing-detail/" + id);                
                 }
             }
             return View ("AddEvents");
@@ -147,19 +147,23 @@ namespace Infinterest.Controllers
             if (ModelState.IsValid)
             {
                 int? ID = HttpContext.Session.GetInt32("userid");           
-
                 Broker user = _context.users
                     .OfType<Broker>()
-                    .Where(broker => broker.UserId == ID)
+                    .Where(use => use.UserId == ID)
                     .FirstOrDefault();
-
                 if(user == null)
                 {
-                    return Redirect("/");
+                    //fake code
+                    return Redirect("/notsignedin");
                 }
-                
+
+                //Add address to db
+                Address NewAddress = new Address(UserInput);
+                _context.address.Add(NewAddress);
+                _context.SaveChanges();
+
                 //Add listing to db
-                Listing NewListing = new Listing(UserInput);
+                Listing NewListing = new Listing(UserInput, NewAddress);
                 NewListing.Broker = user;
                 NewListing.BrokerId = user.UserId;
                 _context.listings.Add(NewListing);
@@ -168,7 +172,7 @@ namespace Infinterest.Controllers
                 user.Listings.Add(NewListing);
                 _context.SaveChanges();
 
-                return Redirect ("/listing-details/" + NewListing.ListingId);
+                return Redirect ("/listing-detail/" + NewListing.ListingId);
             }
             else
             {
@@ -206,7 +210,37 @@ namespace Infinterest.Controllers
             }
             return Redirect("/dashboard");
         }
+        [HttpGet("test/listing/{ListingId}")]
+        public IActionResult TestListing (string ListingId)
+        {
+            if(Int32.TryParse(ListingId, out int id))
+            {
+                Listing listingToTest = _context.listings
+                        .Include(lis => lis.Address)
+                        .FirstOrDefault(listing => listing.ListingId == id);
+                return Redirect("/address/" + listingToTest.Address.postalCode);
+            }
+            else
+            {
+                return Redirect("/");
+            }
+        }
+        [HttpGet("test/Address/{ListingId}")]
+        public IActionResult TestAddress (string ListingId)
+        {
+            if(Int32.TryParse(ListingId, out int id))
+            {
+                Address listingToTest = _context.address
+                        .FirstOrDefault(listing => listing.AddressId == id);
+                return Redirect("/address/" + listingToTest.postalCode);
+            }
+            else
+            {
+                return Redirect("/");
+            }
+        }
 
+        
         // interact with vendors
     }
 }

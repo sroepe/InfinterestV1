@@ -37,6 +37,18 @@ namespace Infinterest.Models
             ImgUrl = UserInput.ImgUrl;
             Address = new Address(UserInput);
         }
+        public Listing(ListingForm UserInput, Address InputAddress)
+        {
+            Events = new List<Event>();
+            MLSLink = UserInput.MLSLink;
+            Price = UserInput.Price;
+            if(Int32.TryParse(UserInput.postalCode, out int zip))
+            {
+                Zip = zip;
+            }
+            ImgUrl = UserInput.ImgUrl;
+            Address = InputAddress;
+        }
 
     }   
 }
