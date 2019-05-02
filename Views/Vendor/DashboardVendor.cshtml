@@ -132,7 +132,15 @@
                       <h4>@events.OpenHouseDate</h4>
                       <h4>@events.Listing</h4>
                       <h4>@events.AreaOfHouse</h4>
-                      <!-- //confirmed vendors -->
+                      /*<h4>
+                        @foreach (VendorToEvent vendor in events.EventVendors)
+                        {
+                          @if(vendor.Confirmed == true)
+                          {
+                            <li>@vendor.Vendor.Company</li>
+                          }
+                        }
+                      </h4>*/
                       <a href="event-detail/{@events.EventId}"><h6>@events.EventId</h6></a>
                     </div>
                   </div>

@@ -13,6 +13,7 @@ namespace Infinterest.Models
         public int Price {get; set;}
         public int Zip {get; set;}  //do we need to have zip as well on the listing since it pulls postalCode from Address??
         public Address Address {get;set;}
+        public int AddressId {get;set;}
         public string ImgUrl { get; set; }
 
         public int BrokerId {get; set;}
@@ -35,7 +36,19 @@ namespace Infinterest.Models
                 Zip = zip;
             }
             ImgUrl = UserInput.ImgUrl;
-            Address = new Address(UserInput);
+        }
+        public Listing(ListingForm UserInput, Address InputAddress)
+        {
+            Events = new List<Event>();
+            MLSLink = UserInput.MLSLink;
+            Price = UserInput.Price;
+            if(Int32.TryParse(UserInput.postalCode, out int zip))
+            {
+                Zip = zip;
+            }
+            ImgUrl = UserInput.ImgUrl;
+            Address =  InputAddress;
+            AddressId = InputAddress.AddressId;
         }
 
     }   
