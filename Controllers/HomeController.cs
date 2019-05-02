@@ -77,7 +77,7 @@ namespace Infinterest.Controllers
             return RedirectToAction ("Dashboard");
         }
 
-        [HttpGet("Listing-detail/{listingId}")]
+        [HttpGet("listing-details/{listingId}")]
         public IActionResult ListingDetail(String listingId)
         {
             if(Int32.TryParse(listingId, out int id))

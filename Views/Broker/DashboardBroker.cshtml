@@ -136,9 +136,9 @@
             @{foreach (Listing list in Model.UsersListings)
             {
             <div class="listingdetails">
-                <img id="listingimg" src="@list.ImgUrl" alt="" >
+                <a href="/listing-details/@list.ListingId"><img id="listingimg" src="@list.ImgUrl" alt="" ></a>
                 <div>
-                <a href="/Listing-detail/@list.ListingId">
+                <a href="/listing-details/@list.ListingId">
                     <h2>@list.Address.addressLine1</h2>
                     <h2>@list.Address.addressLine2</h2>
                 </a>
