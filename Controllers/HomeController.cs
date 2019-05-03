@@ -70,8 +70,10 @@ namespace Infinterest.Controllers
             if(Int32.TryParse(eventId, out int id))
             {
                 Event thisEvent = _context.events
-                    .Where(ev => ev.EventId == id)
-                    .FirstOrDefault();
+                    .Include(ev => ev.Broker)
+                    .Include(ev => ev.Listing)
+                    .ThenInclude(li => li.Address)
+                    .FirstOrDefault(ev => ev.EventId == id);
                 return View(thisEvent);
             }
             return RedirectToAction ("Dashboard");
