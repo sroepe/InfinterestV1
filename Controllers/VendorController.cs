@@ -65,6 +65,7 @@ namespace Infinterest.Controllers
                 if(_context.users.Any(u => u.Email == UserInput.Email))
                 {
                     ModelState.AddModelError("Email", "Email already in use!");
+                    return View("VendorRegistration");
                 }
                 else
                 {
@@ -72,7 +73,7 @@ namespace Infinterest.Controllers
                     _context.users.Add(NewVendor);
                     _context.SaveChanges();
                     HttpContext.Session.SetInt32("userid", NewVendor.UserId);
-                    return Redirect("vendor-registration2");
+                    return Redirect("DashboardVendor");
                 }
             }
             System.Console.WriteLine("Not valid");
@@ -85,26 +86,6 @@ namespace Infinterest.Controllers
 
             return View();
         }
-        [HttpPost("vendor-registration")]
-        public IActionResult AddToVendor(Vendor UserInput)
-        {
-            int? ID = HttpContext.Session.GetInt32("userid");           
-            Vendor user = _context.users
-                .OfType<Vendor>()
-                .Where(vendor => vendor.UserId == ID)
-                .FirstOrDefault();
-            
-            if (user == null)
-            {
-                return Redirect("/");
-            }
-
-            user.AreaOfHouse = UserInput.AreaOfHouse;
-            user.BusinessCategory = UserInput.BusinessCategory;
-            _context.SaveChanges();
-            return Redirect("dashboard");
-        }
-
         
         [HttpPost("vendor")]
         public IActionResult NewVendor(Vendor NewVendor)

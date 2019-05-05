@@ -122,14 +122,14 @@
           </div>
         </div>
         <div id="rightsection">
-            <label class="price upevents">Your Events</label>
+            <label class="price upevents">Upcoming Events</label>
             <div class="myevents">
               @{
                 foreach (Event events in Model.usersEvents)
                 {
                   <div class="event">
                     <div>
-                      <h4>@events.OpenHouseDate</h4>
+                      <h4>@events.AreaOfHouse</h4>
                       <h4>@events.Listing</h4>
                       <h4>@events.AreaOfHouse</h4>
                       <!-- //confirmed vendors -->
