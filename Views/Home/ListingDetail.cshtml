@@ -39,7 +39,7 @@
 
                 <!--this code is temporary - will likely be added to a listing detail page?  to confirm with Hailey -->
 
-           
+
                 <div class="listingheader">
                     
                     
@@ -48,7 +48,7 @@
                     <!-- </div>             -->
                 </div>
                 
-               
+
             <div class="row">
                 <div class="col-sm">
                     <img src="@Model.ImgUrl" alt="" class="respic">
@@ -67,7 +67,7 @@
                     <h4>Agent</h4>
                     <h6>@Model.Broker.FirstName @Model.Broker.LastName</h6>
                     <a href="/broker-profile/@Model.BrokerId"><img src="@Model.Broker.ImgUrl" alt="" class="preferred"></a>
-            
+
                 </div>
                 <div class="vendors-social col-sm">
                     <div class="listingevents">
@@ -75,10 +75,10 @@
                         @{
                             foreach (Event eve in Model.Events)
                             {
-                                <li><a href="/event-detail/@eve.EventId">
-                                <h5>Open House @eve.OpenHouseDate @eve.OpenHouseTime</h5>
-                                </a></li>
-                                <h3>Confirmed Vendors:</h3>
+                                <h5><li><a href="/event-detail/@eve.EventId">
+                                Open House @eve.OpenHouseDate @eve.OpenHouseTime
+                                </a></li></h5>
+                                <h5>Confirmed Vendors:</h5>
                                 @foreach (VendorToEvent vend in eve.EventVendors)
                                 {
                                     if(vend.Confirmed == true)
@@ -89,7 +89,7 @@
                                 
                             }
                         }
-                        <li><a href="/add-event/@Model.ListingId"><h5>Create Event</h5></a></li> 
+                        <h5><li><a href="/add-event/@Model.ListingId">Create Event</a></li></h5>
 
 
                     </div>    

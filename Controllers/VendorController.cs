@@ -85,7 +85,7 @@ namespace Infinterest.Controllers
 
             return View();
         }
-        [HttpPost("vendor-registration")]
+        [HttpPost("vendor-registration2")]
         public IActionResult AddToVendor(Vendor UserInput)
         {
             int? ID = HttpContext.Session.GetInt32("userid");           
