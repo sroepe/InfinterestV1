@@ -73,7 +73,7 @@ namespace Infinterest.Controllers
                     _context.users.Add(NewVendor);
                     _context.SaveChanges();
                     HttpContext.Session.SetInt32("userid", NewVendor.UserId);
-                    return Redirect("DashboardVendor");
+                    return Redirect("vendor-registration2");
                 }
             }
             System.Console.WriteLine("Not valid");
