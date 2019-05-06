@@ -65,6 +65,7 @@ namespace Infinterest.Controllers
                 if(_context.users.Any(u => u.Email == UserInput.Email))
                 {
                     ModelState.AddModelError("Email", "Email already in use!");
+                    return View("VendorRegistration");
                 }
                 else
                 {
@@ -72,7 +73,7 @@ namespace Infinterest.Controllers
                     _context.users.Add(NewVendor);
                     _context.SaveChanges();
                     HttpContext.Session.SetInt32("userid", NewVendor.UserId);
-                    return Redirect("vendor-registration2");
+                    return Redirect("DashboardVendor");
                 }
             }
             System.Console.WriteLine("Not valid");
