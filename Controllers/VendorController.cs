@@ -37,13 +37,18 @@ namespace Infinterest.Controllers
 
             DashboardVendorView viewModel = new DashboardVendorView();
             
-            viewModel.allListings = _context.listings
+            viewModel.currentUser = user;
+
+            viewModel.allEvents = _context.events
+                                    .Include(eve => eve.Listing)
+                                    .Include (eve => eve.Broker)
                                     .ToList();
 
-            if(user.Events != null)
-            {
-                viewModel.usersEvents = user.Events.Select(s => s.Event).ToList();
-            }
+            viewModel.usersEvents = _context.events
+                                    .Include(eve => eve.Listing)
+                                    .Include (eve => eve.Broker)
+                                    // .Where(eve => eve.EventVendors.Vendor == user)
+                                    .ToList();
 
             return View ("DashboardVendor", viewModel);
         }

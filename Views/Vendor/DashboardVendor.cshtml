@@ -104,17 +104,17 @@
           <label class="price listings">New Events</label>
           <div class="alllistings">
             @{
-              foreach (Listing list in Model.allListings)
+              foreach (Event eve in Model.allEvents)
               {
                 <div class="listingdetails">
-                  <img src="@list.ImgUrl" alt="" >
+                  <img src="@eve.Listing.ImgUrl" alt="" >
                   <div>
-                    <h4>@list.Zip</h4>
-                    <h4>@list.Price</h4>
-                    <h4>@list.ListingId</h4>
-                    <h4>@list.MLSLink</h4>
-                    <a href="broker-profile/{id}"><h6>@list.Broker</h6></a>
-                    <a href="event-detail/{eventId}"><h6>@list.Events</h6></a>
+                    <h4>@eve.Listing.Zip</h4>
+                    <h4>@eve.Listing.Price</h4>
+                    <h4>@eve.Listing.ListingId</h4>
+                    <h4>@eve.Listing.MLSLink</h4>
+                    <a href="broker-profile/{id}"><h6>@eve.Listing.Broker</h6></a>
+                    <a href="event-detail/{eventId}"><h6>@eve.Listing.Events</h6></a>
                   </div>
                 </div>
               }
