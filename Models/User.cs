@@ -47,17 +47,19 @@ public class User : BaseEntity
         [Required(ErrorMessage = "Please Confirm Password")]
         [Compare(nameof(Password), ErrorMessage = "Your passwords need to match")]        
         public string PasswordConfirm { get; set; }
-            // optional
-
+            // soon to be required
+        [Required(ErrorMessage = "Please Add Image")]
         [DataType(DataType.Text)]
         public string ImgUrl { get; set; }
         [DataType(DataType.Text)]
+        [Required(ErrorMessage = "Please Add Contact Information")]
 
         public string Contact {get; set;}
         [DataType(DataType.Text)]
 
         public string Bio {get; set;}
         [DataType(DataType.Text)]
+        [Required(ErrorMessage = "Please Add Company Name")]
 
         public string Company { get; set; }
         [DataType(DataType.Text)]
