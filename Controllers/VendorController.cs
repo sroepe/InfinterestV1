@@ -112,27 +112,58 @@ namespace Infinterest.Controllers
         }
 
         
-        [HttpPost("vendor")]
-        public IActionResult NewVendor(Vendor NewVendor)
+        [HttpPost("event-detail/{eventId}/request")]
+        public IActionResult EventRequest(string eventId)
         {
-            if(ModelState.IsValid)  
-            {   
-                int UserId = (int)HttpContext.Session.GetInt32("userid");
-                User User =_context.users.SingleOrDefault(user => user.UserId == UserId);
-                
-                HttpContext.Session.SetInt32("UserId", UserId);
-                @ViewBag.User = User;
-
-                NewVendor.UserId = UserId;
-                _context.users.Add(NewVendor);
-                _context.SaveChanges();
-                return RedirectToAction("Dashboard");
-            }
-            else
+            int? ID = HttpContext.Session.GetInt32("userid");           
+            Vendor user = _context.users
+                .OfType<Vendor>()
+                .Where(vendor => vendor.UserId == ID)
+                .FirstOrDefault();
+            
+            if (user == null)
             {
-                return View("Vendor");
+                return Redirect("/");
             }
+
+            if(Int32.TryParse(eventId, out int id))
+            {
+                Event thisEvent = _context.events
+                    .Include(ev => ev.Broker)
+                    .Include(ev => ev.Listing)
+                    .ThenInclude(li => li.Address)
+                    .FirstOrDefault(ev => ev.EventId == id);
+                
+                VendorToEvent thisRequest = new VendorToEvent(user, thisEvent);
+
+                _context.eventvendors.Add(thisRequest);
+                thisEvent.EventVendors.Add(thisRequest);
+                user.Events.Add(thisRequest);
+                _context.SaveChanges();
+            }
+            return Redirect("/event-detail/" + eventId);
         }
+        // [HttpPost("vendor")]
+        // public IActionResult NewVendor(Vendor NewVendor)
+        // {
+        //     if(ModelState.IsValid)  
+        //     {   
+        //         int UserId = (int)HttpContext.Session.GetInt32("userid");
+        //         User User =_context.users.SingleOrDefault(user => user.UserId == UserId);
+                
+        //         HttpContext.Session.SetInt32("UserId", UserId);
+        //         @ViewBag.User = User;
+
+        //         NewVendor.UserId = UserId;
+        //         _context.users.Add(NewVendor);
+        //         _context.SaveChanges();
+        //         return RedirectToAction("Dashboard");
+        //     }
+        //     else
+        //     {
+        //         return View("Vendor");
+        //     }
+        // }
         
     }
 }

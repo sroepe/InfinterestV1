@@ -7,5 +7,18 @@ namespace Infinterest.Models
         public Vendor Vendor {get;set;}
         public int EventId {get;set;}
         public Event Event {get;set;}
+
+        public VendorToEvent ()
+        {
+            Confirmed = false;
+        }
+        public VendorToEvent (Vendor userInput, Event eventInput)
+        {
+            Confirmed = false;
+            Vendor = userInput;
+            VendorId = userInput.UserId;
+            Event = eventInput;
+            EventId = eventInput.EventId;
+        }
     }
 }
