@@ -197,6 +197,23 @@ namespace Infinterest.Controllers
                 if(listingToDelete.BrokerId == HttpContext.Session.GetInt32("userid"))
                 {
                     _context.listings.Remove(listingToDelete);
+                    _context.SaveChanges();
+                }
+            }
+            return Redirect("/dashboard");
+        }
+        [HttpGet("listing/{ListingId}/archive")]
+        public IActionResult ArchiveListing (string ListingId)
+        {
+            if(Int32.TryParse(ListingId, out int id))
+            {
+                Listing listingToDelete = _context.listings
+                    .FirstOrDefault(listing => listing.ListingId == id);
+
+                if(listingToDelete.BrokerId == HttpContext.Session.GetInt32("userid"))
+                {
+                    listingToDelete.Availible = false;
+                    _context.SaveChanges();
                 }
             }
             return Redirect("/dashboard");
@@ -212,6 +229,23 @@ namespace Infinterest.Controllers
                 if(eventToDelete.BrokerId == HttpContext.Session.GetInt32("userid"))
                 {
                     _context.events.Remove(eventToDelete);
+                    _context.SaveChanges();
+                }
+            }
+            return Redirect("/dashboard");
+        }
+        [HttpGet("event/{EventId}/confirm")]
+        public IActionResult ConfirmEvent (string EventId)
+        {
+            if(Int32.TryParse(EventId, out int id))
+            {
+                Event eventToConfirm = _context.events
+                    .FirstOrDefault(eve => eve.EventId == id);
+
+                if(eventToConfirm.BrokerId == HttpContext.Session.GetInt32("userid"))
+                {
+                    eventToConfirm.Confirmed = true;
+                    _context.SaveChanges();
                 }
             }
             return Redirect("/dashboard");
