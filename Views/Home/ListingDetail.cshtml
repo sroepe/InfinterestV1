@@ -76,7 +76,7 @@
                             foreach (Event eve in Model.CurrentListing.Events)
                             {
                                 <h5><li><a href="/event-detail/@eve.EventId">
-                                Open House @eve.OpenHouseDate @eve.OpenHouseTime
+                                Open House @eve.OpenHouseDateTime
                                 </a></li></h5>
                                 <h5>Confirmed Vendors:</h5>
                                 @foreach (VendorToEvent vend in eve.EventVendors)

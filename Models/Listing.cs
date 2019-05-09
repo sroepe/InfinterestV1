@@ -9,6 +9,7 @@ namespace Infinterest.Models
     public class Listing : BaseEntity
     {   
         public int ListingId {get; set;}
+        public bool Availible {get;set;}
         public string MLSLink {get; set;}
         public int Price {get; set;}
         public int Zip {get; set;}  //do we need to have zip as well on the listing since it pulls postalCode from Address??
@@ -23,11 +24,13 @@ namespace Infinterest.Models
         
         public Listing()
         {
+            Availible = true;
             Events = new List<Event>();
         }
 
         public Listing(ListingForm UserInput)
         {
+            Availible = true;
             Events = new List<Event>();
             MLSLink = UserInput.MLSLink;
             Price = UserInput.Price;
@@ -41,6 +44,7 @@ namespace Infinterest.Models
         }
         public Listing(ListingForm UserInput, Address InputAddress)
         {
+            Availible = true;
             Events = new List<Event>();
             MLSLink = UserInput.MLSLink;
             Price = UserInput.Price;
