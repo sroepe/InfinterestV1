@@ -4,7 +4,7 @@
 <!-- if user is owner of event let them do some stuff -->
 <!-- if user is a vendor let them request to join -->
 <!-- will need to create a page for listings and a page for finalized events -->
-@model Listing
+@model ListingDetailView
 
 @section css {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -51,13 +51,13 @@
 
             <div class="row">
                 <div class="col-sm">
-                    <img src="@Model.ImgUrl" alt="" class="respic">
+                    <img src="@Model.CurrentListing.ImgUrl" alt="" class="respic">
                 </div>
                 <div class="resinfo col-sm">
-                    <h4>@Model.Address.addressLine1 @Model.Address.addressLine2</h4> 
-                    <h4>@Model.Address.city, @Model.Address.state @Model.Address.postalCode</h4> 
-                    <h6>@Model.Price</h6>
-                    <p>@Model.Description</p>
+                    <h4>@Model.CurrentListing.Address.addressLine1 @Model.CurrentListing.Address.addressLine2</h4> 
+                    <h4>@Model.CurrentListing.Address.city, @Model.CurrentListing.Address.state @Model.CurrentListing.Address.postalCode</h4> 
+                    <h6>@Model.CurrentListing.Price</h6>
+                    <p>@Model.CurrentListing.Description</p>
                     <p>MLS Listing</p> <!-- not totaly sure how to do this one -->
                     <p>34683</p>
                 </div>
@@ -65,15 +65,15 @@
             <div class="row">
                 <div class="vendors-social col-sm">
                     <h4>Agent</h4>
-                    <h6>@Model.Broker.FirstName @Model.Broker.LastName</h6>
-                    <a href="/broker-profile/@Model.BrokerId"><img src="@Model.Broker.ImgUrl" alt="" class="preferred"></a>
+                    <h6>@Model.CurrentListing.Broker.FirstName @Model.CurrentListing.Broker.LastName</h6>
+                    <a href="/broker-profile/@Model.CurrentListing.BrokerId"><img src="@Model.CurrentListing.Broker.ImgUrl" alt="" class="preferred"></a>
 
                 </div>
                 <div class="vendors-social col-sm">
                     <div class="listingevents">
                         <h4>Events</h4>
                         @{
-                            foreach (Event eve in Model.Events)
+                            foreach (Event eve in Model.CurrentListing.Events)
                             {
                                 <h5><li><a href="/event-detail/@eve.EventId">
                                 Open House @eve.OpenHouseDate @eve.OpenHouseTime
@@ -89,7 +89,7 @@
                                 
                             }
                         }
-                        <h5><li><a href="/add-event/@Model.ListingId">Create Event</a></li></h5>
+                        <h5><li><a href="/add-event/@Model.CurrentListing.ListingId">Create Event</a></li></h5>
 
 
                     </div>    

@@ -67,6 +67,16 @@ namespace Infinterest.Controllers
         [HttpGet("event-detail/{eventId}")]
         public IActionResult EventDetail(String eventId)
         {
+            int? ID = HttpContext.Session.GetInt32("userid");           
+            User user = _context.users
+                .Where(use => use.UserId == ID)
+                .FirstOrDefault();
+
+            if (user == null)
+            {
+                return Redirect("/");
+            }
+            
             if(Int32.TryParse(eventId, out int id))
             {
                 Event thisEvent = _context.events
@@ -74,7 +84,9 @@ namespace Infinterest.Controllers
                     .Include(ev => ev.Listing)
                     .ThenInclude(li => li.Address)
                     .FirstOrDefault(ev => ev.EventId == id);
-                return View(thisEvent);
+
+                    EventDetailView ViewModel = new EventDetailView(user, thisEvent);
+                return View(ViewModel);
             }
             return RedirectToAction ("Dashboard");
         }
@@ -82,6 +94,16 @@ namespace Infinterest.Controllers
         [HttpGet("listing-details/{listingId}")]
         public IActionResult ListingDetail(String listingId)
         {
+            int? ID = HttpContext.Session.GetInt32("userid");           
+            User user = _context.users
+                .Where(use => use.UserId == ID)
+                .FirstOrDefault();
+
+            if (user == null)
+            {
+                return Redirect("/");
+            }
+
             if(Int32.TryParse(listingId, out int id))
             {
                 Listing thisListing = _context.listings
@@ -91,7 +113,9 @@ namespace Infinterest.Controllers
                     .ThenInclude(eve => eve.EventVendors)
                     .ThenInclude(ev => ev.Vendor)
                     .FirstOrDefault(lis => lis.ListingId == id);
-                return View(thisListing);
+
+                ListingDetailView ViewModel = new ListingDetailView(user, thisListing);
+                return View(ViewModel);
             }
             return RedirectToAction ("Dashboard");
         }
