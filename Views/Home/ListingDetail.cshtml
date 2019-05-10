@@ -56,10 +56,14 @@
                 <div class="resinfo col-sm">
                     <h4>@Model.CurrentListing.Address.addressLine1 @Model.CurrentListing.Address.addressLine2</h4> 
                     <h4>@Model.CurrentListing.Address.city, @Model.CurrentListing.Address.state @Model.CurrentListing.Address.postalCode</h4> 
-                    <h6>@Model.CurrentListing.Price</h6>
+                    <h4>$@Model.CurrentListing.Price</h4>
                     <p>@Model.CurrentListing.Description</p>
-                    <p>MLS Listing</p> <!-- not totaly sure how to do this one -->
-                    <p>34683</p>
+                    <p>MLS Listing # 34683</p> <!-- not totaly sure how to do this one -->
+                    <h5>Share via Social Media or Email</h5>
+                    <a href="#share-ig" rel="modal:open"><img src="../images/instagram.png" alt="" class="social"></a>
+                    <a href="#share-fb" rel="modal:open"><img src="../images/facebook.png" alt="" class="social"></a>
+                    <a href="#share-tweet" rel="modal:open"><img src="../images/twitter.png" alt="" class="social"></a>
+                    <a href="#share-email" rel="modal:open"><img src="../images/email.png" alt="" class="social"></a>
                 </div>
             </div>    
             <div class="row">
@@ -89,15 +93,12 @@
                                 
                             }
                         }
-                        <h5><li><a href="/add-event/@Model.CurrentListing.ListingId">Create Event</a></li></h5>
-
+                        <form>
+                            <button type="submit" class="btn btn-secondary" formaction="/add-event/@Model.CurrentListing.ListingId">Create Event</button>
+                        </form>
 
                     </div>    
-                    <h5>Share via Social Media or Email</h5>
-                    <a href="#share-ig" rel="modal:open"><img src="../images/instagram.png" alt="" class="social"></a>
-                    <a href="#share-fb" rel="modal:open"><img src="../images/facebook.png" alt="" class="social"></a>
-                    <a href="#share-tweet" rel="modal:open"><img src="../images/twitter.png" alt="" class="social"></a>
-                    <a href="#share-email" rel="modal:open"><img src="../images/email.png" alt="" class="social"></a>
+                    
                 </div>   
             </div>
             <div id="share-ig" class="modal">
