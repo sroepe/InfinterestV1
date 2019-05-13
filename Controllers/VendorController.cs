@@ -28,6 +28,7 @@ namespace Infinterest.Controllers
             Vendor user = _context.users
                 .OfType<Vendor>()
                 .Where(vendor => vendor.UserId == ID)
+                .Include(vend => vend.Events)
                 .FirstOrDefault();
             
             if (user == null)
@@ -42,13 +43,20 @@ namespace Infinterest.Controllers
             viewModel.allEvents = _context.events
                                     .Include(eve => eve.Listing)
                                     .Include (eve => eve.Broker)
+                                    .Where (eve => eve.OpenHouseDateTime > DateTime.Now)
                                     .ToList();
 
             viewModel.usersEvents = _context.events
                                     .Include(eve => eve.Listing)
                                     .Include (eve => eve.Broker)
-                                    // .Where(eve => eve.EventVendors.Vendor == user)
+                                    .Where (eve => eve.OpenHouseDateTime > DateTime.Now)
                                     .ToList();
+
+            // viewModel.usersEvents = _context.users
+            //                         .OfType<Vendor>()
+            //                         .Where (use => use.UserId == user.UserId)
+            //                         .Select(use => use.Events)
+            //                         .ToList();
 
             return View ("DashboardVendor", viewModel);
         }
@@ -88,7 +96,6 @@ namespace Infinterest.Controllers
         [HttpGet("vendor-registration2")]
         public IActionResult VendorRegistration2()
         {
-
             return View();
         }
         [HttpPost("vendor-registration2")]
@@ -112,7 +119,7 @@ namespace Infinterest.Controllers
         }
 
         
-        [HttpPost("event-detail/{eventId}/request")]
+        [HttpGet("event-detail/{eventId}/request")]
         public IActionResult EventRequest(string eventId)
         {
             int? ID = HttpContext.Session.GetInt32("userid");           
@@ -129,10 +136,12 @@ namespace Infinterest.Controllers
             if(Int32.TryParse(eventId, out int id))
             {
                 Event thisEvent = _context.events
-                    .Include(ev => ev.Broker)
-                    .Include(ev => ev.Listing)
-                    .ThenInclude(li => li.Address)
                     .FirstOrDefault(ev => ev.EventId == id);
+
+                if (thisEvent == null)
+                {
+                    return Redirect("/no-event");
+                }
                 
                 VendorToEvent thisRequest = new VendorToEvent(user, thisEvent);
 

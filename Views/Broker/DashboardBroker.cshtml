@@ -162,7 +162,7 @@
                 <form>
                     <button class="btn btn-secondary" formaction="/event-detail/@listevent.EventId">
                         <h6>@listevent.OpenHouseDateTime</h6>
-                        <h6>Requests <span class="badge"> @listevent.EventVendors.Where(ev => ev.Confirmed == true).Count()</span></h6>
+                        <h6>Requests <span class="badge"> @listevent.EventVendors.Where(ev => ev.Confirmed == false).Count()</span></h6>
                     </button>
                 </form>
                 }
