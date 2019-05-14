@@ -70,7 +70,7 @@
                 <div class="vendors-social col-sm">
                     <h4>Agent</h4>
                     <h6>@Model.CurrentListing.Broker.FirstName @Model.CurrentListing.Broker.LastName</h6>
-                    <a href="/broker-profile/@Model.CurrentListing.BrokerId"><img src="@Model.CurrentListing.Broker.ImgUrl" alt="" class="preferred"></a>
+                    <a href="/broker-profile/@Model.CurrentListing.BrokerId"><img src="@Model.CurrentListing.Broker.ImgUrl" alt="" class="preferred" height="100" width="100"></a>
 
                 </div>
                 <div class="vendors-social col-sm">
@@ -87,7 +87,7 @@
                                 {
                                     if(vend.Confirmed == true)
                                     {
-                                        <img src="@vend.Vendor.ImgUrl"> <h4>@vend.Vendor.Company</h4>
+                                        <img src="@vend.Vendor.ImgUrl" height="100" width="100"> <h4>@vend.Vendor.Company</h4>
                                     }
                                 }
                                 
@@ -98,7 +98,7 @@
                                     {
                                         if(vend.Confirmed == false)
                                         {
-                                            <img src="@vend.Vendor.ImgUrl"> <h4>@vend.Vendor.Company</h4>
+                                            <img src="@vend.Vendor.ImgUrl" height="100" width="100"> <h4>@vend.Vendor.Company</h4>
                                             <a href="/event-detail/@eve.EventId/@vend.VendorToEventId/confirm">Accept</a>
                                             <a href="/event-detail/@eve.EventId/@vend.VendorToEventId/deny">Deny</a>
                                         }
