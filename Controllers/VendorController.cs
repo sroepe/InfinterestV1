@@ -44,6 +44,7 @@ namespace Infinterest.Controllers
                                     .Include(eve => eve.Listing)
                                     .Include (eve => eve.Broker)
                                     .Where (eve => eve.OpenHouseDateTime > DateTime.Now)
+                                    .Where (eve => eve.Confirmed == false)
                                     .ToList();
 
             viewModel.usersEvents = _context.events

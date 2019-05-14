@@ -79,9 +79,9 @@
                         @{
                             foreach (Event eve in Model.CurrentListing.Events)
                             {
-                                <h5><li><a href="/event-detail/@eve.EventId">
+                                <h5><a href="/event-detail/@eve.EventId">
                                 Open House @eve.OpenHouseDateTime
-                                </a></li></h5>
+                                </a></h5>
                                 <h5>Confirmed Vendors:</h5>
                                 @foreach (VendorToEvent vend in eve.EventVendors)
                                 {
@@ -91,6 +91,19 @@
                                     }
                                 }
                                 
+                                @if(Model.CurrentListing.BrokerId == Model.CurrentUser.UserId)
+                                {
+                                    <h5>Requested Vendors:</h5>
+                                    @foreach (VendorToEvent vend in eve.EventVendors)
+                                    {
+                                        if(vend.Confirmed == false)
+                                        {
+                                            <img src="@vend.Vendor.ImgUrl"> <h4>@vend.Vendor.Company</h4>
+                                            <a href="/event-detail/@eve.EventId/@vend.VendorToEventId/confirm">Accept</a>
+                                            <a href="/event-detail/@eve.EventId/@vend.VendorToEventId/deny">Deny</a>
+                                        }
+                                    }
+                                }
                             }
                         }
                         <form>

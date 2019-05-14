@@ -2,6 +2,7 @@ namespace Infinterest.Models
 {
     public class VendorToEvent
     {
+        public int VendorToEventId {get;set;}
         public bool Confirmed {get;set;}
         public int VendorId {get;set;}
         public Vendor Vendor {get;set;}

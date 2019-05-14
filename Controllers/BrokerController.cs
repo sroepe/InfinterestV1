@@ -234,7 +234,7 @@ namespace Infinterest.Controllers
             }
             return Redirect("/dashboard");
         }
-        [HttpGet("event/{EventId}/confirm")]
+        [HttpGet("event-detail/{EventId}/confirm")]
         public IActionResult ConfirmEvent (string EventId)
         {
             if(Int32.TryParse(EventId, out int id))
@@ -250,9 +250,78 @@ namespace Infinterest.Controllers
             }
             return Redirect("/dashboard");
         }
-        
+        [HttpGet("event-detail/{EventId}/{EvVeId}/confirm")]
+        public IActionResult ConfirmVendor (string EventId, string EvVeId)
+        {
+            int? ID = HttpContext.Session.GetInt32("userid");           
+            Broker user = _context.users
+                .OfType<Broker>()
+                .Where(use => use.UserId == ID)
+                .FirstOrDefault();
+            if(user == null)
+            {
+                return Redirect("/notsignedin");
+            }   
 
-        
-        // interact with vendors
+            if(Int32.TryParse(EventId, out int id))
+            {
+                Event SelectedEvent = _context.events
+                    .FirstOrDefault(eve => eve.EventId == id);
+                if(Int32.TryParse(EvVeId, out int evid))
+                {
+                    VendorToEvent Request = _context.eventvendors
+                        .Include(eve => eve.Event)
+                        .FirstOrDefault(eve => eve.VendorToEventId == evid);
+                    if(SelectedEvent == Request.Event)
+                    {
+                        if(SelectedEvent.BrokerId == HttpContext.Session.GetInt32("userid"))
+                        {
+                            Request.Confirmed = true;
+                            _context.SaveChanges();
+                        }
+                    }
+                }
+            }
+            return Redirect("/event-detail/" + EventId);
+        }
+        [HttpGet("event-detail/{EventId}/{EvVeId}/deny")]
+        public IActionResult DenyVendor (string EventId, string EvVeId)
+        {
+            int? ID = HttpContext.Session.GetInt32("userid");           
+            Broker user = _context.users
+                .OfType<Broker>()
+                .Where(use => use.UserId == ID)
+                .FirstOrDefault();
+            if(user == null)
+            {
+                return Redirect("/notsignedin");
+            }   
+
+            if(Int32.TryParse(EventId, out int id))
+            {
+                Event SelectedEvent = _context.events
+                    .FirstOrDefault(eve => eve.EventId == id);
+                if(Int32.TryParse(EvVeId, out int evid))
+                {
+                    VendorToEvent Request = _context.eventvendors
+                        .Include(eve => eve.Event)
+                        .ThenInclude(ev => ev.EventVendors)
+                        .Include (eve => eve.Vendor)
+                        .ThenInclude (ve => ve.Events)
+                        .FirstOrDefault(eve => eve.VendorToEventId == evid);
+                    if(SelectedEvent == Request.Event)
+                    {
+                        if(SelectedEvent.BrokerId == HttpContext.Session.GetInt32("userid"))
+                        {
+                            Request.Event.EventVendors.Remove(Request);
+                            Request.Vendor.Events.Remove(Request);
+                            _context.eventvendors.Remove(Request);
+                            _context.SaveChanges();
+                        }
+                    }
+                }
+            }
+            return Redirect("/event-detail/" + EventId);
+        }
     }
 }
