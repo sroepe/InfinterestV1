@@ -250,8 +250,8 @@ namespace Infinterest.Controllers
             }
             return Redirect("/dashboard");
         }
-        [HttpGet("event-detail/{EventId}/{EvVeId}/confirm")]
-        public IActionResult ConfirmVendor (string EventId, string EvVeId)
+        [HttpGet("event-detail/{EventId}/{VendorId}/confirm")]
+        public IActionResult ConfirmVendor (string EventId, string VendorId)
         {
             int? ID = HttpContext.Session.GetInt32("userid");           
             Broker user = _context.users
@@ -265,27 +265,33 @@ namespace Infinterest.Controllers
 
             if(Int32.TryParse(EventId, out int id))
             {
-                Event SelectedEvent = _context.events
+                
+                Event eventToConfirm = _context.events
+                    .Include(eve => eve.EventVendors)
                     .FirstOrDefault(eve => eve.EventId == id);
-                if(Int32.TryParse(EvVeId, out int evid))
+
+                if(Int32.TryParse(VendorId, out int vid))
                 {
-                    VendorToEvent Request = _context.eventvendors
-                        .Include(eve => eve.Event)
-                        .FirstOrDefault(eve => eve.VendorToEventId == evid);
-                    if(SelectedEvent == Request.Event)
+                    VendorToEvent Request = eventToConfirm.EventVendors.Find(re => re.VendorId == vid);
+
+                    if(Request == null)
                     {
-                        if(SelectedEvent.BrokerId == HttpContext.Session.GetInt32("userid"))
-                        {
-                            Request.Confirmed = true;
-                            _context.SaveChanges();
-                        }
+                        return Redirect("/what");
                     }
+                    
+                    if(Request.Event.Broker == user)
+                    {
+                        Request.Confirmed = true;
+                        _context.SaveChanges();
+                    }
+                    
                 }
             }
             return Redirect("/event-detail/" + EventId);
         }
+        
         [HttpGet("event-detail/{EventId}/{EvVeId}/deny")]
-        public IActionResult DenyVendor (string EventId, string EvVeId)
+        public IActionResult DenyVendor (string EventId, string VendorId)
         {
             int? ID = HttpContext.Session.GetInt32("userid");           
             Broker user = _context.users
@@ -299,25 +305,22 @@ namespace Infinterest.Controllers
 
             if(Int32.TryParse(EventId, out int id))
             {
-                Event SelectedEvent = _context.events
+                
+                Event eventToConfirm = _context.events
+                    .Include(eve => eve.EventVendors)
                     .FirstOrDefault(eve => eve.EventId == id);
-                if(Int32.TryParse(EvVeId, out int evid))
+
+                if(Int32.TryParse(VendorId, out int vid))
                 {
-                    VendorToEvent Request = _context.eventvendors
-                        .Include(eve => eve.Event)
-                        .ThenInclude(ev => ev.EventVendors)
-                        .Include (eve => eve.Vendor)
-                        .ThenInclude (ve => ve.Events)
-                        .FirstOrDefault(eve => eve.VendorToEventId == evid);
-                    if(SelectedEvent == Request.Event)
+                    VendorToEvent Request = eventToConfirm.EventVendors.Find(re => re.VendorId == vid);
+
+                    
+                    if(Request.Event.BrokerId == HttpContext.Session.GetInt32("userid"))
                     {
-                        if(SelectedEvent.BrokerId == HttpContext.Session.GetInt32("userid"))
-                        {
-                            Request.Event.EventVendors.Remove(Request);
-                            Request.Vendor.Events.Remove(Request);
-                            _context.eventvendors.Remove(Request);
-                            _context.SaveChanges();
-                        }
+                        Request.Event.EventVendors.Remove(Request);
+                        Request.Vendor.Events.Remove(Request);
+                        _context.eventvendors.Remove(Request);
+                        _context.SaveChanges();
                     }
                 }
             }
