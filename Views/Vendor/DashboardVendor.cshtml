@@ -13,7 +13,7 @@
     <nav>
       <ul>
         <li><a href="http://infinterest.com/#home">About</a></li>
-        <li><a href="vendor-profile/{@Model.currentUser.UserId}">@Model.currentUser.FirstName Profile</a></li>
+        <li><a href="/vendor-profile/@Model.currentUser.UserId">@Model.currentUser.FirstName Profile</a></li>
         <li><a href="/logoff">Sign out</a></li>
       </ul>
     </nav>
@@ -99,23 +99,40 @@
         </div>
     </div>
     
-    <div id="middlesection">
+    <div id="middlesection" class="vendor">
       <h4>Upcoming Events</h4>
       
       
         @{
           foreach (Event eve in Model.allEvents)
           {
-            <div class="eventdetails">
-              <img src="@eve.Listing.ImgUrl" alt="" height="100" width="100">
+            <div class="allevents">
+              <div class="eventhead">
+                <a href="event-detail/@eve.EventId"><h4>@eve.OpenHouseDateTime</h4></a>
+                <h6>Area of House Featured: @eve.AreaOfHouse</h6>
+              </div>
+              <div class="eventleft">
+                <img src="@eve.Listing.ImgUrl" alt="" height="100" width="100">
+                
+              </div>
               
-                <h4>@eve.Listing.Zip</h4>
-                <h4>@eve.Listing.Price</h4>
-                <h4>@eve.Listing.ListingId</h4>
-                <h4>@eve.Listing.MLSLink</h4>
-                <a href="broker-profile/{id}"><h6>@eve.Listing.Broker</h6></a>
-                <a href="event-detail/{eventId}"><h6>@eve.Listing.Events</h6></a>
               
+              
+              <div class="eventcenter">
+                
+                <a href="broker-profile/@eve.Listing.Broker.UserId"><h6>Broker: @eve.Listing.Broker.FirstName @eve.Listing.Broker.LastName</h6></a>
+                
+                <h6>Zip Code: @eve.Listing.Zip</h6>
+                <h6>Price: $@eve.Listing.Price</h6>
+                <a href="@eve.Listing.MLSLink"><h6>MLS Link</h6></a>
+                
+                
+              </div>
+              <div class="eventright">
+                <form>
+                  <button type="submit" class="btn btn-secondary" formaction="event-detail/eve.EventId/request">Request to Join Event</button>
+                </form>
+              </div>
             </div>
           }
         }
@@ -123,22 +140,25 @@
     </div>
     <div id="rightsection">
         
-        <div class="myevents">
+        <div class="confevents">
           <h4>Confirmed Events</h4>
           @{
             foreach (Event events in Model.usersEvents)
             {
               <div class="eventdetails">
                 <div>
-                  <h4>@events.AreaOfHouse</h4>
-                  <h4>@events.Listing</h4>
-                  <h4>@events.AreaOfHouse</h4>
+                  <a href="event-detail/@events.EventId"><h6>@events.OpenHouseDateTime</h6></a>
+                  <h6>Address:</h6> TROUBLE PULLING ADDRESS THROUGH
+                  <a href="broker-profile/@events.Listing.Broker.UserId"><h6>Broker: @events.Listing.Broker.FirstName @events.Listing.Broker.LastName</h6></a>
+                  <h6>Featured Home Area: @events.AreaOfHouse</h6>
                   <!-- //confirmed vendors -->
-                  <a href="event-detail/{@events.EventId}"><h6>@events.EventId</h6></a>
+                  
                 </div>
               </div>
             }
-          }   
+          }  
+        </div>
+        <div class="reqdevents"> 
           <h4>Requested Events</h4> 
           @{
             foreach (Event events in Model.usersEvents)
@@ -146,11 +166,12 @@
               // ADD CONFIRMED BOOL - doesn't seem to be working for initial try//
               <div class="eventdetails">
                 <div>
-                  <h4>@events.AreaOfHouse</h4>
-                  <h4>@events.Listing</h4>
-                  <h4>@events.AreaOfHouse</h4>
+                  <a href="event-detail/@events.EventId"><h6>@events.OpenHouseDateTime</h6></a>
+                  <h6>Address:</h6> TROUBLE PULLING ADDRESS THROUGH
+                  <a href="broker-profile/@events.Listing.Broker.UserId"><h6>Broker: @events.Listing.Broker.FirstName @events.Listing.Broker.LastName</h6></a>
+                  <h6>Featured Home Area: @events.AreaOfHouse</h6>
                   <!-- //confirmed vendors -->
-                  <a href="event-detail/{@events.EventId}"><h6>@events.EventId</h6></a>
+                  
                 </div>
               </div>
             }

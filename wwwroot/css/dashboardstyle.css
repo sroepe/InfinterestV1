@@ -63,7 +63,7 @@ body, html, #dashboardcontainer{
     height: auto;
     display: inline-block;
     padding-top: 1%;
-    margin-top: 5%;
+    margin-top: 4%;
     vertical-align: top;
     text-align: center;
     
@@ -104,20 +104,6 @@ body, html, #dashboardcontainer{
 }
 
 .vendordetails h4 {
-    line-height: 0.7;
-    font-weight: bold;
-    color: black;
-}
-
-.eventdetails .btn.btn-secondary{
-    width: 100%;
-    background-color: lightgray;
-    border-radius: 0px;
-    color: black;
-    margin: 0px auto;
-}
-
-.eventdetails h4 {
     line-height: 0.7;
     font-weight: bold;
     color: black;
@@ -276,6 +262,92 @@ label.sectionlabels {
     line-height: 10px;
 }
 
+/*VENDOR DASH SPECIFIC CSS*/
+.allevents {
+    display: inline-block;
+    background-color: lightgray;
+    border-radius: 5px;
+    margin-bottom: 5%;
+    /* width: 100%; */
+    padding: 2%;
+}
+
+#middlesection.vendor h4, #middlesection.vendor h6 {
+    margin: 2%;
+}
+
+.eventhead {
+    display: inline-block;
+    width: 100%;
+    background-color: black;
+    border-radius: 5px;
+}
+
+.eventhead h4, .eventhead h6  {
+    display: inline-block;
+    color: white;
+}
+
+.eventleft {
+    text-align: left;
+    display: inline-block;
+    width: 25%;
+}
+
+.eventleft img {
+    
+    height: auto;
+    max-height: 150px;
+    /* margin-top: 2%; */
+}
+
+.eventleft .btn.btn-secondary {
+    width: auto;
+
+}
+
+.eventcenter {
+    display: inline-block;
+    text-align: left;
+    vertical-align: top;
+    width: 40%;
+    
+
+}
+
+.eventcenter h6 {
+    color: black;
+    line-height: 0.8;
+    font-weight: bold;
+    
+    /* padding-left: 14%; */
+}
+
+.eventright {
+    display: inline-block;
+}
+
+
+.confevents {
+    margin-bottom: 10%;
+}
+
+.eventdetails {
+    background-color: lightgray;
+    padding: 1%;
+    margin: 3%;
+    border-radius: 5px;
+}
+
+.eventdetails h6 {
+    line-height: 0.7;
+}
+
+
+/*END VENDOR DASH SPECIFIC CSS*/
+
+
+
 /* #rightsection p{
     margin: 0;
     font-size: 9px;
@@ -354,15 +426,6 @@ label.sectionlabels {
     border-radius: 2.5px;
 }
 
-.listingdetails {
-    display: inline-block;
-    background-color: lightgray;
-    margin-top: 5%;
-    width: 100%;
-   
-    /* padding: 1%; */
-}
-
 .listingdetails img {
     display: inline-block;
     vertical-align: top;
@@ -371,6 +434,11 @@ label.sectionlabels {
     margin-top: 1%;
     padding: 1%;
     /* width: 35%; */
+}
+
+.listingdetails p {
+    font-size: 10px;
+    margin: 0px auto;
 }
 
 .leftdetail {
@@ -396,10 +464,7 @@ label.sectionlabels {
     /* padding-left: 14%; */
 }
 
-.listingdetails p {
-    font-size: 10px;
-    margin: 0px auto;
-}
+
 
 .mlslink {
     line-height: 1.5;

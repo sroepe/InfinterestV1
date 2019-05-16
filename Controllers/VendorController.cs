@@ -99,6 +99,7 @@ namespace Infinterest.Controllers
         {
             return View();
         }
+        
         [HttpPost("vendor-registration2")]
         public IActionResult AddToVendor(Vendor UserInput)
         {

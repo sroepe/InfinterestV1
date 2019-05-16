@@ -1,7 +1,10 @@
-@model Vendor
+<!DOCTYPE html>
 @{
-    ViewData["Title"] = "Vendor Registration";
+    ViewData["Title"] = "Broker Registration";
 }
+
+@model VendorReg2
+@using Microsoft.AspNetCore.Http;
 
 @section css {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -9,64 +12,98 @@
     <link href="@Url.Content("~/css/nav.css")" rel="stylesheet" type="text/css" />
 }
 
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#AreaOfHouse').change(function() {
+                if ($(this).val() === '12'){
+                    $('#addformgroup').after( $("<div class='form-group' id='otherbox'><label for='Other'>Please enter Other home area to be featured below.</label><textarea class='form-control' type='text' id='Other' placeholder='Enter Other Home Area' rows='1'></textarea></div>") );
+                } else if ($(this).val() != '12'){
+                    $("#otherbox").hide(function(){
+                })
+
+                }
+            });
+            $('#BusinessCategory').change(function() {
+
+                if ($(this).val() === '16'){
+                    $('#addformgroup').after( $("<div class='form-group' id='otherbox'><label for='Other'>Please enter other business category below.</label><textarea class='form-control' type='text' id='Other' placeholder='Enter Other Home Area' rows='1'></textarea></div>") );
+                } else if ($(this).val() != '16'){
+                    $("#otherbox").hide(function(){
+                })
+
+                }
+            });
+        });
+    </script>
+</head>
+
 <header>
   <img src="../images/white-nosub-inflogo.png" alt="logo" class="white-logo">
   <input type="checkbox" id="nav-toggle" class="nav-toggle">
   <nav>
-      <ul>
+    <ul>
         <li><a href="http://infinterest.com/#home">About</a></li>
-        <li><a class="" href="broker-registration">Broker Sign Up</a></li>
-        <li><a class="login text-white" href="#loginModal" data-toggle="modal">Log In</a></li>
-      </ul>
+    </ul>
   </nav>
   <label for="nav-toggle" class="nav-toggle-label">
       <span></span>
   </label>
 </header>
 <div id="container"> 
+    
+    <h5>Please select an Area of House and Business Category below to complete your registration.</h5>
     <div class="regbox">
-        <h4>Vendor Registration</h4>
-        <form asp-action="vendor-registration" asp-controller="Vendor" method="POST">
-            <div class="wrapper">
-                <div class="box1">
-                    <!-- put area of house and business catagory here -->
-<!-- and delete all this other stuff -->
-                        <span asp-validation-for="FirstName"></span>
-                    <div class="form-group">
-                        <label asp-for="FirstName">First name</label>
-                        <input type="text" class="form-control" asp-for="FirstName" placeholder="Enter first name">
-                    </div>
-                        <span asp-validation-for="LastName"></span>
+        <form asp-action="vendor-registration2" method="POST">
+            <div class="form-group" id="addformgroup">
+                <span asp-validation-for="UserAreaInput"></span>
+                <label for="UserAreaInput">Featured Home Area</label>
+                <select class="form-control" asp-for="UserAreaInput" id="AreaOfHouse" placeholder="Please select one">
+                    <option value="" disabled multiple selected="selected">Please select one or more home areas</option>
 
-                    <div class="form-group">
-                        <label asp-for="LastName">Last name</label>
-                        <input type="text" class="form-control" asp-for="LastName" placeholder="Enter last name">
-                    </div>
-                        <span asp-validation-for="Email"></span>
-
-                    <div class="form-group">
-                        <label asp-for="Email">Email</label>
-                        <input type="email" class="form-control" asp-for="Email" placeholder="Enter email">
-                    </div>
-                        <span asp-validation-for="Password"></span>
-
-                    <div class="form-group">
-                        <label asp-for="Password">Password</label>
-                        <input type="password" class="form-control" asp-for="Password" placeholder="Enter password">
-                    </div>
-                        <span asp-validation-for="PasswordConfirm"></span>
-
-                    <div class="form-group">
-                        <label asp-for="PasswordConfirm">Confirm password</label>
-                        <input type="password" class="form-control" asp-for="PasswordConfirm" placeholder="Confirm password">
-                    </div>
-                    <!-- Fields common to vendor and broker -->
-                    <div class="form-group">
-                <button type="submit" class="btn btn-primary">Save and continue</button>   
-                </div>
-                
+                    <!-- make it select multiple and make it a list of area of house options maybe? Or change value to area of house ID and do that in the backend -->
+                    <!-- now we can loop through _context.areas for this, I will just have to add it to the view model -->
+                    
+                    <option value="Kitchen">Kitchen</option>
+                    <option value="Bathroom">Bathroom</option>
+                    <option value="Bedroom">Bedroom</option>
+                    <option value="Living">Living Room</option>
+                    <option value="Dining">Dining Room</option>
+                    <option value="Family">Family / Media Room</option>
+                    <option value="Garage">Garage</option>
+                    <option value="Office">Office</option>
+                    <option value="Patio">Patio</option>
+                    <option value="Basement">Basement</option>
+                    <option value="Other">Other</option>
+                </select>
             </div>
-            
+
+            <div class="form-group" id="addformgroup">
+                <span asp-validation-for="UserBusinessInput"></span>
+                <label for="UserBusinessInput">Business Category</label>
+                <select class="form-control" asp-for="UserBusinessInput" id="BusinessCategory" placeholder="Please select one">
+                    <option value="" disabled multiple selected="selected">Please select one</option>
+                   
+                    <option value="Art">Art</option>
+                    <option value="Baby and Kids">Baby and Kids</option>
+                    <option value="Entertainment and Music">Entertainment and Music</option>
+                    <option value="Fashion and Apparel">Fashion and Apparel</option>
+                    <option value="Food/Nutrition and Beverage">Food/Nutrition and Beverage</option>
+                    <option value="Furnishings">Furnishings</option>
+                    <option value="Health and Wellness">Health and Wellness</option>
+                    <option value="Home Based Business">Home Based Business</option>
+                    <option value="Interior Design">Interior Design</option>
+                    <option value="Jewelery">Jewelry</option>
+                    <option value="Landscapers and Contractors">Landscapers and Contractors</option>
+                    <option value="Pets and Animals">Pets and Animals</option>
+                    <option value="Photographers">Photographers</option>
+                    <option value="Technology and Security">Technology and Security</option>
+                    <option value="Wedding">Wedding</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>  
+            <button type="submit" class="btn btn-primary">Save and continue</button>                
         </form>
     </div>    
 </div>
