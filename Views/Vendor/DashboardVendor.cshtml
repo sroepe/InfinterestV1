@@ -13,7 +13,7 @@
     <nav>
       <ul>
         <li><a href="http://infinterest.com/#home">About</a></li>
-        <li><a href="vendor-profile">My Profile</a></li>
+        <li><a href="vendor-profile/{@Model.currentUser.UserId}">@Model.currentUser.FirstName Profile</a></li>
         <li><a href="/logoff">Sign out</a></li>
       </ul>
     </nav>
@@ -98,49 +98,66 @@
             </form>
         </div>
     </div>
-    <div>
-       <div id="middlesection">
-         <div>
-          <label class="price listings">New Events</label>
-          <div class="alllistings">
-            @{
-              foreach (Event eve in Model.allEvents)
-              {
-                <div class="listingdetails">
-                  <img src="@eve.Listing.ImgUrl" alt="" height="100" width="100">
-                  <div>
-                    <h4>@eve.Listing.Zip</h4>
-                    <h4>@eve.Listing.Price</h4>
-                    <h4>@eve.Listing.ListingId</h4>
-                    <h4>@eve.Listing.MLSLink</h4>
-                    <a href="broker-profile/{id}"><h6>@eve.Listing.Broker</h6></a>
-                    <a href="event-detail/{eventId}"><h6>@eve.Listing.Events</h6></a>
-                  </div>
+    
+    <div id="middlesection">
+      <h4>Upcoming Events</h4>
+      
+      
+        @{
+          foreach (Event eve in Model.allEvents)
+          {
+            <div class="eventdetails">
+              <img src="@eve.Listing.ImgUrl" alt="" height="100" width="100">
+              
+                <h4>@eve.Listing.Zip</h4>
+                <h4>@eve.Listing.Price</h4>
+                <h4>@eve.Listing.ListingId</h4>
+                <h4>@eve.Listing.MLSLink</h4>
+                <a href="broker-profile/{id}"><h6>@eve.Listing.Broker</h6></a>
+                <a href="event-detail/{eventId}"><h6>@eve.Listing.Events</h6></a>
+              
+            </div>
+          }
+        }
+      
+    </div>
+    <div id="rightsection">
+        
+        <div class="myevents">
+          <h4>Confirmed Events</h4>
+          @{
+            foreach (Event events in Model.usersEvents)
+            {
+              <div class="eventdetails">
+                <div>
+                  <h4>@events.AreaOfHouse</h4>
+                  <h4>@events.Listing</h4>
+                  <h4>@events.AreaOfHouse</h4>
+                  <!-- //confirmed vendors -->
+                  <a href="event-detail/{@events.EventId}"><h6>@events.EventId</h6></a>
                 </div>
-              }
+              </div>
             }
-          </div>
-        </div>
-        <div id="rightsection">
-            <label class="price upevents">Upcoming Events</label>
-            <div class="myevents">
-              @{
-                foreach (Event events in Model.usersEvents)
-                {
-                  <div class="event">
-                    <div>
-                      <h4>@events.AreaOfHouse</h4>
-                      <h4>@events.Listing</h4>
-                      <h4>@events.AreaOfHouse</h4>
-                      <!-- //confirmed vendors -->
-                      <a href="event-detail/{@events.EventId}"><h6>@events.EventId</h6></a>
-                    </div>
-                  </div>
-                }
-              }    
-                    
-            </div>   
-        </div>     
-      </div>
+          }   
+          <h4>Requested Events</h4> 
+          @{
+            foreach (Event events in Model.usersEvents)
+            {
+              // ADD CONFIRMED BOOL - doesn't seem to be working for initial try//
+              <div class="eventdetails">
+                <div>
+                  <h4>@events.AreaOfHouse</h4>
+                  <h4>@events.Listing</h4>
+                  <h4>@events.AreaOfHouse</h4>
+                  <!-- //confirmed vendors -->
+                  <a href="event-detail/{@events.EventId}"><h6>@events.EventId</h6></a>
+                </div>
+              </div>
+            }
+          }   
+                
+        </div>   
+    </div>     
+      
   </div>
 </div>
