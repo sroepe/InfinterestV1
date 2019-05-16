@@ -42,6 +42,7 @@ namespace Infinterest.Controllers
 
             viewModel.allEvents = _context.events
                                     .Include(eve => eve.Listing)
+                                    .ThenInclude(lis => lis.Address)
                                     .Include (eve => eve.Broker)
                                     .Where (eve => eve.OpenHouseDateTime > DateTime.Now)
                                     .Where (eve => eve.Confirmed == false)
@@ -49,6 +50,7 @@ namespace Infinterest.Controllers
 
             viewModel.usersEvents = _context.events
                                     .Include(eve => eve.Listing)
+                                    .ThenInclude(lis => lis.Address)
                                     .Include (eve => eve.Broker)
                                     .Where (eve => eve.OpenHouseDateTime > DateTime.Now)
                                     .ToList();
