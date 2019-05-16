@@ -153,6 +153,7 @@
             }
           }  
         </div>
+<<<<<<< Updated upstream
         <div class="reqdevents"> 
           <h4>Requested Events</h4> 
           @{
@@ -180,5 +181,28 @@
         </div>   
     </div>     
       
+=======
+        <div id="rightsection">
+            <label class="price upevents">Your Events</label>
+            <div class="myevents">
+              @{
+                foreach (Event events in Model.usersEvents)
+                {
+                  <div class="event">
+                    <div>
+                      <h4>@events.OpenHouseDate</h4>
+                      <h4>@events.Listing</h4>
+                      <!-- <h4>@events.AreaOfHouseToFeature</h4> -->
+                      <h4>@events.ConfirmedVendors</h4>
+                      <a href="event-detail/{@events.EventId}"><h6>@events.EventId</h6></a>
+                    </div>
+                  </div>
+                }
+              }    
+                    
+            </div>   
+        </div>     
+      </div>
+>>>>>>> Stashed changes
   </div>
 </div>
