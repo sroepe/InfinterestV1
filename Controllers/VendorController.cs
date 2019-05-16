@@ -96,6 +96,8 @@ namespace Infinterest.Controllers
         [HttpGet("vendor-registration2")]
         public IActionResult VendorRegistration2()
         {
+            ViewBag.AreaOfHouse = _context.areas;
+            ViewBag.BusinessCategory = _context.business;
             return View();
         }
         
