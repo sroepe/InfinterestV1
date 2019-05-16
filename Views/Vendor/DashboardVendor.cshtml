@@ -101,32 +101,23 @@
     
     <div id="middlesection" class="vendor">
       <h4>Upcoming Events</h4>
-      
-      
         @{
           foreach (Event eve in Model.allEvents)
           {
             <div class="allevents">
               <div class="eventhead">
-                <a href="event-detail/@eve.EventId"><h4>@eve.OpenHouseDateTime</h4></a>
+                <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
+                <a href="event-detail/@eve.EventId"><h6>@eve.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @eve.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
                 <h6>Area of House Featured: @eve.AreaOfHouse</h6>
               </div>
               <div class="eventleft">
                 <img src="@eve.Listing.ImgUrl" alt="" height="100" width="100">
-                
               </div>
-              
-              
-              
-              <div class="eventcenter">
-                
+              <div class="eventcenter"> 
                 <a href="broker-profile/@eve.Listing.Broker.UserId"><h6>Broker: @eve.Listing.Broker.FirstName @eve.Listing.Broker.LastName</h6></a>
-                
                 <h6>Zip Code: @eve.Listing.Zip</h6>
-                <h6>Price: $@eve.Listing.Price</h6>
+                <h6>Price: $@eve.Listing.Price.ToString("N0")</h6>
                 <a href="@eve.Listing.MLSLink"><h6>MLS Link</h6></a>
-                
-                
               </div>
               <div class="eventright">
                 <form>
@@ -145,9 +136,11 @@
           @{
             foreach (Event events in Model.usersEvents)
             {
-              <div class="eventdetails">
+              if(events.Confirmed == true){
+                <div class="eventdetails">
                 <div>
-                  <a href="event-detail/@events.EventId"><h6>@events.OpenHouseDateTime</h6></a>
+                  <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
+                  <a href="event-detail/@events.EventId"><h6>@events.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @events.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
                   <h6>Address:</h6> TROUBLE PULLING ADDRESS THROUGH
                   <a href="broker-profile/@events.Listing.Broker.UserId"><h6>Broker: @events.Listing.Broker.FirstName @events.Listing.Broker.LastName</h6></a>
                   <h6>Featured Home Area: @events.AreaOfHouse</h6>
@@ -155,6 +148,8 @@
                   
                 </div>
               </div>
+              }
+              
             }
           }  
         </div>
@@ -163,10 +158,14 @@
           @{
             foreach (Event events in Model.usersEvents)
             {
-              // ADD CONFIRMED BOOL - doesn't seem to be working for initial try//
+              /*NEED TO UPDATE IF STATEMENT AFTER DB ADDRESSED FOR PULLING FROM EVENTSVENDORS*/
+              
+              if(@events.EventVendors.Where(ev => ev.Confirmed == false)){
               <div class="eventdetails">
                 <div>
-                  <a href="event-detail/@events.EventId"><h6>@events.OpenHouseDateTime</h6></a>
+                  <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
+                  <a href="event-detail/@events.EventId"><h6>@events.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @events.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
+                  
                   <h6>Address:</h6> TROUBLE PULLING ADDRESS THROUGH
                   <a href="broker-profile/@events.Listing.Broker.UserId"><h6>Broker: @events.Listing.Broker.FirstName @events.Listing.Broker.LastName</h6></a>
                   <h6>Featured Home Area: @events.AreaOfHouse</h6>
@@ -174,6 +173,7 @@
                   
                 </div>
               </div>
+              }
             }
           }   
                 

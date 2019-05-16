@@ -96,17 +96,37 @@ body, html, #dashboardcontainer{
 }
 
 .vendordetails .btn.btn-secondary{
-    width: 100%;
+    padding: 1%;
+    display: inline-block;
+    width: 95%;
     background-color: lightgray;
     border-radius: 0px;
+    border: 1px solid #6c757d;
     color: black;
-    margin: 0px auto;
+    margin-bottom: 3%;
 }
 
-.vendordetails h4 {
-    line-height: 0.7;
+#middlesection .vendordetails button h4 {
+    line-height: 0.6;
     font-weight: bold;
     color: black;
+}
+
+#middlesection .vendordetails button h5 {
+    line-height: 0.6;
+    font-weight: bold;
+    color: black;
+}
+
+.venImg {
+    display: inline-block;
+    vertical-align: top;
+    width: 15%;
+}
+
+.venContact {
+    display: inline-block;
+    width: 85%;
 }
 
 #leftsection::-webkit-scrollbar-track
@@ -166,6 +186,10 @@ body, html, #dashboardcontainer{
     color: whitesmoke;
 }
 
+#reqsbadge {
+    background-color: black;
+}
+
 #leftsection .btn-secondary:hover, #rightsection .btn-secondary:hover{
     background-color: rgb(22, 138, 192);
     
@@ -204,7 +228,7 @@ label.sectionlabels {
 #middlesection h4{
     font-weight: bold ;
     font-size: 20px;
-    margin-bottom: 5%;
+    /* margin-bottom: 5%; */
 
 }
 
@@ -420,10 +444,19 @@ label.sectionlabels {
 }
 
 #mylistings form .addlist.btn.btn-secondary {
-    width: 100%;
+    width: 60%;
     text-align: center;
     margin: 3% 0%;
     border-radius: 2.5px;
+    border: 1px solid lightgray;
+}
+
+.listingandevents {
+    margin-bottom: 5%;
+}
+
+.listingdetails {
+    background-color: lightgray;
 }
 
 .listingdetails img {
@@ -461,7 +494,7 @@ label.sectionlabels {
     font-size: 12px;
     font-weight: bold;
     line-height: 0.5;
-    /* padding-left: 14%; */
+    padding-left: 5%;
 }
 
 

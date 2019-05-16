@@ -12,6 +12,10 @@ body {
 box-sizing: border-box;
 }
 
+a.dropdown-item {
+    color: whitesmoke;
+}
+
 
 /* Extra small devices (portrait phones, less than 576px)
 No media query since this is the default in Bootstrap */
@@ -97,7 +101,7 @@ nav {
 position: absolute;
 text-align: right;
 top: 100%;
-right: 0;
+padding-right: 3%;
 background: black;
 width: 100%;
 transform: scale(1, 0);
@@ -176,6 +180,7 @@ transition: opacity 250ms ease-in-out 250ms;
         display: flex !important;
         justify-content: flex-end;
         align-items: center;
+        padding-right: 3%;
     }
     
     nav ul {
