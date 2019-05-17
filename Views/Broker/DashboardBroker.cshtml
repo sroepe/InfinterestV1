@@ -17,7 +17,7 @@
     <input type="checkbox" id="nav-toggle" class="nav-toggle">
     <nav>
         <ul>
-            <li><a href="http://infinterest.com/#home">About</a></li>
+            
             <div class="dropdown show">
                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @Model.CurrentUser.FirstName!</a>
                 
@@ -125,18 +125,20 @@
             foreach (Vendor vendorAvailable in Model.AvailableVendors)
             {     
             <div class="vendordetails">
-                <button class="btn btn-secondary">
-                    <div class="venImg">
-                        <img src="@vendorAvailable.ImgUrl" alt="" height="105" width="105">
-                    </div>
-                    <div class="venContact">
-                        <h4>@vendorAvailable.Company</h4>
-                        <h5>Name: @vendorAvailable.FirstName @vendorAvailable.LastName</h5>
-                        <h5>Business Type: @vendorAvailable.BusinessCategory</h5>
-                        <h5>Website: @vendorAvailable.Website</h5>
-                        <h5>Phone: @vendorAvailable.Contact</h5>
-                    </div>
-                </button>
+                <form>
+                    <button type="submit" class="btn btn-secondary" formaction="vendor-profile/@vendorAvailable.UserId">
+                        <div class="venImg">
+                            <img src="@vendorAvailable.ImgUrl" alt="" height="105" width="105">
+                        </div>
+                        <div class="venContact">
+                            <h4>@vendorAvailable.Company</h4>
+                            <h5>Name: @vendorAvailable.FirstName @vendorAvailable.LastName</h5>
+                            <h5>Business Type: @ViewBag.BusinessCategory</h5>
+                            <h5>Website: @vendorAvailable.Website</h5>
+                            <h5>Phone: @vendorAvailable.Contact</h5>
+                        </div>
+                    </button>
+                </form>
             </div>
             }
         }

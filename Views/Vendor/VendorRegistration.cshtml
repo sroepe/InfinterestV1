@@ -14,7 +14,7 @@
     <input type="checkbox" id="nav-toggle" class="nav-toggle">
     <nav>
         <ul>
-            <li><a href="http://infinterest.com/#home">About</a></li>
+            <li><a href="/dashboard">Home</a></li>
             <li><a class="" href="broker-registration">Broker Sign Up</a></li>
             <li><a class="login text-white" href="#loginModal" data-toggle="modal">Log In</a></li>
         </ul>
@@ -30,54 +30,54 @@
             <div class="wrapper">
                 <div class="box1">
                     <div class="form-group">
-                        <span asp-validation-for="FirstName"></span>
+                        <span class="errorMsgs" asp-validation-for="FirstName"></span>
                         <label asp-for="FirstName">First name</label>
                         <input asp-for="FirstName" class="form-control" placeholder="Enter first name">
                     </div>
                     <div class="form-group">
-                        <span asp-validation-for="LastName"></span>
+                        <span class="errorMsgs" asp-validation-for="LastName"></span>
                         <label asp-for="LastName">Last name</label>
                         <input asp-for="LastName" class="form-control" placeholder="Enter last name">
                     </div>
                     <div class="form-group">
-                        <span asp-validation-for="Email"></span>
+                        <span class="errorMsgs" asp-validation-for="Email"></span>
                         <label for="Email">Email</label>
                         <input asp-for="Email" class="form-control" placeholder="Enter email">
                     </div>
                     <div class="form-group">
-                        <span asp-validation-for="Password"></span>
+                        <span class="errorMsgs" asp-validation-for="Password"></span>
                         <label asp-for="Password">Password</label>
                         <input asp-for="Password" class="form-control" placeholder="Enter password">
                     </div>
                     <div class="form-group">
-                        <span asp-validation-for="PasswordConfirm"></span>
+                        <span class="errorMsgs" asp-validation-for="PasswordConfirm"></span>
                         <label asp-for="PasswordConfirm">Confirm password</label>
                         <input asp-for="PasswordConfirm" class="form-control" placeholder="Confirm password">
                     </div>
                 </div>
                 <div class="box2">  
                     <div class="form-group">
-                        <span asp-validation-for="Company"></span>
+                        <span class="errorMsgs" asp-validation-for="Company"></span>
                         <label for="Company">Company</label>
                         <input asp-for="Company" class="form-control" placeholder="Enter company name">
                     </div> 
                     <div class="form-group">
-                        <span asp-validation-for="Website"></span>
+                        <span class="errorMsgs" asp-validation-for="Website"></span>
                         <label for="Website">Your website</label>
                         <input asp-for="Website" class="form-control" placeholder="Enter website">
                     </div>
                     <div class="form-group">
-                        <span asp-validation-for="Contact"></span>
+                        <span class="errorMsgs" asp-validation-for="Contact"></span>
                         <label for="Contact">Phone number</label>
                         <input asp-for="Contact" class="form-control" placeholder="Enter phone number">
                     </div> 
                     <div class="form-group">
-                        <span asp-validation-for="Bio"></span>
+                        <span class="errorMsgs" asp-validation-for="Bio"></span>
                         <label for="Bio">Your bio</label>
                         <textarea asp-for="Bio" class="form-control" placeholder="Enter bio" rows="3"></textarea>
                     </div>   
                     <div class="form-group">
-                        <span asp-validation-for="ImgUrl"></span>
+                        <span class="errorMsgs" asp-validation-for="ImgUrl"></span>
                         <label for="ImgUrl">Logo</label>
                         <input asp-for="ImgUrl" class="form-control" placeholder="Add your company's logo">
                     </div>        

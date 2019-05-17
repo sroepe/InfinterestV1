@@ -12,9 +12,14 @@
     <input type="checkbox" id="nav-toggle" class="nav-toggle">
     <nav>
       <ul>
-        <li><a href="http://infinterest.com/#home">About</a></li>
-        <li><a href="/vendor-profile/@Model.currentUser.UserId">@Model.currentUser.FirstName Profile</a></li>
-        <li><a href="/logoff">Sign out</a></li>
+        <div class="dropdown show">
+          <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @Model.currentUser.FirstName!</a>
+          
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="broker-profile/@Model.currentUser.UserId">My Profile</a>
+              <a class="dropdown-item" href="/logoff">Sign out</a>
+          </div>
+        </div>
       </ul>
     </nav>
     <label for="nav-toggle" class="nav-toggle-label">
@@ -121,7 +126,7 @@
               </div>
               <div class="eventright">
                 <form>
-                  <button type="submit" class="btn btn-secondary" formaction="event-detail/eve.EventId/request">Request to Join Event</button>
+                  <button type="submit" class="btn btn-secondary" formaction="/event-detail/@eve.EventId/request">Request to Join Event</button>
                 </form>
               </div>
             </div>
@@ -153,7 +158,6 @@
             }
           }  
         </div>
-<<<<<<< Updated upstream
         <div class="reqdevents"> 
           <h4>Requested Events</h4> 
           @{
@@ -161,7 +165,7 @@
             {
               /*NEED TO UPDATE IF STATEMENT AFTER DB ADDRESSED FOR PULLING FROM EVENTSVENDORS*/
               
-              if(@events.EventVendors.Where(ev => ev.Confirmed == false)){
+              if(events.Confirmed == false){
               <div class="eventdetails">
                 <div>
                   <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
@@ -181,28 +185,5 @@
         </div>   
     </div>     
       
-=======
-        <div id="rightsection">
-            <label class="price upevents">Your Events</label>
-            <div class="myevents">
-              @{
-                foreach (Event events in Model.usersEvents)
-                {
-                  <div class="event">
-                    <div>
-                      <h4>@events.OpenHouseDate</h4>
-                      <h4>@events.Listing</h4>
-                      <!-- <h4>@events.AreaOfHouseToFeature</h4> -->
-                      <h4>@events.ConfirmedVendors</h4>
-                      <a href="event-detail/{@events.EventId}"><h6>@events.EventId</h6></a>
-                    </div>
-                  </div>
-                }
-              }    
-                    
-            </div>   
-        </div>     
-      </div>
->>>>>>> Stashed changes
   </div>
 </div>

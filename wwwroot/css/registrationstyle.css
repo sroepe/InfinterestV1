@@ -65,7 +65,7 @@ a:hover{
 .box2 {
     flex: 1;
 }
-.regbox {
+.regbox, .regbox2 {
     background-color: rgb(32, 32, 32);
     border-radius: 5px;
     box-shadow: 2px 2px;
@@ -79,6 +79,22 @@ a:hover{
     font-size: 28px;
     line-height: 30px;
     text-align: center;
+}
+
+.regbox2 h4{
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.errorMsgs {
+    color: whitesmoke;
+}
+
+.regLabels {
+    color: whitesmoke;
 }
 /* .modal h4 {
     color: whitesmoke;
