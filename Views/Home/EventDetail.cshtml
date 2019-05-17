@@ -63,9 +63,37 @@
                     <h4>@Model.CurrentEvent.OpenHouseDateTime.Date.ToString("h:mm tt")</h4>     
                     <div class="eventvendors">
                         <h4>Confirmed Vendors</h4>
-                       
-                        <h4>Requested Vendors</h4>
+                            @{
+                                foreach (VendorToEvent ven in Model.CurrentEvent.EventVendors)
+                                {
+                                    if(ven.Confirmed == true)
+                                    {
+                                        <img src="@ven.Vendor.ImgUrl" height="100" width="100"> 
+                                        <p>Company: @ven.Vendor.Company</p>
+                                        <p>Contact: @ven.Vendor.FirstName @ven.Vendor.LastName</p>
+                                        <p>@ven.Vendor.BusinessCategory</p>
+
+
+                                    }
+                                    if(Model.CurrentEvent.BrokerId == Model.CurrentUser.UserId)
+                                    {
+                                    <h4>Requested Vendors</h4>
+                            
+                                if(ven.Confirmed == false)
+                                {
+                                    <img src="@ven.Vendor.ImgUrl" height="100" width="100"> 
+                                    <p>@ven.Vendor.Company</p>
+
+                                    <a href="/event-detail/@Model.CurrentEvent.EventId/@ven.VendorId/confirm">Accept</a>
+                                    <a href="/event-detail/@Model.CurrentEvent.EventId/@ven.VendorId/deny">Deny</a>
+                                }
+                                
+                        }
+                            }
+                            
                         
+                        
+                        }
                     </div>
                 </div>
                 <div class="vendors-social col-4">
@@ -73,6 +101,17 @@
                         <button class="close" type="submit" formaction="/dashboard">&times;</button>
                     </form>    
                     <h4>Confirm Content Intended from Wireframe</h4>
+                    @{
+                        foreach (VendorToEvent ven in Model.CurrentEvent.EventVendors)
+                        {
+                            if (ven.VendorId != @Model.CurrentUser.UserId)
+                            {
+                                <form>
+                                    <button type="submit" class="btn btn-secondary" formaction="/event-detail/@Model.CurrentEvent.EventId/request">Request to Join Event</button>
+                                </form>
+                            }
+                        }    
+                    }                               
                 </div>   
             </div>
             <div id="share-ig" class="modal">

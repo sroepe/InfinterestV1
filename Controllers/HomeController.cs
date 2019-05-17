@@ -83,6 +83,10 @@ namespace Infinterest.Controllers
                     .Include(ev => ev.Broker)
                     .Include(ev => ev.Listing)
                     .ThenInclude(li => li.Address)
+                    .Include(ev => ev.EventVendors)
+                    .ThenInclude(ev => ev.Vendor)  
+                    .ThenInclude(bus => bus.BusinessCategory)  
+                        
                     .FirstOrDefault(ev => ev.EventId == id);
 
                     EventDetailView ViewModel = new EventDetailView(user, thisEvent);
