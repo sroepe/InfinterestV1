@@ -23,9 +23,13 @@
     <nav>
         <ul>
             <li><a href="/dashboard">Home</a></li>
-            <li><a href="http://infinterest.com/#home">About</a></li>
-            <li><a href="/messaging">Messaging</a></li>
-            <li><a href="/logoff">Sign out</a></li>
+            <div class="dropdown show">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @Model.CurrentUser.FirstName!</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="broker-profile/@Model.CurrentUser.UserId">My Profile</a>
+                    <a class="dropdown-item" href="/logoff">Sign out</a>
+                </div>
+            </div>
         </ul>
     </nav>
     <label for="nav-toggle" class="nav-toggle-label">
@@ -36,7 +40,9 @@
 
     <div class="container">
         <div id="event-details" class="shadow-box mb-4">
-
+            <form>
+                <button class="close" type="submit" formaction="/dashboard">&times;</button>
+            </form> 
                 <!--this code is temporary - will likely be added to a listing detail page?  to confirm with Hailey -->
 
 
@@ -51,19 +57,19 @@
 
             <div class="row">
                 <div class="col-sm">
-                    <img src="@Model.CurrentListing.ImgUrl" alt="" class="respic">
+                    <img src="@Model.CurrentListing.ImgUrl" alt="" height="150" width="200" class="respic">
                 </div>
                 <div class="resinfo col-sm">
                     <h4>@Model.CurrentListing.Address.addressLine1 @Model.CurrentListing.Address.addressLine2</h4> 
                     <h4>@Model.CurrentListing.Address.city, @Model.CurrentListing.Address.state @Model.CurrentListing.Address.postalCode</h4> 
-                    <h4>$@Model.CurrentListing.Price</h4>
+                    <h4>$@Model.CurrentListing.Price.ToString("N0")</h4>
                     <p>@Model.CurrentListing.Description</p>
-                    <p>MLS Listing # 34683</p> <!-- not totaly sure how to do this one -->
-                    <h5>Share via Social Media or Email</h5>
+                    <p>MLS Listing TBD</p> <!--not totaly sure how to do this one -->
+                    <!-- <h5>Share via Social Media or Email</h5>
                     <a href="#share-ig" rel="modal:open"><img src="../images/instagram.png" alt="" class="social"></a>
                     <a href="#share-fb" rel="modal:open"><img src="../images/facebook.png" alt="" class="social"></a>
                     <a href="#share-tweet" rel="modal:open"><img src="../images/twitter.png" alt="" class="social"></a>
-                    <a href="#share-email" rel="modal:open"><img src="../images/email.png" alt="" class="social"></a>
+                    <a href="#share-email" rel="modal:open"><img src="../images/email.png" alt="" class="social"></a> -->
                 </div>
             </div>    
             <div class="row">

@@ -120,13 +120,6 @@ namespace Infinterest.Controllers
             return RedirectToAction ("Dashboard");
         }
 
-        //temporary - just for viewing while working
-        [HttpGet("event-detail")]
-        public IActionResult EventDetailTemp(String eventId)
-        {
-            return View ("EventDetail");
-        }
-
         // POST Login user
         [HttpPost("existing-user")]
         public IActionResult ExistingUser(User userInput)

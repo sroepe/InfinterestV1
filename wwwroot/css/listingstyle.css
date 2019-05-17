@@ -14,6 +14,8 @@ body, html, .ultimatecontainer{
     padding-top: 100px;
 }
 
+
+
 label{
     color: whitesmoke;
     font-size: 20px;
@@ -83,8 +85,8 @@ a:hover{
 }
 
 .respic {
-    width: 150px;
-    height: auto;
+    /* width: 150px;
+    height: auto; */
 }
 
 .social {

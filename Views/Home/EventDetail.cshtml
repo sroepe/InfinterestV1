@@ -23,9 +23,14 @@
     <nav>
         <ul>
             <li><a href="/dashboard">Home</a></li>
-            <li><a href="http://infinterest.com/#home">About</a></li>
-            <li><a href="/messaging">Messaging</a></li>
-            <li><a href="/logoff">Sign out</a></li>
+            <div class="dropdown show">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @Model.CurrentUser.FirstName!</a>
+                
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="broker-profile/@Model.CurrentUser.UserId">My Profile</a>
+                    <a class="dropdown-item" href="/logoff">Sign out</a>
+                </div>
+            </div>
         </ul>
     </nav>
     <label for="nav-toggle" class="nav-toggle-label">
@@ -35,53 +40,39 @@
 <div class="ultimatecontainer">
 
     <div class="container">
-        <div id="event-details" class="shadow-box mb-4">
-
-
-                <div class="listingheader">
-                    <h4>@Model.CurrentEvent.Listing.Address.addressLine1, @Model.CurrentEvent.Listing.Address.city, @Model.CurrentEvent.Listing.Address.state @Model.CurrentEvent.Listing.Address.postalCode</h4>
-                    
-                    <!-- <div class="row"> -->
-                    <div class="listingevents">
-                        <li><a href="/event-detail"><h5>Open House April 2, 2019</h5></a></li>
-                        <li><a href="/event-detail"><h5>Open House April 4, 2019</h5></a></li>
-                        <li><a href="/add-event"><h5>Create Event</h5></a></li> 
-                    </div>    
-                    <!-- </div>             -->
-                </div>
-                
-
+        <div id="eventcontainer" class="shadow-box mb-4">
+            
             <div class="row">
-                <div class="col-sm">
-                    <img src="../images/home7.jpg" alt="kitchenpic" class="respic">
-                </div>
-                <div class="resinfo col-sm">
+                <div class="resinfo col-4">
+                    <img src="../images/home7.jpg" alt="kitchenpic" class="respic" height="150" width="200">
                     <!-- <h4>93754 39th Ave W</h4>
                     <h4>Centerville, WA 90528</h4> -->
-                    <h6>$849,000</h6>
-                    <h6>January 19, 2019</h6>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                    <p>MLS Listing</p>
-                    <p>34683</p>
-                </div>
-            </div>    
-            <div class="row">
-                <div class="vendors-social col-sm">
-                    <h4>Agent</h4>
-                    <h6>Sarah Thomas</h6>
-                    <a href="/broker-profile"><img src="../images/headshot1.jpg" alt="" class="preferred"></a>
-            
-                </div>
-                <div class="vendors-social col-sm">
-                    <h4>Vendors</h4>
-                    <a href="/vendor-profile" target="_blank"><img src="../images/cupcake.png" alt="" class="vendors"></a>
-                    <a href="/vendor-profile" target="_blank"><img src="../images/jimmyjohns.jpg" alt="" class="vendors"></a>
+                    <form>
+                        <button type="submit" formaction="/listing-details/@Model.CurrentEvent.Listing.ListingId">
+                            <h4>@Model.CurrentEvent.Listing.Address.addressLine1</h4>
+                            <h4>@Model.CurrentEvent.Listing.Address.city, @Model.CurrentEvent.Listing.Address.state @Model.CurrentEvent.Listing.Address.postalCode</h4>
+                        </button>
+                    </form>
+                    <h4>Broker</h4>
+                    <h6>@Model.CurrentEvent.Broker.FirstName @Model.CurrentEvent.Broker.LastName</h6>
                 
-                    <h5>Share via Social Media or Email</h5>
-                    <a href="#share-ig" rel="modal:open"><img src="../images/instagram.png" alt="" class="social"></a>
-                    <a href="#share-fb" rel="modal:open"><img src="../images/facebook.png" alt="" class="social"></a>
-                    <a href="#share-tweet" rel="modal:open"><img src="../images/twitter.png" alt="" class="social"></a>
-                    <a href="#share-email" rel="modal:open"><img src="../images/email.png" alt="" class="social"></a>
+                </div>
+                <div class="event-details col-4">
+                       
+                    <h4>@Model.CurrentEvent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy")</h4>
+                    <h4>@Model.CurrentEvent.OpenHouseDateTime.Date.ToString("h:mm tt")</h4>     
+                    <div class="eventvendors">
+                        <h4>Confirmed Vendors</h4>
+                       
+                        <h4>Requested Vendors</h4>
+                        
+                    </div>
+                </div>
+                <div class="vendors-social col-4">
+                    <form>
+                        <button class="close" type="submit" formaction="/dashboard">&times;</button>
+                    </form>    
+                    <h4>Confirm Content Intended from Wireframe</h4>
                 </div>   
             </div>
             <div id="share-ig" class="modal">
@@ -100,6 +91,6 @@
                 <p>You have successfully shared this event via email!</p>
                 <a href="#" rel="modal:close">Close</a>
             </div>
-        </div>
+       
     </div>
 </div>    

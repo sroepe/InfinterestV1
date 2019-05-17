@@ -141,12 +141,12 @@
           @{
             foreach (Event events in Model.usersEvents)
             {
-              if(events.Confirmed == true){
+              @if(events.Confirmed.Equals(true)){
                 <div class="eventdetails">
                 <div>
                   <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
                   <a href="event-detail/@events.EventId"><h6>@events.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @events.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
-                  <h6>Address:</h6> TROUBLE PULLING ADDRESS THROUGH
+                  <h6>Address: @events.Listing.Address.addressLine1, @events.Listing.Address.city, @events.Listing.Address.state</h6> 
                   <a href="broker-profile/@events.Listing.Broker.UserId"><h6>Broker: @events.Listing.Broker.FirstName @events.Listing.Broker.LastName</h6></a>
                   <h6>Featured Home Area: @events.AreaOfHouse</h6>
                   <!-- //confirmed vendors -->
@@ -165,13 +165,13 @@
             {
               /*NEED TO UPDATE IF STATEMENT AFTER DB ADDRESSED FOR PULLING FROM EVENTSVENDORS*/
               
-              if(events.Confirmed == false){
+              @if(events.Confirmed.Equals(false)){
               <div class="eventdetails">
                 <div>
                   <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
                   <a href="event-detail/@events.EventId"><h6>@events.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @events.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
                   
-                  <h6>Address:</h6> TROUBLE PULLING ADDRESS THROUGH
+                  <h6>Address: @events.Listing.Address.addressLine1, @events.Listing.Address.city, @events.Listing.Address.state</h6> 
                   <a href="broker-profile/@events.Listing.Broker.UserId"><h6>Broker: @events.Listing.Broker.FirstName @events.Listing.Broker.LastName</h6></a>
                   <h6>Featured Home Area: @events.AreaOfHouse</h6>
                   <!-- //confirmed vendors -->
