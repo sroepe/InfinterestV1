@@ -48,6 +48,11 @@ body{
 a:hover{
     text-decoration: none;
 }
+
+span.field-validation-error {
+    color: red;
+}
+
 @media(min-width:768px){
     .wrapper{
         display: flex;
@@ -87,10 +92,6 @@ a:hover{
     font-size: 20px;
     line-height: 30px;
     text-align: center;
-}
-
-.errorMsgs {
-    color: whitesmoke;
 }
 
 .regLabels {
