@@ -31,37 +31,80 @@ namespace Infinterest.Controllers
             ViewBag.ErrorReg = TempData["ErrorReg"];
             return View("Index");
         }
-        // vendor reg moved to vendor controller
-        // broker reg moved to broker controller
-
+        
         [HttpGet("broker-profile/{id}")]
         public IActionResult BrokerProfile(String id)
         {
+            ProfileDetailView ViewModel = new ProfileDetailView();
+            int? ID = HttpContext.Session.GetInt32("userid");           
+            User user = _context.users
+                .Where(use => use.UserId == ID)
+                .FirstOrDefault();
+            if (user == null)
+            {
+                return Redirect("/");
+            }
+            ViewModel.CurrentUser = user;
             if(Int32.TryParse(id, out int userid))
             {
                 Broker thisBroker = _context.users
                 .OfType<Broker>()                
                     .Where(broker => broker.UserId == userid)
                     .FirstOrDefault();
-                return View("BrokerProfile", thisBroker);
+                if (thisBroker == null)
+                {
+                    return Redirect("/");
+                }
+                ViewModel.SelectedUser = thisBroker;
+                ViewModel.UpcomingEvents = thisBroker.Events
+                                        .FindAll(eve => eve.OpenHouseDateTime > DateTime.Now)
+                                        .ToList();
+                ViewModel.PastEvents = thisBroker.Events
+                                        .FindAll(eve => eve.OpenHouseDateTime < DateTime.Now)
+                                        .ToList();
+                return View("BrokerProfile", ViewModel);
             }
-            
             return RedirectToAction ("Dashboard");
         }
+
         [HttpGet("vendor-profile/{id}")]
         public IActionResult VendorProfile(String id)
         {
+            ProfileDetailView ViewModel = new ProfileDetailView();
+            int? ID = HttpContext.Session.GetInt32("userid");           
+            User user = _context.users
+                .Where(use => use.UserId == ID)
+                .FirstOrDefault();
+            if (user == null)
+            {
+                return Redirect("/");
+            }
+            ViewModel.CurrentUser = user;
             if(Int32.TryParse(id, out int userid))
             {
                 Vendor thisVendor = _context.users
                 .OfType<Vendor>()
                     .Where(vendor => vendor.UserId == userid)
                     .FirstOrDefault();
-                return View("VendorProfile", thisVendor);
+                if (thisVendor == null)
+                {
+                    return Redirect("/vendornotfound");
+                }
+                ViewModel.SelectedUser = thisVendor;
+                List<Event> ConfrimedEvents = thisVendor.Events
+                                            .FindAll(eve => eve.Confirmed == true)
+                                            .Select(eve => eve.Event)
+                                            .ToList();
+                ViewModel.UpcomingEvents = ConfrimedEvents
+                                        .FindAll(eve => eve.OpenHouseDateTime > DateTime.Now)
+                                        .ToList();
+                ViewModel.PastEvents = ConfrimedEvents
+                                        .FindAll(eve => eve.OpenHouseDateTime < DateTime.Now)
+                                        .ToList();
+                return View("VendorProfile", ViewModel);
             }
             
             return RedirectToAction ("Dashboard");
-
         }
 
         [HttpGet("event-detail/{eventId}")]
