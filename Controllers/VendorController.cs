@@ -44,14 +44,15 @@ namespace Infinterest.Controllers
 
             viewModel.allEvents = _context.events
                                     .Include(eve => eve.Listing)
-                                    .ThenInclude(lis => lis.Address)
+                                        .ThenInclude(lis => lis.Address)
                                     .Include (eve => eve.Broker)
+                                    .Include (eve => eve.EventVendors)
+                                        .ThenInclude(ev => ev.Vendor)
                                     .Where (eve => eve.OpenHouseDateTime > DateTime.Now)
                                     .Where (eve => eve.Confirmed == false)
                                     .ToList();
 
             viewModel.usersEvents = user.Events
-                                    .Where(ev => ev.Confirmed == true)
                                     .ToList();
 
 

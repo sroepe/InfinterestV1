@@ -165,7 +165,7 @@
             {
               /*NEED TO UPDATE IF STATEMENT AFTER DB ADDRESSED FOR PULLING FROM EVENTSVENDORS*/
               
-              @if(events.Confirmed.Equals(false)){
+              @if(events.Confirmed.Equals(false) && events.Denied.Equals(false)){
               <div class="eventdetails">
                 <div>
                   <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->

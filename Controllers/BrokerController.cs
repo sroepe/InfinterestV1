@@ -290,7 +290,7 @@ namespace Infinterest.Controllers
             return Redirect("/event-detail/" + EventId);
         }
         
-        [HttpGet("event-detail/{EventId}/{EvVeId}/deny")]
+        [HttpGet("event-detail/{EventId}/{VendorId}/deny")]
         public IActionResult DenyVendor (string EventId, string VendorId)
         {
             int? ID = HttpContext.Session.GetInt32("userid");           
@@ -314,17 +314,21 @@ namespace Infinterest.Controllers
                 {
                     VendorToEvent Request = eventToConfirm.EventVendors.Find(re => re.VendorId == vid);
 
-                    
-                    if(Request.Event.BrokerId == HttpContext.Session.GetInt32("userid"))
+                    if(Request == null)
                     {
-                        Request.Event.EventVendors.Remove(Request);
-                        Request.Vendor.Events.Remove(Request);
-                        _context.eventvendors.Remove(Request);
+                        return Redirect("/what");
+                    }
+                    
+                    if(Request.Event.Broker == user)
+                    {
+                        Request.Denied = true;
                         _context.SaveChanges();
                     }
+                    
                 }
             }
             return Redirect("/event-detail/" + EventId);
         }
+        
     }
 }

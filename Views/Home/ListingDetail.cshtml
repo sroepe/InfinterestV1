@@ -86,7 +86,7 @@
                                     <h5>Requested Vendors:</h5>
                                     @foreach (VendorToEvent vend in eve.EventVendors)
                                     {
-                                        if(vend.Confirmed == false)
+                                        if(vend.Confirmed == false && vend.Denied == false)
                                         {
                                             <img src="@vend.Vendor.ImgUrl" height="100" width="100"> <h4>@vend.Vendor.Company</h4>
                                             <a href="/event-detail/@eve.EventId/@vend.VendorId/confirm">Accept</a>
