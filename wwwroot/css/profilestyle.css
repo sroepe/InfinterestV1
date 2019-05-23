@@ -55,7 +55,7 @@ body, html, #profilecontainer{
 
 
 /* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
+@media (min-width: 768px) {}
 
  
 
@@ -66,10 +66,3 @@ body, html, #profilecontainer{
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) { }
-
- */
-
-
-
-
-
