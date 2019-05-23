@@ -84,6 +84,7 @@ namespace Infinterest.Controllers
             {
                 Vendor thisVendor = _context.users
                 .OfType<Vendor>()
+                    .Include(ve => ve.Events)
                     .Where(vendor => vendor.UserId == userid)
                     .FirstOrDefault();
                 if (thisVendor == null)

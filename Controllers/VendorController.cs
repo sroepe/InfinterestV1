@@ -27,9 +27,11 @@ namespace Infinterest.Controllers
             int? ID = HttpContext.Session.GetInt32("userid");           
             Vendor user = _context.users
                 .OfType<Vendor>()
-                .Where(vendor => vendor.UserId == ID)
                 .Include(vend => vend.Events)
-                .FirstOrDefault();
+                    .ThenInclude(ve => ve.Event)
+                        .ThenInclude(ev => ev.Listing)
+                            .ThenInclude(li => li.Address)
+                .FirstOrDefault(vendor => vendor.UserId == ID);
             
             if (user == null)
             {
@@ -49,14 +51,9 @@ namespace Infinterest.Controllers
                                     .ToList();
 
             viewModel.usersEvents = user.Events
-                                    .Select(ve => ve.Event)
+                                    .Where(ev => ev.Confirmed == true)
                                     .ToList();
 
-            // viewModel.usersEvents = _context.users
-            //                         .OfType<Vendor>()
-            //                         .Where (use => use.UserId == user.UserId)
-            //                         .Select(use => use.Events)
-            //                         .ToList();
 
             return View ("DashboardVendor", viewModel);
         }

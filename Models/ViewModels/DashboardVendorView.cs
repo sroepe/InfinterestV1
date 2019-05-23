@@ -6,6 +6,6 @@ namespace Infinterest.Models
     {
         public Vendor currentUser {get;set;}
         public List<Event> allEvents {get;set;}
-        public virtual List<Event> usersEvents {get;set;}
+        public virtual List<VendorToEvent> usersEvents {get;set;}
     }
 }

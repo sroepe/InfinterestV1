@@ -139,16 +139,16 @@
         <div class="confevents">
           <h4>Confirmed Events</h4>
           @{
-            foreach (Event events in Model.usersEvents)
+            foreach (VendorToEvent events in Model.usersEvents)
             {
               @if(events.Confirmed.Equals(true)){
                 <div class="eventdetails">
                 <div>
                   <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
-                  <a href="event-detail/@events.EventId"><h6>@events.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @events.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
-                  <h6>Address: @events.Listing.Address.addressLine1, @events.Listing.Address.city, @events.Listing.Address.state</h6> 
-                  <a href="broker-profile/@events.Listing.Broker.UserId"><h6>Broker: @events.Listing.Broker.FirstName @events.Listing.Broker.LastName</h6></a>
-                  <h6>Featured Home Area: @events.AreaOfHouse</h6>
+                  <a href="event-detail/@events.EventId"><h6>@events.Event.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @events.Event.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
+                  <h6>Address: @events.Event.Listing.Address.addressLine1, @events.Event.Listing.Address.city, @events.Event.Listing.Address.state</h6> 
+                  <a href="broker-profile/@events.Event.Listing.Broker.UserId"><h6>Broker: @events.Event.Listing.Broker.FirstName @events.Event.Listing.Broker.LastName</h6></a>
+                  <h6>Featured Home Area: @events.Event.AreaOfHouse</h6>
                   <!-- //confirmed vendors -->
                   
                 </div>
@@ -161,7 +161,7 @@
         <div class="reqdevents"> 
           <h4>Requested Events</h4> 
           @{
-            foreach (Event events in Model.usersEvents)
+            foreach (VendorToEvent events in Model.usersEvents)
             {
               /*NEED TO UPDATE IF STATEMENT AFTER DB ADDRESSED FOR PULLING FROM EVENTSVENDORS*/
               
@@ -169,11 +169,11 @@
               <div class="eventdetails">
                 <div>
                   <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
-                  <a href="event-detail/@events.EventId"><h6>@events.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @events.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
+                  <a href="event-detail/@events.EventId"><h6>@events.Event.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @events.Event.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
                   
-                  <h6>Address: @events.Listing.Address.addressLine1, @events.Listing.Address.city, @events.Listing.Address.state</h6> 
-                  <a href="broker-profile/@events.Listing.Broker.UserId"><h6>Broker: @events.Listing.Broker.FirstName @events.Listing.Broker.LastName</h6></a>
-                  <h6>Featured Home Area: @events.AreaOfHouse</h6>
+                  <h6>Address: @events.Event.Listing.Address.addressLine1, @events.Event.Listing.Address.city, @events.Event.Listing.Address.state</h6> 
+                  <a href="broker-profile/@events.Event.Listing.Broker.UserId"><h6>Broker: @events.Event.Listing.Broker.FirstName @events.Event.Listing.Broker.LastName</h6></a>
+                  <h6>Featured Home Area: @events.Event.AreaOfHouse</h6>
                   <!-- //confirmed vendors -->
                   
                 </div>
