@@ -67,38 +67,40 @@
                         @{
                             foreach (Event eve in Model.CurrentListing.Events)
                             {
-                                <h5>    
-                                    <a href="/event-detail/@eve.EventId">
-                                    Open House @eve.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @eve.OpenHouseDateTime.Date.ToString("h:mm tt")
-                                    </a>
-                                </h5>
-                                <h5>Confirmed Vendors:</h5>
-                                @foreach (VendorToEvent vend in eve.EventVendors)
-                                {
-                                    if(vend.Confirmed == true)
-                                    {
-                                        <img src="@vend.Vendor.ImgUrl" height="100" width="100"> <h4>@vend.Vendor.Company</h4>
-                                    }
-                                }
-                                
-                                @if(Model.CurrentListing.BrokerId == Model.CurrentUser.UserId)
-                                {
-                                    <h5>Requested Vendors:</h5>
+                                <div class="event-info">
+                                    <h5>    
+                                        <a class="event-link" href="/event-detail/@eve.EventId">
+                                        Open House @eve.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @eve.OpenHouseDateTime.Date.ToString("h:mm tt")
+                                        </a>
+                                    </h5>
+                                    <h5>Confirmed Vendors:</h5>
                                     @foreach (VendorToEvent vend in eve.EventVendors)
                                     {
-                                        if(vend.Confirmed == false && vend.Denied == false)
+                                        if(vend.Confirmed == true)
                                         {
                                             <img src="@vend.Vendor.ImgUrl" height="100" width="100"> <h4>@vend.Vendor.Company</h4>
-                                            <a href="/event-detail/@eve.EventId/@vend.VendorId/confirm">Accept</a>
-                                            <a href="/event-detail/@eve.EventId/@vend.VendorId/deny">Deny</a>
                                         }
                                     }
-                                    <a href="listing-detail/@Model.CurrentListing.ListingId/archive">Archive Listing</a>
-                                }
+                                    
+                                    @if(Model.CurrentListing.BrokerId == Model.CurrentUser.UserId)
+                                    {
+                                        <h5>Requested Vendors:</h5>
+                                        @foreach (VendorToEvent vend in eve.EventVendors)
+                                        {
+                                            if(vend.Confirmed == false && vend.Denied == false)
+                                            {
+                                                <img src="@vend.Vendor.ImgUrl" height="100" width="100"> <h4>@vend.Vendor.Company</h4>
+                                                <a href="/event-detail/@eve.EventId/@vend.VendorId/confirm">Accept</a>
+                                                <a href="/event-detail/@eve.EventId/@vend.VendorId/deny">Deny</a>
+                                            }
+                                        }
+                                    }
+                                </div>
                             }
                         }
                         @if(Model.CurrentListing.BrokerId == Model.CurrentUser.UserId) {
-                            <form>
+                            <a href="listing-detail/@Model.CurrentListing.ListingId/archive">Archive Listing</a>
+                            <form class="add-event-form">
                                 <button type="submit" class="btn btn-secondary" formaction="/add-event/@Model.CurrentListing.ListingId">Create Event</button>
                             </form>
                         }
@@ -112,18 +114,18 @@
                             foreach (Event eve in Model.CurrentListing.Events)
                             {
                                 @if(eve.Confirmed == true) {
-                                    <h5><a href="/event-detail/@eve.EventId">
-                                    Open House @eve.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @eve.OpenHouseDateTime.Date.ToString("h:mm tt")
-                                    </a></h5>
-                                    <h5>Confirmed Vendors:</h5>
-                                    @foreach (VendorToEvent vend in eve.EventVendors)
-                                    {
-                                    
-                                        <img src="@vend.Vendor.ImgUrl" height="100" width="100"> <h4>@vend.Vendor.Company</h4>
-                                    }
-                                }
-                                
-                                
+                                    <div class="event-info">
+                                        <h5><a href="/event-detail/@eve.EventId">
+                                        Open House @eve.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @eve.OpenHouseDateTime.Date.ToString("h:mm tt")
+                                        </a></h5>
+                                        <h5>Confirmed Vendors:</h5>
+                                        @foreach (VendorToEvent vend in eve.EventVendors)
+                                        {
+                                        
+                                            <img src="@vend.Vendor.ImgUrl" height="100" width="100"> <h4>@vend.Vendor.Company</h4>
+                                        }
+                                    </div>  
+                                }       
                             }
                         }
                     </div>    

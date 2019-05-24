@@ -2,14 +2,37 @@ html {
     height: 100%;
 }
 
+.container {
+    padding-top: 5%;
+}
+
+#eventcontainer h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+#eventcontainer.event-details h4 {
+    text-align: center;
+}
+
+#eventcontainer.resinfo h4 {
+    text-align: left;
+}
+
+h5.resinfo {
+    font-weight: bold;
+}
+
 .col-4 {
     display: inline-block;
-    vertical-align: top;
-    
+    vertical-align: top;   
 }
 
 .eventvendors h4 {
     margin-top: 10%;
+    text-align: center;
 }
 
 .close {
@@ -278,7 +301,7 @@ maybe move the left section to the top, search and prefpics becomes inline-block
 }
 
 #eventcontainer h6{
-    font-size: 20px;
+    /* font-size: 20px; */
 }
  
 #eventcontainer.shadow-box.mb-4 {
@@ -301,7 +324,7 @@ maybe move the left section to the top, search and prefpics becomes inline-block
     font-weight: bold;
     font-size: 16px;
     line-height: 1;
-    text-align: left;
+    /* text-align: center; */
 }
 
 #eventcontainer h6 {
@@ -325,6 +348,10 @@ maybe move the left section to the top, search and prefpics becomes inline-block
     font-weight: bold;
     /* margin-top: 50px; */
     font-size: 14pt;
+}
+
+.vendor-req {
+    display: inline-block;
 }
 
 .vendors {
