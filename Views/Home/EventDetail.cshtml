@@ -82,29 +82,25 @@
                             }
                                     
                                     
-                        <h4>Requested Vendors</h4>
                             @if(Model.CurrentEvent.BrokerId == Model.CurrentUser.UserId)
-                                {
-                                
-                                    foreach (VendorToEvent vend in Model.CurrentEvent.EventVendors)
-                                    {    
-                                        if(vend.Denied == false && vend.Confirmed == false) 
-                                        {
-                                            <div class="vendor-req">
-                                                <img src="@vend.Vendor.ImgUrl" height="100" width="100"> 
-                                                <p>@vend.Vendor.Company</p>
+                            {
+                            <h4>Requested Vendors</h4>
+                            
+                                foreach (VendorToEvent vend in Model.CurrentEvent.EventVendors)
+                                {    
+                                    if(vend.Denied == false && vend.Confirmed == false) 
+                                    {
+                                        <div class="vendor-req">
+                                            <img src="@vend.Vendor.ImgUrl" height="100" width="100"> 
+                                            <p>@vend.Vendor.Company</p>
 
-                                                <a href="/event-detail/@Model.CurrentEvent.EventId/@vend.VendorId/confirm">Accept</a>
-                                                <a href="/event-detail/@Model.CurrentEvent.EventId/@vend.VendorId/deny">Deny</a>
-                                            </div>
-                                        }  
-                                        
+                                            <a href="/event-detail/@Model.CurrentEvent.EventId/@vend.VendorId/confirm">Accept</a>
+                                            <a href="/event-detail/@Model.CurrentEvent.EventId/@vend.VendorId/deny">Deny</a>
+                                        </div>
                                     }
-                                    
+                                }
                             }
-                        
-                        
-                      
+
                     </div>
                 </div>
                 <div class="vendors-social col-4">
@@ -123,20 +119,12 @@
                     
 
 
-                    @{
-                        foreach (VendorToEvent ven in Model.CurrentEvent.EventVendors)
-                        {
-                            @if(@Model.CurrentUser.UserType == "Vendor" && ven.VendorId == @Model.CurrentUser.UserId)
-                            {
-                                if(ven.Confirmed == false && ven.Denied == false)
-                                {
-                                <form>
-                                    <button type="submit" class="btn btn-secondary" formaction="/event-detail/@Model.CurrentEvent.EventId/request">Request to Join Event</button>
-                                </form>
-                                }
-                            }     
-                        }    
-                    }                               
+                    @if(@Model.CurrentUser.UserType == "Vendor")
+                    {
+                        <form>
+                            <button type="submit" class="btn btn-secondary" formaction="/event-detail/@Model.CurrentEvent.EventId/request">Request to Join Event</button>
+                        </form>
+                    }             
                 </div>   
             </div>
             <div id="share-ig" class="modal">
