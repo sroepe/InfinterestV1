@@ -94,4 +94,27 @@ a:hover{
     width: auto;
 }
 
+.conf-events h4 {
+    font-weight: bold;
+}
+
+.conf-events h5 {
+    text-align: center;
+}
+
+.event-info {
+    background-color: lightgray;
+    border-radius: 2.5px;
+    padding: 1%;
+}
+
+a.event-link {
+    color: black;
+    font-weight: bold;
+}
+
+.add-event-form {
+    margin-top: 10%;
+}
+
 
