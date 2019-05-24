@@ -196,8 +196,11 @@ namespace Infinterest.Controllers
 
                 if(listingToDelete.BrokerId == HttpContext.Session.GetInt32("userid"))
                 {
-                    _context.listings.Remove(listingToDelete);
-                    _context.SaveChanges();
+                    if(listingToDelete.Availible == false)
+                    {
+                        _context.listings.Remove(listingToDelete);
+                        _context.SaveChanges();
+                    }
                 }
             }
             return Redirect("/dashboard");

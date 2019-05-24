@@ -61,6 +61,11 @@
                        
                     <h4>@Model.CurrentEvent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy")</h4>
                     <h4>@Model.CurrentEvent.OpenHouseDateTime.Date.ToString("h:mm tt")</h4>     
+
+                    @if(Model.CurrentEvent.BrokerId == Model.CurrentUser.UserId)
+                    {
+                        <a href="event-detail/@Model.CurrentEvent.EventId/confirm">Finalize Event</a>
+                    }
                     <div class="eventvendors">
                         <h4>Confirmed Vendors</h4>
                             @{
@@ -88,6 +93,7 @@
                                     <a href="/event-detail/@Model.CurrentEvent.EventId/@ven.VendorId/deny">Deny</a>
                                 }
                                 
+
                         }
                             }
                             

@@ -143,6 +143,13 @@ namespace Infinterest.Controllers
                 {
                     return Redirect("/no-event");
                 }
+
+                VendorToEvent ifExistsCheck = thisEvent.EventVendors
+                    .Find(ev => ev.Vendor == user);
+                if(ifExistsCheck != null)
+                {
+                    return Redirect("/already-requested");
+                }
                 
                 VendorToEvent thisRequest = new VendorToEvent(user, thisEvent);
 
