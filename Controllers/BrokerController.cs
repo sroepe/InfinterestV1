@@ -284,7 +284,7 @@ namespace Infinterest.Controllers
                     
                     if(Request.Event.Broker == user)
                     {
-                        Request.Confirmed = true;
+                        Request.RequestStatus = "Accepted";
                         _context.SaveChanges();
                     }
                     
@@ -324,7 +324,7 @@ namespace Infinterest.Controllers
                     
                     if(Request.Event.Broker == user)
                     {
-                        Request.Denied = true;
+                        Request.RequestStatus = "Denied";
                         _context.SaveChanges();
                     }
                     
