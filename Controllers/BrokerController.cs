@@ -121,6 +121,12 @@ namespace Infinterest.Controllers
                         .Where(broker => broker.UserId == ID)
                         .FirstOrDefault();
 
+                    if(thisListing.BrokerId != user.UserId)
+                    {
+                        //fake code
+                        return Redirect("/notrightuser");
+                    }
+
                     NewEvent.Broker = user;
                     NewEvent.BrokerId = user.UserId;
                     user.Events.Add(NewEvent);
@@ -190,7 +196,27 @@ namespace Infinterest.Controllers
 
                 if(listingToDelete.BrokerId == HttpContext.Session.GetInt32("userid"))
                 {
-                    _context.listings.Remove(listingToDelete);
+                    if(listingToDelete.Availible == false)
+                    {
+                        _context.listings.Remove(listingToDelete);
+                        _context.SaveChanges();
+                    }
+                }
+            }
+            return Redirect("/dashboard");
+        }
+        [HttpGet("listing/{ListingId}/archive")]
+        public IActionResult ArchiveListing (string ListingId)
+        {
+            if(Int32.TryParse(ListingId, out int id))
+            {
+                Listing listingToDelete = _context.listings
+                    .FirstOrDefault(listing => listing.ListingId == id);
+
+                if(listingToDelete.BrokerId == HttpContext.Session.GetInt32("userid"))
+                {
+                    listingToDelete.Availible = false;
+                    _context.SaveChanges();
                 }
             }
             return Redirect("/dashboard");
@@ -206,41 +232,106 @@ namespace Infinterest.Controllers
                 if(eventToDelete.BrokerId == HttpContext.Session.GetInt32("userid"))
                 {
                     _context.events.Remove(eventToDelete);
+                    _context.SaveChanges();
                 }
             }
             return Redirect("/dashboard");
         }
-        [HttpGet("test/listing/{ListingId}")]
-        public IActionResult TestListing (string ListingId)
+        [HttpGet("event-detail/{EventId}/confirm")]
+        public IActionResult ConfirmEvent (string EventId)
         {
-            if(Int32.TryParse(ListingId, out int id))
+            if(Int32.TryParse(EventId, out int id))
             {
-                Listing listingToTest = _context.listings
-                        .Include(lis => lis.Address)
-                        .FirstOrDefault(listing => listing.ListingId == id);
-                return Redirect("/address/" + listingToTest.Address.postalCode);
-            }
-            else
-            {
-                return Redirect("/");
-            }
-        }
-        [HttpGet("test/Address/{ListingId}")]
-        public IActionResult TestAddress (string ListingId)
-        {
-            if(Int32.TryParse(ListingId, out int id))
-            {
-                Address listingToTest = _context.address
-                        .FirstOrDefault(listing => listing.AddressId == id);
-                return Redirect("/address/" + listingToTest.postalCode);
-            }
-            else
-            {
-                return Redirect("/");
-            }
-        }
+                Event eventToConfirm = _context.events
+                    .FirstOrDefault(eve => eve.EventId == id);
 
+                if(eventToConfirm.BrokerId == HttpContext.Session.GetInt32("userid"))
+                {
+                    eventToConfirm.Confirmed = true;
+                    _context.SaveChanges();
+                }
+            }
+            return Redirect("/dashboard");
+        }
+        [HttpGet("event-detail/{EventId}/{VendorId}/confirm")]
+        public IActionResult ConfirmVendor (string EventId, string VendorId)
+        {
+            int? ID = HttpContext.Session.GetInt32("userid");           
+            Broker user = _context.users
+                .OfType<Broker>()
+                .Where(use => use.UserId == ID)
+                .FirstOrDefault();
+            if(user == null)
+            {
+                return Redirect("/notsignedin");
+            }   
+
+            if(Int32.TryParse(EventId, out int id))
+            {
+                
+                Event eventToConfirm = _context.events
+                    .Include(eve => eve.EventVendors)
+                    .FirstOrDefault(eve => eve.EventId == id);
+
+                if(Int32.TryParse(VendorId, out int vid))
+                {
+                    VendorToEvent Request = eventToConfirm.EventVendors.Find(re => re.VendorId == vid);
+
+                    if(Request == null)
+                    {
+                        return Redirect("/what");
+                    }
+                    
+                    if(Request.Event.Broker == user)
+                    {
+                        Request.Confirmed = true;
+                        _context.SaveChanges();
+                    }
+                    
+                }
+            }
+            return Redirect("/event-detail/" + EventId);
+        }
         
-        // interact with vendors
+        [HttpGet("event-detail/{EventId}/{VendorId}/deny")]
+        public IActionResult DenyVendor (string EventId, string VendorId)
+        {
+            int? ID = HttpContext.Session.GetInt32("userid");           
+            Broker user = _context.users
+                .OfType<Broker>()
+                .Where(use => use.UserId == ID)
+                .FirstOrDefault();
+            if(user == null)
+            {
+                return Redirect("/notsignedin");
+            }   
+
+            if(Int32.TryParse(EventId, out int id))
+            {
+                
+                Event eventToConfirm = _context.events
+                    .Include(eve => eve.EventVendors)
+                    .FirstOrDefault(eve => eve.EventId == id);
+
+                if(Int32.TryParse(VendorId, out int vid))
+                {
+                    VendorToEvent Request = eventToConfirm.EventVendors.Find(re => re.VendorId == vid);
+
+                    if(Request == null)
+                    {
+                        return Redirect("/what");
+                    }
+                    
+                    if(Request.Event.Broker == user)
+                    {
+                        Request.Denied = true;
+                        _context.SaveChanges();
+                    }
+                    
+                }
+            }
+            return Redirect("/event-detail/" + EventId);
+        }
+        
     }
 }

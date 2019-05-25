@@ -27,8 +27,11 @@ namespace Infinterest.Controllers
             int? ID = HttpContext.Session.GetInt32("userid");           
             Vendor user = _context.users
                 .OfType<Vendor>()
-                .Where(vendor => vendor.UserId == ID)
-                .FirstOrDefault();
+                .Include(vend => vend.Events)
+                    .ThenInclude(ve => ve.Event)
+                        .ThenInclude(ev => ev.Listing)
+                            .ThenInclude(li => li.Address)
+                .FirstOrDefault(vendor => vendor.UserId == ID);
             
             if (user == null)
             {
@@ -37,13 +40,21 @@ namespace Infinterest.Controllers
 
             DashboardVendorView viewModel = new DashboardVendorView();
             
-            viewModel.allListings = _context.listings
+            viewModel.currentUser = user;
+
+            viewModel.allEvents = _context.events
+                                    .Include(eve => eve.Listing)
+                                        .ThenInclude(lis => lis.Address)
+                                    .Include (eve => eve.Broker)
+                                    .Include (eve => eve.EventVendors)
+                                        .ThenInclude(ev => ev.Vendor)
+                                    .Where (eve => eve.OpenHouseDateTime > DateTime.Now)
+                                    .Where (eve => eve.Confirmed == false)
                                     .ToList();
 
-            if(user.Events != null)
-            {
-                viewModel.usersEvents = user.Events.Select(s => s.Event).ToList();
-            }
+            viewModel.usersEvents = user.Events
+                                    .ToList();
+
 
             return View ("DashboardVendor", viewModel);
         }
@@ -65,6 +76,7 @@ namespace Infinterest.Controllers
                 if(_context.users.Any(u => u.Email == UserInput.Email))
                 {
                     ModelState.AddModelError("Email", "Email already in use!");
+                    return View("VendorRegistration");
                 }
                 else
                 {
@@ -82,10 +94,12 @@ namespace Infinterest.Controllers
         [HttpGet("vendor-registration2")]
         public IActionResult VendorRegistration2()
         {
-
+            ViewBag.AreaOfHouse = _context.areas;
+            ViewBag.BusinessCategory = _context.business;
             return View();
         }
-        [HttpPost("vendor-registration")]
+        
+        [HttpPost("vendor-registration2")]
         public IActionResult AddToVendor(Vendor UserInput)
         {
             int? ID = HttpContext.Session.GetInt32("userid");           
@@ -106,27 +120,67 @@ namespace Infinterest.Controllers
         }
 
         
-        [HttpPost("vendor")]
-        public IActionResult NewVendor(Vendor NewVendor)
+        [HttpGet("event-detail/{eventId}/request")]
+        public IActionResult EventRequest(string eventId)
         {
-            if(ModelState.IsValid)  
-            {   
-                int UserId = (int)HttpContext.Session.GetInt32("userid");
-                User User =_context.users.SingleOrDefault(user => user.UserId == UserId);
-                
-                HttpContext.Session.SetInt32("UserId", UserId);
-                @ViewBag.User = User;
-
-                NewVendor.UserId = UserId;
-                _context.users.Add(NewVendor);
-                _context.SaveChanges();
-                return RedirectToAction("Dashboard");
-            }
-            else
+            int? ID = HttpContext.Session.GetInt32("userid");           
+            Vendor user = _context.users
+                .OfType<Vendor>()
+                .Where(vendor => vendor.UserId == ID)
+                .FirstOrDefault();
+            
+            if (user == null)
             {
-                return View("Vendor");
+                return Redirect("/");
             }
+
+            if(Int32.TryParse(eventId, out int id))
+            {
+                Event thisEvent = _context.events
+                    .FirstOrDefault(ev => ev.EventId == id);
+
+                if (thisEvent == null)
+                {
+                    return Redirect("/no-event");
+                }
+
+                VendorToEvent ifExistsCheck = thisEvent.EventVendors
+                    .Find(ev => ev.Vendor == user);
+                if(ifExistsCheck != null)
+                {
+                    return Redirect("/already-requested");
+                }
+                
+                VendorToEvent thisRequest = new VendorToEvent(user, thisEvent);
+
+                _context.eventvendors.Add(thisRequest);
+                thisEvent.EventVendors.Add(thisRequest);
+                user.Events.Add(thisRequest);
+                _context.SaveChanges();
+            }
+            return Redirect("/event-detail/" + eventId);
         }
+        // [HttpPost("vendor")]
+        // public IActionResult NewVendor(Vendor NewVendor)
+        // {
+        //     if(ModelState.IsValid)  
+        //     {   
+        //         int UserId = (int)HttpContext.Session.GetInt32("userid");
+        //         User User =_context.users.SingleOrDefault(user => user.UserId == UserId);
+                
+        //         HttpContext.Session.SetInt32("UserId", UserId);
+        //         @ViewBag.User = User;
+
+        //         NewVendor.UserId = UserId;
+        //         _context.users.Add(NewVendor);
+        //         _context.SaveChanges();
+        //         return RedirectToAction("Dashboard");
+        //     }
+        //     else
+        //     {
+        //         return View("Vendor");
+        //     }
+        // }
         
     }
 }

@@ -3,14 +3,16 @@ using System;
 using Infinterest.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infinterest.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20190514003627_vendortoeventid")]
+    partial class vendortoeventid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,7 +142,7 @@ namespace Infinterest.Migrations
                     b.Property<int>("ListingId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AddressId");
+                    b.Property<int?>("AddressId");
 
                     b.Property<bool>("Availible");
 
@@ -230,7 +232,7 @@ namespace Infinterest.Migrations
 
                     b.Property<bool>("Confirmed");
 
-                    b.Property<bool>("Denied");
+                    b.Property<int>("VendorToEventId");
 
                     b.HasKey("VendorId", "EventId");
 
@@ -294,8 +296,7 @@ namespace Infinterest.Migrations
                 {
                     b.HasOne("Infinterest.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AddressId");
 
                     b.HasOne("Infinterest.Models.Broker", "Broker")
                         .WithMany("Listings")

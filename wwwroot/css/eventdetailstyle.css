@@ -1,3 +1,45 @@
+html {
+    height: 100%;
+}
+
+.container {
+    padding-top: 5%;
+}
+
+#eventcontainer h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+#eventcontainer.event-details h4 {
+    text-align: center;
+}
+
+#eventcontainer.resinfo h4 {
+    text-align: left;
+}
+
+h5.resinfo {
+    font-weight: bold;
+}
+
+.col-4 {
+    display: inline-block;
+    vertical-align: top;   
+}
+
+.eventvendors h4 {
+    margin-top: 10%;
+    text-align: center;
+}
+
+.close {
+    display: inline-block;
+    text-align: right;
+}
+
 /* Phone devices */
 @media screen and (max-width : 768px) {
     .share {
@@ -22,10 +64,10 @@
         margin: 5%;
     }
 
-    .row .form-control {
+    /* .row .form-control {
         width: 100% !important;
         margin: auto;
-    }
+    } */
 
     .daterangecontainer {
         display: flex;
@@ -67,6 +109,13 @@
         width: 80%;
         text-align: center;
         padding-top: 2%;
+    }
+
+    button {
+        background-color: transparent;
+        border: none;
+        width: 75%;
+        padding: 0;
     }
     
 }
@@ -119,11 +168,11 @@ maybe move the left section to the top, search and prefpics becomes inline-block
     .preferred {
         margin: 5%;
     }
-
+/* 
     .row .form-control {
         width: 100% !important;
         margin: auto;
-    }
+    } */
 
     .daterangecontainer {
         display: flex;
@@ -171,6 +220,13 @@ maybe move the left section to the top, search and prefpics becomes inline-block
         height: 200px;
     }
 
+    button {
+        background-color: transparent;
+        border: none;
+        width: 75%;
+        padding: 0;
+    }
+
 }
 
 /* Large devices */
@@ -191,20 +247,26 @@ maybe move the left section to the top, search and prefpics becomes inline-block
     background-repeat: no-repeat;
     background-size: cover;
     padding-top: 35px;
+    height: 1000px;
 }
 
-#event-details{
+/* .row .form-control {
+    width: 100% !important;
+    margin: auto;
+} */
+
+#eventcontainer {
     margin-top: 15px;
+    width: 100%;
     height: 100%;
     padding: 20px;
+    display: inline-block;
 }
 
-#event-details .listingheader h4 {
-    background-color: black;
-    height: 60px;
-    color: whitesmoke;
-    padding: 10px 10px 0px 10px;
-    text-align: center;
+#event-details .resinfo a h4 {
+    color: black;
+    padding: 0;
+    text-align: left;
     display: inline-block;
     width: auto;
     margin-bottom: -10px;
@@ -228,50 +290,68 @@ maybe move the left section to the top, search and prefpics becomes inline-block
 
 .respic{
     /* margin: 3%; */
-    height: auto;
-    width: 100%;
+    /* height: auto;
+    width: 100%; */
 }
 
-.resinfo.col-sm {
+.resinfo.col-4 a h4{
     display: inline-block;
-    text-align: center;
-    padding-top: 30px;
+    text-align: left;
+   
 }
 
-#event-details h6{
-    font-size: 20px;
+#eventcontainer h6{
+    /* font-size: 20px; */
 }
-/* 
-#event-details.shadow-box.mb-4 {
+ 
+#eventcontainer.shadow-box.mb-4 {
     padding: 10px;
-} */
+} 
 
-#event-details h4 {
+#eventcontainer button {
+    margin-bottom: 10%;
+}
+
+#eventcontainer button h4 {
+    color: black;
+    font-size: 16px;
+    line-height: 1;
+    text-align: left;
+}
+
+#eventcontainer h4 {
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1;
+    /* text-align: center; */
+}
+
+#eventcontainer h6 {
     color: black;
     /* font-weight: bold; */
-    font-size: 24px;
-    line-height: 30px;
-    text-align: center;
+    
+    line-height: 1;
+    text-align: left;
 }
 
-.col-sm {
-    /* padding: 10px; */
-    text-align: center;
-}
-
-.vendors-social.col-sm {
+.event-details {
     display: inline-block;
-    margin-top: 15px;
+    /* margin-top: 15px; */
     margin-left: auto;
     margin-right: auto;
     height: auto; 
-    text-align: center;
+    text-align: left;
 }
 
-.vendors-social h5 {
+.event-details h5 {
     font-weight: bold;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     font-size: 14pt;
+}
+
+.vendor-req {
+    display: inline-block;
 }
 
 .vendors {
@@ -310,6 +390,13 @@ maybe move the left section to the top, search and prefpics becomes inline-block
     margin-top: 300px;
     font-size: 14pt;
     font-weight: bold;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    width: 75%;
+    padding: 0;
 }
 
 

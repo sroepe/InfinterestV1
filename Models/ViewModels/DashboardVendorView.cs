@@ -4,7 +4,8 @@ namespace Infinterest.Models
 {
     public class DashboardVendorView
     {
-        public List<Listing> allListings {get;set;}
-        public virtual ICollection<Event> usersEvents {get;set;}
+        public Vendor currentUser {get;set;}
+        public List<Event> allEvents {get;set;}
+        public virtual List<VendorToEvent> usersEvents {get;set;}
     }
 }

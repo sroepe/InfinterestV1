@@ -31,73 +31,144 @@ namespace Infinterest.Controllers
             ViewBag.ErrorReg = TempData["ErrorReg"];
             return View("Index");
         }
-        // vendor reg moved to vendor controller
-        // broker reg moved to broker controller
-
+        
         [HttpGet("broker-profile/{id}")]
         public IActionResult BrokerProfile(String id)
         {
+            ProfileDetailView ViewModel = new ProfileDetailView();
+            int? ID = HttpContext.Session.GetInt32("userid");           
+            User user = _context.users
+                .Where(use => use.UserId == ID)
+                .FirstOrDefault();
+            if (user == null)
+            {
+                return Redirect("/");
+            }
+            ViewModel.CurrentUser = user;
             if(Int32.TryParse(id, out int userid))
             {
                 Broker thisBroker = _context.users
                 .OfType<Broker>()                
                     .Where(broker => broker.UserId == userid)
                     .FirstOrDefault();
-                return View("BrokerProfile", thisBroker);
+                if (thisBroker == null)
+                {
+                    return Redirect("/");
+                }
+                ViewModel.SelectedUser = thisBroker;
+                ViewModel.UpcomingEvents = thisBroker.Events
+                                        .FindAll(eve => eve.OpenHouseDateTime > DateTime.Now)
+                                        .ToList();
+                ViewModel.PastEvents = thisBroker.Events
+                                        .FindAll(eve => eve.OpenHouseDateTime < DateTime.Now)
+                                        .ToList();
+                return View("BrokerProfile", ViewModel);
             }
-            
             return RedirectToAction ("Dashboard");
         }
+
         [HttpGet("vendor-profile/{id}")]
         public IActionResult VendorProfile(String id)
         {
+            ProfileDetailView ViewModel = new ProfileDetailView();
+            int? ID = HttpContext.Session.GetInt32("userid");           
+            User user = _context.users
+                .Where(use => use.UserId == ID)
+                .FirstOrDefault();
+            if (user == null)
+            {
+                return Redirect("/");
+            }
+            ViewModel.CurrentUser = user;
             if(Int32.TryParse(id, out int userid))
             {
                 Vendor thisVendor = _context.users
                 .OfType<Vendor>()
+                    .Include(ve => ve.Events)
+                        .ThenInclude(ve => ve.Event)
                     .Where(vendor => vendor.UserId == userid)
                     .FirstOrDefault();
-                return View("VendorProfile", thisVendor);
+                if (thisVendor == null)
+                {
+                    return Redirect("/vendornotfound");
+                }
+                ViewModel.SelectedUser = thisVendor;
+                List<Event> ConfrimedEvents = thisVendor.Events
+                                            .FindAll(eve => eve.Confirmed == true)
+                                            .Select(eve => eve.Event)
+                                            .ToList();
+                ViewModel.UpcomingEvents = ConfrimedEvents
+                                        .FindAll(eve => eve.OpenHouseDateTime > DateTime.Now)
+                                        .ToList();
+                ViewModel.PastEvents = ConfrimedEvents
+                                        .FindAll(eve => eve.OpenHouseDateTime < DateTime.Now)
+                                        .ToList();
+                return View("VendorProfile", ViewModel);
             }
             
             return RedirectToAction ("Dashboard");
-
         }
 
         [HttpGet("event-detail/{eventId}")]
         public IActionResult EventDetail(String eventId)
         {
+            int? ID = HttpContext.Session.GetInt32("userid");           
+            User user = _context.users
+                .Where(use => use.UserId == ID)
+                .FirstOrDefault();
+
+            if (user == null)
+            {
+                return Redirect("/");
+            }
+            
             if(Int32.TryParse(eventId, out int id))
             {
                 Event thisEvent = _context.events
-                    .Where(ev => ev.EventId == id)
-                    .FirstOrDefault();
-                return View(thisEvent);
+                    .Include(ev => ev.Broker)
+                    .Include(ev => ev.AreaOfHouse)
+                    .Include(ev => ev.Listing)
+                    .ThenInclude(li => li.Address)
+                    .Include(ev => ev.EventVendors)
+                    .ThenInclude(ev => ev.Vendor)  
+                    .ThenInclude(bus => bus.BusinessCategory)  
+                   
+                        
+                    .FirstOrDefault(ev => ev.EventId == id);
+
+                    EventDetailView ViewModel = new EventDetailView(user, thisEvent);
+                return View(ViewModel);
             }
             return RedirectToAction ("Dashboard");
         }
 
-        [HttpGet("Listing-detail/{listingId}")]
+        [HttpGet("listing-details/{listingId}")]
         public IActionResult ListingDetail(String listingId)
         {
+            int? ID = HttpContext.Session.GetInt32("userid");           
+            User user = _context.users
+                .Where(use => use.UserId == ID)
+                .FirstOrDefault();
+
+            if (user == null)
+            {
+                return Redirect("/");
+            }
+
             if(Int32.TryParse(listingId, out int id))
             {
                 Listing thisListing = _context.listings
-                    .Include(List => List.Address)
-                    .Include(lis => lis.Events)
+                    .Include(list => list.Broker)
+                    .Include(list => list.Address)
+                    .Include(list => list.Events)
                     .ThenInclude(eve => eve.EventVendors)
                     .ThenInclude(ev => ev.Vendor)
                     .FirstOrDefault(lis => lis.ListingId == id);
-                return View(thisListing);
+
+                ListingDetailView ViewModel = new ListingDetailView(user, thisListing);
+                return View(ViewModel);
             }
             return RedirectToAction ("Dashboard");
-        }
-
-        //temporary - just for viewing while working
-        [HttpGet("event-detail")]
-        public IActionResult EventDetailTemp(String eventId)
-        {
-            return View ("EventDetail");
         }
 
         // POST Login user

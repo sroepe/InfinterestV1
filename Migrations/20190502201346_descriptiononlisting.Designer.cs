@@ -3,14 +3,16 @@ using System;
 using Infinterest.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infinterest.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20190502201346_descriptiononlisting")]
+    partial class descriptiononlisting
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,7 +123,9 @@ namespace Infinterest.Migrations
 
                     b.Property<int>("ListingId");
 
-                    b.Property<DateTime>("OpenHouseDateTime");
+                    b.Property<DateTime>("OpenHouseDate");
+
+                    b.Property<DateTime>("OpenHouseTime");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate();
@@ -140,9 +144,7 @@ namespace Infinterest.Migrations
                     b.Property<int>("ListingId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AddressId");
-
-                    b.Property<bool>("Availible");
+                    b.Property<int?>("AddressId");
 
                     b.Property<int>("BrokerId");
 
@@ -180,11 +182,9 @@ namespace Infinterest.Migrations
 
                     b.Property<string>("Bio");
 
-                    b.Property<string>("Company")
-                        .IsRequired();
+                    b.Property<string>("Company");
 
-                    b.Property<string>("Contact")
-                        .IsRequired();
+                    b.Property<string>("Contact");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd();
@@ -199,8 +199,7 @@ namespace Infinterest.Migrations
                         .IsRequired()
                         .HasMaxLength(45);
 
-                    b.Property<string>("ImgUrl")
-                        .IsRequired();
+                    b.Property<string>("ImgUrl");
 
                     b.Property<string>("LastName")
                         .IsRequired();
@@ -229,8 +228,6 @@ namespace Infinterest.Migrations
                     b.Property<int>("EventId");
 
                     b.Property<bool>("Confirmed");
-
-                    b.Property<bool>("Denied");
 
                     b.HasKey("VendorId", "EventId");
 
@@ -294,8 +291,7 @@ namespace Infinterest.Migrations
                 {
                     b.HasOne("Infinterest.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AddressId");
 
                     b.HasOne("Infinterest.Models.Broker", "Broker")
                         .WithMany("Listings")

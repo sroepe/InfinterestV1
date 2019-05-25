@@ -16,11 +16,15 @@
     <img src="../images/white-nosub-inflogo.png" alt="logo" class="white-logo">
     <input type="checkbox" id="nav-toggle" class="nav-toggle">
     <nav>
-      <ul>
-        <li><a href="http://infinterest.com/#home">About</a></li>
-        <li><a href="broker-profile/{@Model.CurrentUser.UserId}">@Model.CurrentUser.FirstName Profile</a></li>
-        <li><a href="/logoff">Sign out</a></li>
-      </ul>
+        <ul>
+            <div class="dropdown show">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @Model.CurrentUser.FirstName!</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="broker-profile/@Model.CurrentUser.UserId">My Profile</a>
+                    <a class="dropdown-item" href="/logoff">Sign out</a>
+                </div>
+            </div>
+        </ul>
     </nav>
     <label for="nav-toggle" class="nav-toggle-label">
         <span></span>
@@ -119,49 +123,67 @@
             foreach (Vendor vendorAvailable in Model.AvailableVendors)
             {     
             <div class="vendordetails">
-                <img src="@vendorAvailable.ImgUrl" alt="">
-                <h4>@vendorAvailable.FirstName @vendorAvailable.LastName</h4>
-                <h4>@vendorAvailable.Company</h4>
-                <h4>@vendorAvailable.Contact</h4>
+                <form>
+                    <button type="submit" class="btn btn-secondary" formaction="vendor-profile/@vendorAvailable.UserId">
+                        <div class="venImg">
+                            <img src="@vendorAvailable.ImgUrl" alt="" height="105" width="105">
+                        </div>
+                        <div class="venContact">
+                            <h4>@vendorAvailable.Company</h4>
+                            <h5>Name: @vendorAvailable.FirstName @vendorAvailable.LastName</h5>
+                            <h5>Business Type: @ViewBag.BusinessCategory</h5>
+                            <h5>Website: @vendorAvailable.Website</h5>
+                            <h5>Phone: @vendorAvailable.Contact</h5>
+                        </div>
+                    </button>
+                </form>
             </div>
             }
         }
     </div>
     <div id="rightsection">
-        <div>
+        <div id="mylistings">
             <form>
-                <button type="submit" class="btn btn-secondary" formaction="/add-listings">Add New Listing</button>
+                <button type="submit" class="addlist btn btn-secondary" formaction="/add-listings">Add New Listing</button>
             </form>
             <h4>Your Listings</h4>
+            
             @{foreach (Listing list in Model.UsersListings)
             {
-            <div class="listingdetails">
-                <img id="listingimg" src="@list.ImgUrl" alt="" >
-                <div>
-                <a href="/Listing-detail/@list.ListingId">
-                    <h2>@list.Address.addressLine1</h2>
-                    <h2>@list.Address.addressLine2</h2>
-                </a>
-                <h4>Postal Code: @list.Zip</h4>
-                <h4>$@list.Price</h4>
-                <h4><a href="@list.MLSLink" target="_blank">MLS Link</a></h4>
+            <div class="listingandevents">
+                <div class="listingdetails">
+                    <div class="leftdetail">
+                        <a href="/listing-details/@list.ListingId"><img src="@list.ImgUrl" alt="" height="100" width="100"></a>
+                        <!-- <p><a href="/remove/listing/@list.ListingId">Remove Listing</a></p> -->
+                    </div>
+                    <div class="listinginfo">
+                        <a href="/listing-details/@list.ListingId">
+                            <h6>@list.Address.addressLine1 @list.Address.addressLine2</h6>
+                            <h6>@list.Address.city, @list.Address.state @list.Address.postalCode</h6>
+                        </a>
+                        <h6>$@list.Price.ToString("N0")</h6>
+                        <h6><a class="mlslink" href="@list.MLSLink" target="_blank">MLS Link</a></h6>
+                    </div>     
                     
+                </div>
+                <div class="listevents">   
                     @{
                     foreach (Event listevent in list.Events)
                     {     
-                    <div>
-                    <a href="event-detail/@listevent.EventId"><h6>@listevent.OpenHouseDate</h6><h6>@listevent.OpenHouseTime</h6></a>
-                    <h6>Requests: @listevent.EventVendors.Where(ev => ev.Confirmed == true).Count()</h6>
-                    </div>
+                    <form>
+                        <button class="btn btn-secondary" formaction="/event-detail/@listevent.EventId">
+                            <h6>@listevent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @listevent.OpenHouseDateTime.Date.ToString("h:mm tt")</h6>
+                            <h6>Requests <span id="reqsbadge" class="badge"> @listevent.EventVendors.Where(ev => ev.Confirmed == false).Where(ev => ev.Denied == false).Count()</span></h6>
+                        </button>
+                    </form>
                     }
                     }
-                <!-- <a href="/add-event/@list.ListingId">Add Event</a> -->
-                <button type="submit" class="btn btn-secondary" formaction="/add-event/@list.ListingId">Add Event</button>
+                    <form>
+                        <button type="submit" class="btn btn-secondary" formaction="/add-event/@list.ListingId"><h6>Add Event</h6></button>
+                    </form>
                 </div>
-            
-            </div>
+            </div>    
             }
             }
-        </div>    
     </div>      
 </div>
