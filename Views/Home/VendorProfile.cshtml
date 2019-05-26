@@ -14,80 +14,78 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<div class="grey">
-  <header>
-    <img src="../images/white-nosub-inflogo.png" alt="logo" class="white-logo">
-    <input type="checkbox" id="nav-toggle" class="nav-toggle">
-    <nav>
-        <ul>
-          <li><a href="/dashboard">Home</a></li>
-          <li><a href="http://infinterest.com/#home">About</a></li>
-          <li><a href="/messaging">Messaging</a></li>
-          <li><a href="/logoff">Sign out</a></li>
-        </ul>
-    </nav>
-    <label for="nav-toggle" class="nav-toggle-label">
-        <span></span>
-    </label>
-  </header>
-<div class="container">
-  <div class="content" id="vendor-profile">
-    <div class="shadow-box top-box"> 
-      <div>
-       <img class="logo-pic" src="../images/jimmyjohns.jpg" alt="">
-      </div>
-      <div>
-        <h3>Jimmy Johns</h3>
-        <p>Delivering super fast gourmet sandwiches.</p>
-        <div class="star-ratings-sprite">
-          <span style="width:89%" class="star-ratings-sprite-rating"></span> 
+
+<header>
+  <img src="../images/white-nosub-inflogo.png" alt="logo" class="white-logo">
+  <input type="checkbox" id="nav-toggle" class="nav-toggle">
+  <nav>
+      <ul>
+        <li><a href="/dashboard">Home</a></li>
+        <div class="dropdown show">
+          <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @Model.CurrentUser.FirstName!</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="/logoff">Sign out</a>
+          </div>
         </div>
-        <p class="d-inline">53 reviews </p>
-      </div>
-   </div>
-    <div class="shadow-box contact-info">
-      <a class="item" href="/remax.com">jimmyjohns.com</a>
-      <p class="item">(206)708-6836</p>
-      <div class="item">
-        <a href="https://www.instagram.com/remax/?hl=en"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.linkedin.com/company/remax-central/about/"><i class="fab fa-linkedin-in"></i></a>
-        <a href="https://twitter.com/search?q=remax&src=tyah"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://twitter.com/search?q=remax&src=tyah"><i class="fab fa-twitter"></i></a><br>
-      </div>
-      <div class="item">
-        <button type="button" class="favBut btn btn-danger">
-            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Favorite
-          </button>
-      </div>
-      <div class="item">
-        <a href="#message" rel="modal:open"><button type="button item" class="btn btn-outline-primary">
-          <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Message
-          </button>
-        </a>
-      </div>
-      <div id="message" class="modal">
-        <div class="form-group">
-          
-          <label for="Message">Message</label>
-          <textarea class="form-control" id="Message" placeholder="Enter message" rows="5"></textarea>
-        </div>  
-        <button><a href="#" rel="modal:close">Send</a></button>
-      </div>
+      </ul>
+  </nav>
+  <label for="nav-toggle" class="nav-toggle-label">
+      <span></span>
+  </label>
+</header>
+<div class="profilecontainer">
+  <div class="col-3 user-details" id="user-profile">
+    
+    <div class="row">
+      <div class="users-details">
+        <img class="profile-pic" src="@Model.CurrentUser.ImgUrl" alt="" >
         
-      
+        <div class="user-info">
+          <h4>@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h4>
+          <h5>@Model.CurrentUser.Company</h5>
+          <h5><a class="item" target="_blank" href="http://www.@Model.CurrentUser.Website">@Model.CurrentUser.Website</a></h5>
+        </div>
+      </div>
     </div>
-    <div class="shadow-box vendor-pic">
-      <img class="" src="../images/sandwich1.jpg" alt="">
-      <img class="" src="../images/sandwich.jpg" alt="">
-      <img class="" src="../images/sandwich3.jpg" alt="">
+    <div class="user-bio">
+      <h4>Bio</h4>
+      <h5>@Model.CurrentUser.Bio</h5>
+    </div>
+    <div class="user-contact">
+      <h4>Contact</h4>
+      <h5>@Model.CurrentUser.Contact</h5>
+      <h5>@Model.CurrentUser.Email</h5>
     </div>
     
-    <!-- End of content/broker-profile -->
-    </div>
-
     
-
-  <!-- End of container -->
+    
+  
+  
+  
+  <!-- End of content/profile -->
+  </div>
+  <div class="col-5 user-conf-events">
+    <h4>Upcoming Confirmed Events</h4>
+      @{
+        foreach (Event myEvent in Model.UpcomingEvents)
+        {
+          <div class="eventdetails">
+            <div>
+              <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
+              <a href="event-detail/@myEvent.EventId"><h6>@myEvent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @myEvent.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
+              <h6>Address: @myEvent.Listing.Address.addressLine1, @myEvent.Listing.Address.city, @myEvent.Listing.Address.state</h6> 
+              <a href="broker-profile/@myEvent.Listing.Broker.UserId"><h6>Broker: @myEvent.Listing.Broker.FirstName @myEvent.Listing.Broker.LastName</h6></a>
+              <h6>Featured Home Area: @myEvent.AreaOfHouse</h6>
+              <!-- //confirmed vendors -->
+              
+            </div>
+          </div>
+        }
+      }
+    <h4>Past Confirmed Events</h4>
+  </div>
+  <div class="col-3 user-pend-events">
+    <h4>Pending Events</h4>
   </div>
 <!-- End of grey -->
 </div>

@@ -21,8 +21,10 @@
       <ul>
         <li><a href="/dashboard">Home</a></li>
         <div class="dropdown show">
-          
-        
+          <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @Model.CurrentUser.FirstName!</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="/logoff">Sign out</a>
+          </div>
         </div>
       </ul>
   </nav>
@@ -30,14 +32,14 @@
       <span></span>
   </label>
 </header>
-<div id="profilecontainer">
-  <div class="col-3 broker-details" id="broker-profile">
+<div class="profilecontainer">
+  <div class="col-3 user-details" id="user-profile">
     
     <div class="row">
-      <div class="broker-details">
+      <div class="users-details">
         <img class="profile-pic" src="../images/headshot2.jpg" alt="" >
         
-        <div class="broker-info">
+        <div class="user-info">
           <h4>Josh McGee</h4>
           <h5>Remax</h5>
           <h5><a class="item" href="/remax.com">Remax.com/josh-mcgee</a></h5>
@@ -61,10 +63,10 @@
   
   <!-- End of content/profile -->
   </div>
-  <div class="col-5 broker-conf-events">
+  <div class="col-5 user-conf-events">
     <h1>THIS IS WHERE UPCOMING AND PAST CONFIRMED EVENTS WILL APPEAR</h1>
   </div>
-  <div class="col-3 broker-pend-events">
+  <div class="col-3 user-pend-events">
     <h1>THIS IS WHERE PENDING EVENTS WILL APPEAR</h1>
   </div>
   
