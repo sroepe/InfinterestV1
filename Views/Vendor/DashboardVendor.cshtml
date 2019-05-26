@@ -125,7 +125,21 @@
                 <a href="@eve.Listing.MLSLink"><h6>MLS Link</h6></a>
               </div>
               <div class="eventright">
-                
+                @{
+                foreach (VendorToEvent events in Model.usersEvents)
+                {
+                  @if(@Model.currentUser.UserId.Equals(@events.VendorId))
+                    {
+                        if(@events.Confirmed.Equals(false)){
+                        <form>
+                            <button type="submit" class="btn btn-secondary" formaction="/event-detail/@events.EventId/request">Request to Join Event</button>
+                        </form>
+                        }
+                    }        
+                  }
+              
+           
+          }  
               </div>
             </div>
           }
@@ -177,6 +191,7 @@
                   
                 </div>
               </div>
+
               }
             }
           }   
