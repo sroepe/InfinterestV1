@@ -94,7 +94,7 @@ namespace Infinterest.Controllers
                 }
                 ViewModel.SelectedUser = thisVendor;
                 List<Event> ConfrimedEvents = thisVendor.Events
-                                            .FindAll(eve => eve.Confirmed == true)
+                                            .FindAll(eve => eve.RequestStatus == "Accepted")
                                             .Select(eve => eve.Event)
                                             .ToList();
                 ViewModel.UpcomingEvents = ConfrimedEvents

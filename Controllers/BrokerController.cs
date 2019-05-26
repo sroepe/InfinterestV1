@@ -135,7 +135,7 @@ namespace Infinterest.Controllers
                     thisListing.Events.Add(NewEvent);
 
                     _context.SaveChanges();
-                    return Redirect ("/listing-details/" + id);                
+                    return Redirect ("/listing-detail/" + id);                
                 }
             }
             return View ("AddEvents");
@@ -178,7 +178,7 @@ namespace Infinterest.Controllers
                 user.Listings.Add(NewListing);
                 _context.SaveChanges();
 
-                return Redirect ("/listing-details/" + NewListing.ListingId);
+                return Redirect ("/listing-detail/" + NewListing.ListingId);
             }
             else
             {
@@ -284,7 +284,7 @@ namespace Infinterest.Controllers
                     
                     if(Request.Event.Broker == user)
                     {
-                        Request.Confirmed = true;
+                        Request.RequestStatus = "Accepted";
                         _context.SaveChanges();
                     }
                     
@@ -324,7 +324,7 @@ namespace Infinterest.Controllers
                     
                     if(Request.Event.Broker == user)
                     {
-                        Request.Denied = true;
+                        Request.RequestStatus = "Denied";
                         _context.SaveChanges();
                     }
                     
