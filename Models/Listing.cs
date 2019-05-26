@@ -14,6 +14,7 @@ namespace Infinterest.Models
         public int Price {get; set;}
         public int Zip {get; set;}  //do we need to have zip as well on the listing since it pulls postalCode from Address??
         public Address Address {get;set;}
+        public int AddressId {get;set;}
         public string ImgUrl { get; set; }
         public string Description { get; set; }
 

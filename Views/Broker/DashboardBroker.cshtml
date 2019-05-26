@@ -173,7 +173,7 @@
                     <form>
                         <button class="btn btn-secondary" formaction="/event-detail/@listevent.EventId">
                             <h6>@listevent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @listevent.OpenHouseDateTime.Date.ToString("h:mm tt")</h6>
-                            <h6>Requests <span id="reqsbadge" class="badge"> @listevent.EventVendors.Where(ev => ev.Confirmed == false).Where(ev => ev.Denied == false).Count()</span></h6>
+                            <h6>Requests <span id="reqsbadge" class="badge"> @listevent.EventVendors.Where(ev => ev.RequestStatus == "Requested").Count()</span></h6>
                         </button>
                     </form>
                     }

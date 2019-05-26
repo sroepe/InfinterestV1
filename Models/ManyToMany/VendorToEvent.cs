@@ -2,8 +2,7 @@ namespace Infinterest.Models
 {
     public class VendorToEvent
     {
-        public bool Confirmed {get;set;}
-        public bool Denied {get;set;}
+        public string RequestStatus {get;set;} //Requested, Accepted, Or Denied
         public int VendorId {get;set;}
         public Vendor Vendor {get;set;}
         public int EventId {get;set;}
@@ -11,13 +10,11 @@ namespace Infinterest.Models
 
         public VendorToEvent ()
         {
-            Confirmed = false;
-            Denied = false;
+            RequestStatus = "Requested";
         }
         public VendorToEvent (Vendor userInput, Event eventInput)
         {
-            Confirmed = false;
-            Denied = false;
+            RequestStatus = "Requested";
             Vendor = userInput;
             VendorId = userInput.UserId;
             Event = eventInput;
