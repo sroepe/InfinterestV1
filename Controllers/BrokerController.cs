@@ -135,7 +135,7 @@ namespace Infinterest.Controllers
                     thisListing.Events.Add(NewEvent);
 
                     _context.SaveChanges();
-                    return Redirect ("/listing-detail/" + id);                
+                    return Redirect ("/listing-details/" + id);                
                 }
             }
             return View ("AddEvents");
@@ -178,7 +178,7 @@ namespace Infinterest.Controllers
                 user.Listings.Add(NewListing);
                 _context.SaveChanges();
 
-                return Redirect ("/listing-detail/" + NewListing.ListingId);
+                return Redirect ("/listing-details/" + NewListing.ListingId);
             }
             else
             {

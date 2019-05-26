@@ -70,7 +70,7 @@
                             @{
                                 foreach (VendorToEvent ven in Model.CurrentEvent.EventVendors)
                                 {
-                                    if(ven.Confirmed == true)
+                                    if(ven.RequestStatus.Equals("Confirmed"))
                                     {
                                         <img src="@ven.Vendor.ImgUrl" height="100" width="100"> 
                                         <p>Company: @ven.Vendor.Company</p>
@@ -88,7 +88,7 @@
                             
                                 foreach (VendorToEvent vend in Model.CurrentEvent.EventVendors)
                                 {    
-                                    if(vend.Denied == false && vend.Confirmed == false) 
+                                    if(vend.RequestStatus.Equals("Requested")) 
                                     {
                                         <div class="vendor-req">
                                             <img src="@vend.Vendor.ImgUrl" height="100" width="100"> 
@@ -119,14 +119,7 @@
                     
 
 
-                    @if(@Model.CurrentUser.UserType.Equals("Vendor"))
-                    {
-                        if(@Model.CurrentEvent.Confirmed.Equals(false)){
-                        <form>
-                            <button type="submit" class="btn btn-secondary" formaction="/event-detail/@Model.CurrentEvent.EventId/request">Request to Join Event</button>
-                        </form>
-                        }
-                    }             
+                        
                 </div>   
             </div>
             <div id="share-ig" class="modal">

@@ -128,13 +128,13 @@
                 @{
                 foreach (VendorToEvent events in Model.usersEvents)
                 {
-                  @if(@Model.currentUser.UserId.Equals(@events.VendorId))
+                  @if(!@Model.currentUser.UserId.Equals(@events.VendorId))
                     {
-                        if(@events.Confirmed.Equals(false)){
+              
                         <form>
                             <button type="submit" class="btn btn-secondary" formaction="/event-detail/@events.EventId/request">Request to Join Event</button>
                         </form>
-                        }
+                        
                     }        
                   }
               
@@ -153,7 +153,7 @@
           @{
             foreach (VendorToEvent events in Model.usersEvents)
             {
-              @if(events.Confirmed.Equals(true)){
+              @if(events.RequestStatus.Equals("Accepted")){
                 <div class="eventdetails">
                 <div>
                   <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
@@ -177,7 +177,7 @@
             {
               /*NEED TO UPDATE IF STATEMENT AFTER DB ADDRESSED FOR PULLING FROM EVENTSVENDORS*/
               
-              @if(events.Confirmed.Equals(false) && events.Denied.Equals(false)){
+              @if(events.RequestStatus.Equals("Requested")){
               <h4>My Requested Events</h4> 
               <div class="eventdetails">
                 <div>

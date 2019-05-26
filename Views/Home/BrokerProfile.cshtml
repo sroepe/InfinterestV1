@@ -37,23 +37,23 @@
     
     <div class="row">
       <div class="users-details">
-        <img class="profile-pic" src="../images/headshot2.jpg" alt="" >
+        <img class="profile-pic" src="@Model.CurrentUser.ImgUrl" alt="" >
         
         <div class="user-info">
-          <h4>Josh McGee</h4>
-          <h5>Remax</h5>
-          <h5><a class="item" href="/remax.com">Remax.com/josh-mcgee</a></h5>
+          <h4>@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h4>
+          <h5>@Model.CurrentUser.Company</h5>
+          <h5><a class="item" target="_blank" href="http://www.@Model.CurrentUser.Website">@Model.CurrentUser.Website</a></h5>
         </div>
       </div>
     </div>
     <div class="user-bio">
       <h4>Bio</h4>
-      <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </h5>
+      <h5>@Model.CurrentUser.Bio</h5>
     </div>
     <div class="user-contact">
       <h4>Contact</h4>
-      <h5>206-555-1212</h5>
-      <h5>joshm@remax.com</h5>
+      <h5>@Model.CurrentUser.Contact</h5>
+      <h5>@Model.CurrentUser.Email</h5>
     </div>
     
     
@@ -64,10 +64,27 @@
   <!-- End of content/profile -->
   </div>
   <div class="col-5 user-conf-events">
-    <h1>THIS IS WHERE UPCOMING AND PAST CONFIRMED EVENTS WILL APPEAR</h1>
+    <h4>Upcoming Confirmed Events</h4>
+      @{
+        foreach (Event myEvent in Model.UpcomingEvents)
+        {
+          <div class="eventdetails">
+            <div>
+              <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
+              <a href="event-detail/@myEvent.EventId"><h6>@myEvent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @myEvent.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
+              <h6>Address: @myEvent.Listing.Address.addressLine1, @myEvent.Listing.Address.city, @myEvent.Listing.Address.state</h6> 
+              <a href="broker-profile/@myEvent.Listing.Broker.UserId"><h6>Broker: @myEvent.Listing.Broker.FirstName @myEvent.Listing.Broker.LastName</h6></a>
+              <h6>Featured Home Area: @myEvent.AreaOfHouse</h6>
+              <!-- //confirmed vendors -->
+              
+            </div>
+          </div>
+        }
+      }
+    <h4>Past Confirmed Events</h4>
   </div>
   <div class="col-3 user-pend-events">
-    <h1>THIS IS WHERE PENDING EVENTS WILL APPEAR</h1>
+    <h4>Pending Events</h4>
   </div>
   
   <!-- End of container -->
