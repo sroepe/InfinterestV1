@@ -59,39 +59,31 @@
     <div class="regbox2">
         <h4>Please select one or more Featured Home Areas and a Business Category to complete your registration.</h4>
         <form role="form" action="/vendor-registration2" method="POST">
-            <div class="form-group" id="addformarea">
+            <div class="row form-check" id="addformarea">
                 <span class="errorMsgs" asp-validation-for="UserAreaInput"></span>
-                <label class="regLabels" for="UserAreaInput">Featured Home Area</label>
-                <select class="form-control" asp-for="UserAreaInput" id="UserAreaInput" placeholder="Please select one">
-                    <option value="" disabled multiple selected="selected">Please select one or more home areas</option>
+                <h5><label class="regLabels" for="UserAreaInput">Featured Home Area</label></h5>
+                @{
+                    foreach (Area homeArea in @ViewBag.AreaOfHouse)
+                    {
 
-                    <!-- make it select multiple and make it a list of area of house options maybe? Or change value to area of house ID and do that in the backend -->
-                    <!-- now we can loop through _context.areas for this, I will just have to add it to the view model -->
-                    @{
-                        foreach (Area homeArea in @ViewBag.AreaOfHouse)
-                        {
-                            <option value="@homeArea.area">@homeArea.area</option>
-                        }
+                        <input class="form-check-input" type="checkbox" id="homearea" value="@homeArea.area">
+                        <label class="form-check-label" for="homearea">@homeArea.area</label>
                     }
-                    
-                </select>
+                }
             </div>
-
-            <div class="form-group" id="addformbus">
+            <div class="row form-check" id="addformbus">
                 <span class="errorMsgs" asp-validation-for="UserBusinessInput"></span>
-                <label class="regLabels" for="UserBusinessInput">Business Category</label>
-                <select class="form-control" asp-for="UserBusinessInput" id="UserBusinessInput" placeholder="Please select one">
-                    <option value="" disabled multiple selected="selected">Please select one</option>
+                <h5><label class="regLabels" for="UserBusinessInput">Business Category</label></h5>
                     @{
-                        foreach (Business busCat in @ViewBag.BusinessCategory){
-                            <option value="@busCat.business">@busCat.business</option>
+                        foreach (Business busCat in @ViewBag.BusinessCategory)
+                        {
+                            <input class="form-check-input" type="checkbox" id="buscat" value="@busCat.business">
+                            <label class="form-check-label" for="buscat">@busCat.business</label>
                         }
                     }
-                    
-                </select>
             </div>  
             <button type="submit" class="btn btn-primary">Save and continue</button>                
-        </form>
+        </form>        
     </div>    
 </div>
 <div id="loginModal" class="modal fade" role="form">
