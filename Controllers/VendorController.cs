@@ -137,6 +137,7 @@ namespace Infinterest.Controllers
             if(Int32.TryParse(eventId, out int id))
             {
                 Event thisEvent = _context.events
+                    .Include(eve => eve.EventVendors)
                     .FirstOrDefault(ev => ev.EventId == id);
 
                 if (thisEvent == null)
