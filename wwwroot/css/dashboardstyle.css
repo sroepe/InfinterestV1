@@ -113,7 +113,7 @@ body, html, #dashboardcontainer{
 }
 
 #middlesection .vendordetails button h5 {
-    line-height: 0.6;
+    line-height: 0.9;
     font-weight: bold;
     color: black;
 }
@@ -179,6 +179,10 @@ body, html, #dashboardcontainer{
     vertical-align: middle;
     
     /* border: 1px solid rgb(22, 138, 192); */
+}
+
+#rightsection .addbtn.btn.btn.btn-secondary {
+    background-color: rgb(65, 60, 60);
 }
 
 .listevents h6 {

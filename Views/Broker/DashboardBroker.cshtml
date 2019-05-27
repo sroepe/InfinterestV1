@@ -131,7 +131,7 @@
                         <div class="venContact">
                             <h4>@vendorAvailable.Company</h4>
                             <h5>Name: @vendorAvailable.FirstName @vendorAvailable.LastName</h5>
-                            <h5>Business Type: @ViewBag.BusinessCategory</h5>
+                            <h5>Business Type: @vendorAvailable.BusinessCategory</h5>
                             <h5>Website: @vendorAvailable.Website</h5>
                             <h5>Phone: @vendorAvailable.Contact</h5>
                         </div>
@@ -168,18 +168,29 @@
                 </div>
                 <div class="listevents">   
                     @{
-                    foreach (Event listevent in list.Events)
-                    {     
-                    <form>
-                        <button class="btn btn-secondary" formaction="/event-detail/@listevent.EventId">
-                            <h6>@listevent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @listevent.OpenHouseDateTime.Date.ToString("h:mm tt")</h6>
-                            <h6>Requests <span id="reqsbadge" class="badge"> @listevent.EventVendors.Where(ev => ev.RequestStatus == "Requested").Count()</span></h6>
-                        </button>
-                    </form>
+                        foreach (Event listevent in list.Events)
+                        {     
+                            if(listevent.Confirmed.Equals(true)){
+                                <form>
+                                    <button class="btn btn-secondary" formaction="/event-detail/@listevent.EventId">
+                                        <h6>@listevent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @listevent.OpenHouseDateTime.Date.ToString("h:mm tt")</h6>
+                                        <h6><span class="confirmed">CONFIRMED</span></h6>
+                                    </button>
+                                </form>
+                            }
+                            else 
+                            {
+                                <form>
+                                    <button class="btn btn-secondary" formaction="/event-detail/@listevent.EventId">
+                                        <h6>@listevent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @listevent.OpenHouseDateTime.Date.ToString("h:mm tt")</h6>
+                                        <h6>Requests <span id="reqsbadge" class="badge"> @listevent.EventVendors.Where(ev => ev.RequestStatus == "Requested").Count()</span></h6>
+                                    </button>
+                                </form>
+                            }
+                        }
                     }
-                    }
                     <form>
-                        <button type="submit" class="btn btn-secondary" formaction="/add-event/@list.ListingId"><h6>Add Event</h6></button>
+                        <button type="submit" class="addbtn btn btn-secondary" formaction="/add-event/@list.ListingId"><h6>Add Event</h6></button>
                     </form>
                 </div>
             </div>    

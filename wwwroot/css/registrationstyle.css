@@ -86,6 +86,9 @@ span.field-validation-error {
     text-align: center;
 }
 
+.regbox2 {
+    width: 75%;
+}
 .regbox2 h4{
     color: whitesmoke;
     font-weight: bold;
@@ -94,8 +97,36 @@ span.field-validation-error {
     text-align: center;
 }
 
+.regbox2 h5 {
+    text-align: center;
+}
+
 .regLabels {
     color: whitesmoke;
+    text-align: center;
+}
+
+input#homearea.form-check-input {
+    margin-left: 2%;
+}
+
+label.form-check-label {
+    color: whitesmoke;
+    margin-left: 5%;
+}
+
+#addformarea {
+    display: inline-block;
+    vertical-align: top;
+    margin: 1%;
+    text-align: center;
+}
+
+#addformbus {
+    display: inline-block;
+    vertical-align: top;
+    margin: 1%;
+    text-align: center;
 }
 /* .modal h4 {
     color: whitesmoke;
