@@ -49,7 +49,6 @@ namespace Infinterest.Controllers
                                     .Include (eve => eve.EventVendors)
                                         .ThenInclude(ev => ev.Vendor)
                                     .Include (eve => eve.AreaOfHouse)
-                                        .ThenInclude (ar => ar.area)
                                     .Where (eve => eve.OpenHouseDateTime > DateTime.Now)
                                     .Where (eve => eve.Confirmed == false)
                                     .ToList();

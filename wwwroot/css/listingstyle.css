@@ -105,7 +105,8 @@ a:hover{
 .event-info {
     background-color: lightgray;
     border-radius: 2.5px;
-    padding: 1%;
+    padding: 2%;
+    margin-bottom: 5%;
 }
 
 a.event-link {

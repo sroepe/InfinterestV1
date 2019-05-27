@@ -77,7 +77,7 @@
                                     <h5>Confirmed Vendors:</h5>
                                     @foreach (VendorToEvent vend in eve.EventVendors)
                                     {
-                                        if(vend.RequestStatus.Equals("Confirmed"))
+                                        if(vend.RequestStatus.Equals("Accepted"))
                                         {
                                             <img src="@vend.Vendor.ImgUrl" height="100" width="100"> <h4>@vend.Vendor.Company</h4>
                                         }

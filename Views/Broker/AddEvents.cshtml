@@ -32,8 +32,6 @@
     <nav>
         <ul>
         <li><a href="/dashboard">Home</a></li>
-        <li><a href="http://infinterest.com/#home">About</a></li>
-        <li><a href="/messaging">Messaging</a></li>
         <li><a href="/logoff">Sign out</a></li>
         </ul>
     </nav>
@@ -63,7 +61,7 @@
                         <select class="form-control" asp-for="AreaOfHouse" id="AreaOfHouse" placeholder="Please select one">
                             <!-- make it select multiple and make it a list of area of house options maybe? Or change value to area of house ID and do that in the backend -->
                             <!-- now we can loop through _context.areas for this, I will just have to add it to the view model -->
-                            <input type value="" disabled selected="selected">Please select one</option>
+                            <option value="" disabled selected="selected">Please select one</option>
                             <option value="Yard">Yard</option>
                             <option value="Kitchen">Kitchen</option>
                             <option value="Bathroom">Bathroom</option>

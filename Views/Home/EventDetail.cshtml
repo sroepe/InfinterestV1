@@ -70,7 +70,7 @@
                             @{
                                 foreach (VendorToEvent ven in Model.CurrentEvent.EventVendors)
                                 {
-                                    if(ven.RequestStatus.Equals("Confirmed"))
+                                    if(ven.RequestStatus.Equals("Accepted"))
                                     {
                                         <img src="@ven.Vendor.ImgUrl" height="100" width="100"> 
                                         <p>Company: @ven.Vendor.Company</p>
