@@ -10,20 +10,6 @@
 }
 
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $('#AreaOfHouse').change(function() {
-                if ($(this).val() === 'Other'){
-                    $('#addformgroup').after( $("<div class='form-group' id='otherbox'><label for='Other'>Please enter Other home area to be featured below.</label><textarea class='form-control' type='text' id='Other' placeholder='Enter Other Home Area' rows='1'></textarea></div>") );
-                } else if ($(this).val() != 'Other'){
-                    $("#otherbox").hide(function(){
-                })
-
-                }
-            });
-        });
-    </script>
 </head>
 
 <header>
@@ -58,28 +44,61 @@
                     <div class="form-group" id="addformgroup">
                         <span asp-validation-for="AreaOfHouse"></span>
                         <label for="AreaOfHouse">Featured Home Area</label>
-                        <select class="form-control" asp-for="AreaOfHouse" id="AreaOfHouse" placeholder="Please select one">
-                            <!-- make it select multiple and make it a list of area of house options maybe? Or change value to area of house ID and do that in the backend -->
-                            <!-- now we can loop through _context.areas for this, I will just have to add it to the view model -->
-                            <option value="" disabled selected="selected">Please select one</option>
-                            <option value="Yard">Yard</option>
-                            <option value="Kitchen">Kitchen</option>
-                            <option value="Bathroom">Bathroom</option>
-                            <option value="Bedroom">Bedroom</option>
-                            <option value="Living">Living Room</option>
-                            <option value="Dining">Dining Room</option>
-                            <option value="Family">Family / Media Room</option>
-                            <option value="Garage">Garage</option>
-                            <option value="Office">Office</option>
-                            <option value="Patio">Patio</option>
-                            <option value="Basement">Basement</option>
-                            <option value="Other">Other</option>
-                        </select>
+                        <div class="row">
+                            <div class="col">
+                                <div class="checkboxes">
+                                    <input type="checkbox" value="1">
+                                    <label for="AreaOfHouse">Basement</label>
+                                </div>
+                                <div class="checkboxes">
+                                    <input type="checkbox" value="2">
+                                    <label for="AreaOfHouse">Bathroom</label>
+                                </div>
+                                <div class="checkboxes">
+                                    <input type="checkbox" value="3">
+                                    <label for="AreaOfHouse">Bedroom</label>
+                                </div>
+                                <div class="checkboxes">
+                                    <input type="checkbox" value="4">
+                                    <label for="AreaOfHouse">Dining Room</label>
+                                </div>
+                                <div class="checkboxes">
+                                    <input type="checkbox" value="5">
+                                    <label for="AreaOfHouse">Family / Media Room</label>
+                                </div>
+                                <div class="checkboxes">
+                                    <input type="checkbox" value="6">
+                                    <label for="AreaOfHouse">Garage</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="checkboxes">
+                                    <input type="checkbox" value="7">
+                                    <label for="AreaOfHouse">Kitchen</label>
+                                </div>
+                                <div class="checkboxes">
+                                    <input type="checkbox" value="8">
+                                    <label for="AreaOfHouse">Living Room</label>
+                                </div>
+                                <div class="checkboxes">
+                                    <input type="checkbox" value="9">
+                                    <label for="AreaOfHouse">Office</label>
+                                </div>
+                                <div class="checkboxes">
+                                    <input type="checkbox" value="10">
+                                    <label for="AreaOfHouse">Patio</label>
+                                </div>
+                                <div class="checkboxes">
+                                    <input type="checkbox" value="11">
+                                    <label for="AreaOfHouse">Yard</label>
+                                </div>
+                                <div class="checkboxes">
+                                    <input type="checkbox" value="12">
+                                    <label for="AreaOfHouse">Other</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!-- <div class="form-group">
-                        <label for="Other">If "Other" is Selected, please enter home area to be featured below.</label>
-                        <textarea class="form-control" type="text" id="Other" placeholder="Enter Other Home Area" rows="1"></textarea>
-                    </div> -->
                     <button type="submit" class="btn btn-primary">Add Event</button>
                 </div>
             </div>    

@@ -69,6 +69,10 @@ a:hover{
     text-align: center;
 }
 
+.checkboxes label, .checkboxes input {
+    font-size: 12pt;
+}
+
 .btn-primary{
     margin-left: 35%;
     margin-top: 3%;

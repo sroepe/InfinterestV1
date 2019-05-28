@@ -99,7 +99,7 @@ span.field-validation-error {
 
 .regbox2 h5 {
     text-align: center;
-    font-size: 12pt;
+    font-size: 13pt;
 }
 
 .regLabels {
@@ -111,7 +111,7 @@ span.field-validation-error {
 #addformarea {
     display: inline-block;
     vertical-align: top;
-    margin: 0 12%;
+    
 
 }
 
@@ -123,7 +123,8 @@ span.field-validation-error {
 } 
 
 .row.vend-reg {
-    
+    margin-left: 5%;
+    margin-bottom: 5%;
 }
 
 .checkboxes {
