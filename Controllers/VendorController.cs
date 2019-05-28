@@ -42,6 +42,9 @@ namespace Infinterest.Controllers
             
             viewModel.currentUser = user;
 
+            viewModel.usersEvents = user.Events
+                                    .ToList();
+
             viewModel.allEvents = _context.events
                                     .Include(eve => eve.Listing)
                                         .ThenInclude(lis => lis.Address)
@@ -51,11 +54,8 @@ namespace Infinterest.Controllers
                                     .Include (eve => eve.AreaOfHouse)
                                     .Where (eve => eve.OpenHouseDateTime > DateTime.Now)
                                     .Where (eve => eve.Confirmed == false)
+                                .Where(eve => !viewModel.usersEvents.Any(ue=>ue.EventId == eve.EventId))
                                     .ToList();
-
-            viewModel.usersEvents = user.Events
-                                    .ToList();
-
 
             return View ("DashboardVendor", viewModel);
         }
