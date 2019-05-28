@@ -13,30 +13,6 @@
 }
 
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $('#UserAreaInput').change(function() {
-                if ($(this).val() == 'Other'){
-                    $('#addformarea').after( $("<div class='form-group' id='otherboxarea'><label for='Other'>Please enter Other home area to be featured below.</label><textarea class='form-control' type='text' id='Other' placeholder='Enter Other Home Area' rows='1'></textarea></div>") );
-                } else if ($(this).val() != 'Other'){
-                    $("#otherboxarea").hide(function(){
-                })
-
-                }
-            });
-            $('#UserBusinessInput').change(function() {
-
-                if ($(this).val() == 'Other'){
-                    $('#addformbus').after( $("<div class='form-group' id='otherboxbus'><label for='Other'>Please enter other business category below.</label><textarea class='form-control' type='text' id='Other' placeholder='Enter Other Home Area' rows='1'></textarea></div>") );
-                } else if ($(this).val() != 'Other'){
-                    $("#otherboxbus").hide(function(){
-                })
-
-                }
-            });
-        });
-    </script>
 </head>
 
 <header>
@@ -59,28 +35,76 @@
     <div class="regbox2">
         <h4>Please select one or more Featured Home Areas and a Business Category to complete your registration.</h4>
         <form role="form" action="/vendor-registration2" method="POST">
-            <div class="row form-check" id="addformarea">
+            <div class="form-check" id="addformarea">
                 <span class="errorMsgs" asp-validation-for="UserAreaInput"></span>
                 <h5><label class="regLabels" for="UserAreaInput">Featured Home Area</label></h5>
+                <div class="row vend-reg">
                 @{
+                    
                     foreach (Area homeArea in @ViewBag.AreaOfHouse)
                     {
-
-                        <input class="form-check-input" type="checkbox" id="homearea" value="@homeArea.area">
-                        <label class="form-check-label" for="homearea">@homeArea.area</label>
+                        @if(homeArea.AreaId >= 1 && homeArea.AreaId <= 4){
+                            <div class="col-4">
+                                <div class="checkboxes">
+                                    <input type="checkbox" id="homearea" value="@homeArea.area">
+                                    <label for="homearea">@homeArea.area</label>
+                                </div>
+                            </div>   
+                        }
+                        @if(homeArea.AreaId >= 5 && homeArea.AreaId <= 8){
+                            <div class="col-4">
+                                <div class="checkboxes">
+                                    <input type="checkbox" id="homearea" value="@homeArea.area">
+                                    <label for="homearea">@homeArea.area</label>
+                                </div>
+                            </div>
+                        }
+                        @if(homeArea.AreaId >= 9 && homeArea.AreaId <= 12){
+                            <div class="col-4">
+                                <div class="checkboxes">
+                                    <input type="checkbox" id="homearea" value="@homeArea.area">
+                                    <label for="homearea">@homeArea.area</label>
+                                </div>
+                            </div>
+                        }
                     }
                 }
             </div>
-            <div class="row form-check" id="addformbus">
+            <div class="form-check" id="addformbus">
                 <span class="errorMsgs" asp-validation-for="UserBusinessInput"></span>
                 <h5><label class="regLabels" for="UserBusinessInput">Business Category</label></h5>
+                    <div class="row vend-reg">
                     @{
                         foreach (Business busCat in @ViewBag.BusinessCategory)
                         {
-                            <input class="form-check-input" type="checkbox" id="buscat" value="@busCat.business">
-                            <label class="form-check-label" for="buscat">@busCat.business</label>
+                            @if(busCat.BusinessId >= 1 && busCat.BusinessId <= 6){
+                                <div class="col-4">
+                                    <div class="checkboxes">
+                                        <input type="checkbox" id="buscat" value="@busCat.business">
+                                        <label for="homearea">@busCat.business</label>
+                                    </div>
+                                </div>   
+                            }
+                            @if(busCat.BusinessId >= 7 && busCat.BusinessId <= 12){
+                                <div class="col-4">
+                                    <div class="checkboxes">
+                                        <input type="checkbox" id="buscat" value="@busCat.business">
+                                        <label for="buscat">@busCat.business</label>
+                                    </div>
+                                </div>   
+                            }
+                            @if(busCat.BusinessId >= 13){
+                                <div class="col-4">
+                                    <div class="checkboxes">
+                                        <input type="checkbox" id="buscat" value="@busCat.business">
+                                        <label for="buscat">@busCat.business</label>
+                                    </div>
+                                </div>   
+                            }
+                            
                         }
                     }
+                    </div>
             </div>  
             <button type="submit" class="btn btn-primary">Save and continue</button>                
         </form>        
