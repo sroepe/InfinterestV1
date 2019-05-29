@@ -157,7 +157,7 @@
                   <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
                   <a href="/event-detail/@events.EventId"><h6>@events.Event.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @events.Event.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
                   <h6>Address: @events.Event.Listing.Address.addressLine1, @events.Event.Listing.Address.city, @events.Event.Listing.Address.state</h6> 
-                  <a href="broker-profile/@events.Event.Listing.Broker.UserId"><h6>Broker: @events.Event.Listing.Broker.FirstName @events.Event.Listing.Broker.LastName</h6></a>
+                  <a href="/broker-profile/@events.Event.Listing.Broker.UserId"><h6>Broker: @events.Event.Listing.Broker.FirstName @events.Event.Listing.Broker.LastName</h6></a>
                   @{
                     foreach (Area ar in @events.Event.AreaOfHouse) 
                     {
@@ -184,12 +184,7 @@
                   
                   <h6>@reqEvent.Event.Listing.Address.addressLine1, @reqEvent.Event.Listing.Address.city, @reqEvent.Event.Listing.Address.state @reqEvent.Event.Listing.Address.postalCode</h6> 
                   <a href="broker-profile/@reqEvent.Event.Listing.Broker.UserId"><h6>Broker: @reqEvent.Event.Listing.Broker.FirstName @reqEvent.Event.Listing.Broker.LastName</h6></a>
-                  @{
-                    foreach (Area ar in @reqEvent.Event.AreaOfHouse) 
-                    {
-                      <h5>Area of House Featured: @ar.area</h5>
-                    }
-                  }
+                  //will have area(s) of house here
                 </div>
               </div>
               }

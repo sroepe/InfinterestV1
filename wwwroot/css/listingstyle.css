@@ -97,6 +97,17 @@ a:hover{
     margin-bottom: 5%;
 }
 
+.vendors {
+    display: inline-block;
+    margin-right: 1%;
+}
+
+.vendors button {
+    background-color: none;
+    border: 0px none;
+    padding: 0;
+}
+
 .conf-events h4 {
     font-weight: bold;
 }

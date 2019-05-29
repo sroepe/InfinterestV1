@@ -69,6 +69,8 @@
       @{
         foreach (Event myEvent in Model.UpcomingEvents)
         {
+          @if(myEvent.Confirmed.Equals(true))
+          { 
           <div class="eventdetails">
             <div>
               <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
@@ -80,26 +82,46 @@
               
             </div>
           </div>
+          }
         }
       }
     <h4>Past Confirmed Events</h4>
-  </div>
-  <div class="col-3 user-pend-events">
-    <h4>Pending Events</h4>
-    @{
-        foreach (Event myEvent in Model.UpcomingEvents)
+     @{
+        foreach (Event past in Model.PastEvents)
         {
-            <div class="eventdetails">
+          <div class="eventdetails">
             <div>
               <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
-              <a href="/event-detail/@myEvent.EventId"><h6>@myEvent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @myEvent.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
+              <a href="/event-detail/@past.EventId"><h6>@past.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @past.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
              
               
-              <h6>Featured Home Area: @myEvent.AreaOfHouse</h6>
+              <h6>Featured Home Area: @past.AreaOfHouse</h6>
               <!-- //confirmed vendors -->
               
             </div>
           </div>
+        }
+      }
+  </div>
+  <div class="col-3 user-pend-events">
+    <h4>Pending Events</h4>
+    @{
+        foreach (Event pendEvent in Model.UpcomingEvents)
+        {
+          if(pendEvent.Confirmed.Equals(false))
+          {
+            <div class="eventdetails">
+            <div>
+              <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
+              <a href="/event-detail/@pendEvent.EventId"><h6>@pendEvent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @pendEvent.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
+             
+              
+              <h6>Featured Home Area: @pendEvent.AreaOfHouse</h6>
+              <!-- //confirmed vendors -->
+              
+            </div>
+          </div>
+          }
         }
       }
   </div>

@@ -112,7 +112,7 @@
                 </div>
                 <div class="vendors-social col-sm">
                     <div class="conf-events">
-                        <h4>Confirmed Events</h4>
+                        <h4>Upcoming Confirmed Events</h4>
                         @{
                             foreach (Event eve in Model.CurrentListing.Events)
                             {
@@ -125,7 +125,9 @@
                                         <h5>Confirmed Vendors:</h5>
                                         @foreach (VendorToEvent vend in eve.EventVendors)
                                         {
-                                            <img src="@vend.Vendor.ImgUrl" height="100" width="100"> <h4>@vend.Vendor.Company</h4>
+                                            <div class="vendors">
+                                                <a href="/vendor-profile/@vend.VendorId"><img src="@vend.Vendor.ImgUrl" height="100" width="100"></a>
+                                            </div>
                                         }
                                     </div>  
                                 }       
