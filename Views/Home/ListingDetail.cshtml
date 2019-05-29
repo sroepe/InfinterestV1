@@ -49,11 +49,11 @@
                     <h4>@Model.CurrentListing.Address.addressLine1 @Model.CurrentListing.Address.addressLine2</h4> 
                     <h4>@Model.CurrentListing.Address.city, @Model.CurrentListing.Address.state @Model.CurrentListing.Address.postalCode</h4> 
                     <h4>$@Model.CurrentListing.Price.ToString("N0")</h4>
-                    <p>@Model.CurrentListing.Description</p>
-                    <p>MLS Listing TBD</p> <!--not totaly sure how to do this one -->
+                    <p>MLS Listing # TBD</p> <!--not totaly sure how to do this one -->
                     <h4>Agent</h4>
                     <h6>@Model.CurrentListing.Broker.FirstName @Model.CurrentListing.Broker.LastName</h6>
                     <a href="/broker-profile/@Model.CurrentListing.BrokerId"><img src="@Model.CurrentListing.Broker.ImgUrl" alt="" class="preferred" height="100" width="100"></a>
+                    <p class="list-desc">@Model.CurrentListing.Description</p>
                     <!-- <h5>Share via Social Media or Email</h5>
                     <a href="#share-ig" rel="modal:open"><img src="../images/instagram.png" alt="" class="social"></a>
                     <a href="#share-fb" rel="modal:open"><img src="../images/facebook.png" alt="" class="social"></a>
@@ -86,6 +86,7 @@
                                     @if(Model.CurrentListing.BrokerId == Model.CurrentUser.UserId)
                                     {
                                         <h5>Requested Vendors:</h5>
+                                        <h6>Requests <span id="reqsbadge" class="badge"> @eve.EventVendors.Where(ev => ev.RequestStatus == "Requested").Count()</span></h6>
                                         @foreach (VendorToEvent vend in eve.EventVendors)
                                         {
                                             if(vend.RequestStatus.Equals("Requested"))
@@ -124,8 +125,30 @@
                                         <h5>Confirmed Vendors:</h5>
                                         @foreach (VendorToEvent vend in eve.EventVendors)
                                         {
-                                        
                                             <img src="@vend.Vendor.ImgUrl" height="100" width="100"> <h4>@vend.Vendor.Company</h4>
+                                        }
+                                    </div>  
+                                }       
+                            }
+                        }
+                    </div>
+                    <div class="conf-events">
+                        <h4>Past Confirmed Events</h4>
+                        @{
+                            foreach (Event eve in Model.CurrentListing.Events)
+                            {
+                                @if(eve.Confirmed.Equals(true) && eve.OpenHouseDateTime < DateTime.Now) {
+                                    <div class="event-info">
+                                        <h5>
+                                            <a class="event-link" href="/event-detail/@eve.EventId">
+                                            Open House @eve.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @eve.OpenHouseDateTime.Date.ToString("h:mm tt")</a>
+                                        </h5>
+                                        <h5>Confirmed Vendors:</h5>
+                                        @foreach (VendorToEvent vend in eve.EventVendors)
+                                        {
+                                            if(vend.RequestStatus.Equals("Accepted")){
+                                                <img src="@vend.Vendor.ImgUrl" height="100" width="100"> <h4>@vend.Vendor.Company</h4>
+                                            }
                                         }
                                     </div>  
                                 }       

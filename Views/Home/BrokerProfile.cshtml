@@ -23,6 +23,13 @@
         <div class="dropdown show">
           <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @Model.CurrentUser.FirstName!</a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            @if(@Model.CurrentUser.UserType.Equals("Broker"))
+            {
+              <a class="dropdown-item" href="/broker-profile/@Model.CurrentUser.UserId">My Profile</a>
+            }
+            @if(@Model.CurrentUser.UserType.Equals("Vendor")){
+              <a class="dropdown-item" href="/vendor-profile/@Model.CurrentUser.UserId">My Profile</a>
+            }
             <a class="dropdown-item" href="/logoff">Sign out</a>
           </div>
         </div>
@@ -34,59 +41,115 @@
 </header>
 <div class="profilecontainer">
   <div class="col-3 user-details" id="user-profile">
-    
-    <div class="row">
-      <div class="users-details">
-        <img class="profile-pic" src="@Model.CurrentUser.ImgUrl" alt="" >
+      <div class="row">
         
-        <div class="user-info">
-          <h4>@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h4>
-          <h5>@Model.CurrentUser.Company</h5>
-          <h5><a class="item" target="_blank" href="http://www.@Model.CurrentUser.Website">@Model.CurrentUser.Website</a></h5>
+  @if(@Model.SelectedUser.UserId.Equals(@Model.CurrentUser.UserId))
+  {
+        <div class="users-details">
+          <img class="profile-pic" src="@Model.CurrentUser.ImgUrl" alt="" >
+          <div class="user-info">
+            <h4>@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h4>
+            <h5>@Model.CurrentUser.Company</h5>
+            <h5><a class="item" target="_blank" href="http://www.@Model.CurrentUser.Website">@Model.CurrentUser.Website</a></h5>
+          </div>
         </div>
+      
+      <div class="user-bio">
+        <h4>Bio</h4>
+        <h5>@Model.CurrentUser.Bio</h5>
       </div>
-    </div>
-    <div class="user-bio">
-      <h4>Bio</h4>
-      <h5>@Model.CurrentUser.Bio</h5>
-    </div>
-    <div class="user-contact">
-      <h4>Contact</h4>
-      <h5>@Model.CurrentUser.Contact</h5>
-      <h5>@Model.CurrentUser.Email</h5>
-    </div>
+      <div class="user-contact">
+        <h4>Contact</h4>
+        <h5>@Model.CurrentUser.Contact</h5>
+        <h5>@Model.CurrentUser.Email</h5>
+      </div>
     
+  }
+  else
+  {
+        <div class="users-details">
+          <img class="profile-pic" src="@Model.SelectedUser.ImgUrl" alt="" >
+          
+          <div class="user-info">
+            <h4>@Model.SelectedUser.FirstName @Model.SelectedUser.LastName</h4>
+            <h5>@Model.SelectedUser.Company</h5>
+            <h5><a class="item" target="_blank" href="http://www.@Model.SelectedUser.Website">@Model.SelectedUser.Website</a></h5>
+          </div>
+        </div>
+      
+      <div class="user-bio">
+        <h4>Bio</h4>
+        <h5>@Model.SelectedUser.Bio</h5>
+      </div>
+      <div class="user-contact">
+        <h4>Contact</h4>
+        <h5>@Model.SelectedUser.Contact</h5>
+        <h5>@Model.SelectedUser.Email</h5>
+      </div>
     
-    
-  
-  
-  
-  <!-- End of content/profile -->
+  }
+    </div>
   </div>
+    
+  
   <div class="col-5 user-conf-events">
     <h4>Upcoming Confirmed Events</h4>
-      @{
-        foreach (Event myEvent in Model.UpcomingEvents)
+    @{
+      foreach (Event myEvent in Model.UpcomingEvents)
+      {
+        @if(myEvent.Confirmed.Equals(true))
         {
-          <div class="eventdetails">
+        <div class="eventdetails">
+          <div>
+            <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
+            <a href="event-detail/@myEvent.EventId"><h6>@myEvent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @myEvent.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
+            <h6>Address: @myEvent.Listing.Address.addressLine1, @myEvent.Listing.Address.city, @myEvent.Listing.Address.state</h6> 
+            <a href="broker-profile/@myEvent.Listing.Broker.UserId"><h6>Broker: @myEvent.Listing.Broker.FirstName @myEvent.Listing.Broker.LastName</h6></a>
+            <h6>Featured Home Area: @myEvent.AreaOfHouse</h6>
+            <!-- //confirmed vendors -->
+          </div>
+        </div>
+        }
+      }
+    }
+    <h4>Past Confirmed Events</h4>
+    @{
+      foreach (Event pastEvent in Model.PastEvents)
+      {
+        <div class="eventdetails">
+          <div>
+            <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
+            <a href="event-detail/@pastEvent.EventId"><h6>@pastEvent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @pastEvent.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
+            <h6>Address: @pastEvent.Listing.Address.addressLine1, @pastEvent.Listing.Address.city, @pastEvent.Listing.Address.state</h6> 
+            <a href="broker-profile/@pastEvent.Listing.Broker.UserId"><h6>Broker: @pastEvent.Listing.Broker.FirstName @pastEvent.Listing.Broker.LastName</h6></a>
+            <h6>Featured Home Area: @pastEvent.AreaOfHouse</h6>
+            <!-- //confirmed vendors -->
+          </div>
+        </div>
+      }
+    }
+  </div>
+  <div class="col-3 user-pend-events">
+    <h4>Pending Events</h4>
+    @{
+        foreach (Event pendEvent in Model.UpcomingEvents)
+        {
+          if(pendEvent.Confirmed.Equals(false))
+          {
+            <div class="eventdetails">
             <div>
               <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
-              <a href="event-detail/@myEvent.EventId"><h6>@myEvent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @myEvent.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
-              <h6>Address: @myEvent.Listing.Address.addressLine1, @myEvent.Listing.Address.city, @myEvent.Listing.Address.state</h6> 
-              <a href="broker-profile/@myEvent.Listing.Broker.UserId"><h6>Broker: @myEvent.Listing.Broker.FirstName @myEvent.Listing.Broker.LastName</h6></a>
-              <h6>Featured Home Area: @myEvent.AreaOfHouse</h6>
+              <a href="event-detail/@pendEvent.EventId"><h6>@pendEvent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @pendEvent.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
+             
+              
+              <h6>Featured Home Area: @pendEvent.AreaOfHouse</h6>
               <!-- //confirmed vendors -->
               
             </div>
           </div>
+          }
         }
       }
-    <h4>Past Confirmed Events</h4>
   </div>
-  <div class="col-3 user-pend-events">
-    <h4>Pending Events</h4>
-  </div>
-  
-  <!-- End of container -->
 </div>
 

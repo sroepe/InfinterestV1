@@ -72,9 +72,9 @@
           <div class="eventdetails">
             <div>
               <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
-              <a href="event-detail/@myEvent.EventId"><h6>@myEvent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @myEvent.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
-              <h6>Address: @myEvent.Listing.Address.addressLine1, @myEvent.Listing.Address.city, @myEvent.Listing.Address.state</h6> 
-              <a href="broker-profile/@myEvent.Listing.Broker.UserId"><h6>Broker: @myEvent.Listing.Broker.FirstName @myEvent.Listing.Broker.LastName</h6></a>
+              <a href="/event-detail/@myEvent.EventId"><h6>@myEvent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @myEvent.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
+             
+              
               <h6>Featured Home Area: @myEvent.AreaOfHouse</h6>
               <!-- //confirmed vendors -->
               
@@ -86,5 +86,21 @@
   </div>
   <div class="col-3 user-pend-events">
     <h4>Pending Events</h4>
+    @{
+        foreach (Event myEvent in Model.UpcomingEvents)
+        {
+            <div class="eventdetails">
+            <div>
+              <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
+              <a href="/event-detail/@myEvent.EventId"><h6>@myEvent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @myEvent.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
+             
+              
+              <h6>Featured Home Area: @myEvent.AreaOfHouse</h6>
+              <!-- //confirmed vendors -->
+              
+            </div>
+          </div>
+        }
+      }
   </div>
 </div>

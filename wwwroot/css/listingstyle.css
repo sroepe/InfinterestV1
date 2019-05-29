@@ -84,9 +84,8 @@ a:hover{
     background-color: rgb(22, 138, 192) !important;
 }
 
-.respic {
-    /* width: 150px;
-    height: auto; */
+.list-desc {
+    margin-top: 2%;
 }
 
 .social {
@@ -94,12 +93,16 @@ a:hover{
     width: auto;
 }
 
+.conf-events {
+    margin-bottom: 5%;
+}
+
 .conf-events h4 {
     font-weight: bold;
 }
 
 .conf-events h5 {
-    text-align: center;
+    text-align: left;
 }
 
 .event-info {
@@ -112,6 +115,10 @@ a:hover{
 a.event-link {
     color: black;
     font-weight: bold;
+}
+
+#reqsbadge {
+    background-color: black;
 }
 
 .add-event-form {

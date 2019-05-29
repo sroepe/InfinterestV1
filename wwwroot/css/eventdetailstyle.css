@@ -40,6 +40,27 @@ h5.resinfo {
     text-align: right;
 }
 
+#right-section {
+    text-align: right;
+}
+
+#right-section form {
+    display: inline-block;
+}
+
+.confirm.btn.btn-secondary {
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;   
+}
+
+.join.btn.btn-secondary {
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    
+}
+
 /* Phone devices */
 @media screen and (max-width : 768px) {
     .share {

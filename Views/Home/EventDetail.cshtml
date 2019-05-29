@@ -93,9 +93,12 @@
                                         <div class="vendor-req">
                                             <img src="@vend.Vendor.ImgUrl" height="100" width="100"> 
                                             <p>@vend.Vendor.Company</p>
-
-                                            <a href="/event-detail/@Model.CurrentEvent.EventId/@vend.VendorId/confirm">Accept</a>
-                                            <a href="/event-detail/@Model.CurrentEvent.EventId/@vend.VendorId/deny">Deny</a>
+                                            <form>
+                                                <button type="submit" class="accept-vendor btn btn-secondary" formaction="/event-detail/@Model.CurrentEvent.EventId/@vend.VendorId/confirm">Accept</button>
+                                                <button type="submit" class="deny-vendor btn btn-secondary" formaction="/event-detail/@Model.CurrentEvent.EventId/@vend.VendorId/deny">Deny</button>
+                                            </form>
+                                            <!-- <a href="/event-detail/@Model.CurrentEvent.EventId/@vend.VendorId/confirm">Accept</a>
+                                            <a href="/event-detail/@Model.CurrentEvent.EventId/@vend.VendorId/deny">Deny</a> -->
                                         </div>
                                     }
                                 }
@@ -103,23 +106,32 @@
 
                     </div>
                 </div>
-                <div class="vendors-social col-4">
-                    <form>
-                        <button class="close" type="submit" formaction="/dashboard">&times;</button>
-                    </form>    
+                <div id="right-section" class="col-4">  
                     @if(Model.CurrentEvent.BrokerId == Model.CurrentUser.UserId)
                         {
                             if(@Model.CurrentEvent.Confirmed.Equals(false)) 
                             {
                                 <form>
-                                    <button type="submit" class="btn btn-secondary" formaction="/event-detail/@Model.CurrentEvent.EventId/confirm">Confirm Event</button>
+                                    <button type="submit" class="confirm btn btn-secondary" formaction="/event-detail/@Model.CurrentEvent.EventId/confirm">Confirm</button>
                                 </form>
                             }
                         }    
-                    
-
-
-                        
+                    @{
+                        foreach(VendorToEvent ven in Model.CurrentEvent.EventVendors)
+                        {
+                            @if(!ven.VendorId.Equals(Model.CurrentUser.UserId))
+                            {
+                            <form>
+                                <button type="submit" class="join btn btn-secondary" formaction="/event-detail/@Model.CurrentEvent.EventId/request"><p>Join<br>Event</p></button>
+                            </form>
+                            }
+                            else {}
+                        }
+                    }
+                               
+                    <form>
+                        <button class="close" type="submit" formaction="/dashboard">&times;</button>
+                    </form>  
                 </div>   
             </div>
             <div id="share-ig" class="modal">
