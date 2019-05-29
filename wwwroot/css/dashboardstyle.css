@@ -42,6 +42,11 @@ body, html, #dashboardcontainer{
     /* margin-left: 3%; */
 }
 
+.coming-soon {
+    position: absolute;
+    margin: 0 auto;
+}
+
 .preftitle {
     display: block;
     margin-left: 4%;    

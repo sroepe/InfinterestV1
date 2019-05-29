@@ -1,25 +1,26 @@
 <div class="container wrapper">
+        <img src="../images/coming-soon.png" alt="Coming Soon!" class="coming-soon" height="200" width="auto">
         <div class="searchbox">
             <h4>Search Upcoming Open House Events</h4>
             <form>
                 <div class="form-group whereinput">
                     <label for="zipcode">Where</label>
-                    <input type="text" class="form-control" placeholder="Zip Code">
+                    <input type="text" class="form-control" placeholder="Zip Code" disabled>
                 </div>
                 <div class="form-group">
                     <label for="zipcode" class="when">When</label>
-                    <input type="date" class="form-control daterange">
+                    <input type="date" class="form-control daterange" disabled>
                     <label>to</label>
-                    <input type="date" class="form-control daterange">
+                    <input type="date" class="form-control daterange" disabled>
                 </div>
                 <div class="form-group">
                     <label for="price" class="when">Price Range</label>
-                    <input type="number" class="form-control daterange" min="10000" max="100000000" value="10000">
+                    <input type="number" class="form-control daterange" min="10000" max="100000000" value="10000" disabled>
                     <label>to</label>
-                    <input type="number" class="form-control daterange" min="10000" max="100000000" value="100000000">
+                    <input type="number" class="form-control daterange" min="10000" max="100000000" value="100000000" disabled>
                 </div>
                 <!-- Button trigger search modal -->
-                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#searchModal">Search</button>
+                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#searchModal" disabled>Search</button>
                 <!-- Search modal -->
                 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                     <div class="modal-dialog" role="document">

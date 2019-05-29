@@ -63,13 +63,11 @@
                         <label for="postalCode">Postal Code</label>
                         <input type="text" asp-for="postalCode" class="form-control">
                     </div>
-                    <!-- commenting out above until determine how to pull Address model via Listing -->
-
-                    <!-- <div class="form-group">
-                        <span asp-validation-for="Zip"></span>
-                        <label for="Zip">Zip Code</label>
-                        <input type="number" asp-for="Zip" class="form-control">
-                    </div> -->
+                    <div class="form-group">
+                        <span asp-validation-for="Description"></span>
+                        <label for="Description">Description</label>
+                        <textarea type="textbox" asp-for="Description" class="form-control" placeholder="Please enter a description of the home."></textarea>
+                    </div>
                     <div class="form-group">
                         <span asp-validation-for="ImgUrl"></span>
                         <label for="ImgUrl">Photo Url</label>
