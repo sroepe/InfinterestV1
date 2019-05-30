@@ -50,6 +50,14 @@ namespace Infinterest.Controllers
                 Broker thisBroker = _context.users
                 .OfType<Broker>()                
                     .Where(broker => broker.UserId == userid)
+                    .Include(broker => broker.Listings) //redundent until I re-work the view
+                    .ThenInclude(list => list.Address)
+                    .Include(broker => broker.Events)
+                        .ThenInclude(eve => eve.Listing)
+                        .ThenInclude(list => list.Address)
+                    .Include(broker => broker.Events)
+                        .ThenInclude(eve => eve.EventVendors)
+                        .ThenInclude(ev => ev.Vendor)
                     .FirstOrDefault();
                 if (thisBroker == null)
                 {
