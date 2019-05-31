@@ -24,6 +24,7 @@
         <div class="dropdown show">
           <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @Model.CurrentUser.FirstName!</a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="/broker-profile/@Model.CurrentUser.UserId">My Profile</a>
             <a class="dropdown-item" href="/logoff">Sign out</a>
           </div>
         </div>
@@ -105,24 +106,6 @@
   </div>
   <div class="col-3 user-pend-events">
     <h4>Pending Events</h4>
-    @{
-        foreach (Event pendEvent in Model.UpcomingEvents)
-        {
-          if(pendEvent.Confirmed.Equals(false))
-          {
-            <div class="eventdetails">
-            <div>
-              <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
-              <a href="/event-detail/@pendEvent.EventId"><h6>@pendEvent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @pendEvent.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
-             
-              
-              <h6>Featured Home Area: @pendEvent.AreaOfHouse</h6>
-              <!-- //confirmed vendors -->
-              
-            </div>
-          </div>
-          }
-        }
-      }
+    <p>We need something in the ViewModel to grab this I think?</p>
   </div>
 </div>

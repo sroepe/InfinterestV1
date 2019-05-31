@@ -35,16 +35,14 @@
 </header>
 <div class="profilecontainer">
   <div class="col-3 user-details" id="user-profile">
-      <div class="row">
-        <div class="users-details">
-          <img class="profile-pic" src="@Model.SelectedUser.ImgUrl" alt="" >
-          <div class="user-info">
-            <h4>@Model.SelectedUser.FirstName @Model.SelectedUser.LastName</h4>
-            <h5>@Model.SelectedUser.Company</h5>
-            <h5><a class="item" target="_blank" href="http://www.@Model.SelectedUser.Website">@Model.SelectedUser.Website</a></h5>
-          </div>
+      <div class="users-details">
+        <img class="profile-pic" src="@Model.SelectedUser.ImgUrl" alt="" >
+        <div class="user-info">
+          <h4>@Model.SelectedUser.FirstName @Model.SelectedUser.LastName</h4>
+          <h5>@Model.SelectedUser.Company</h5>
+          <h5><a class="item" target="_blank" href="http://www.@Model.SelectedUser.Website">@Model.SelectedUser.Website</a></h5>
         </div>
-      
+      </div>
       <div class="user-bio">
         <h4>Bio</h4>
         <h5>@Model.SelectedUser.Bio</h5>
@@ -54,7 +52,6 @@
         <h5>@Model.SelectedUser.Contact</h5>
         <h5>@Model.SelectedUser.Email</h5>
       </div>
-    </div>
   </div>
     
   
