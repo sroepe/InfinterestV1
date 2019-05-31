@@ -65,7 +65,7 @@ namespace Infinterest.Controllers
                 }
                 ViewModel.SelectedUser = thisBroker;
                 ViewModel.UpcomingEvents = thisBroker.Events
-                                        .FindAll(eve => eve.OpenHouseDateTime > DateTime.Now)
+                                        .FindAll(eve => eve.Confirmed.Equals(true) && eve.OpenHouseDateTime > DateTime.Now)
                                         .ToList();
                 ViewModel.PastEvents = thisBroker.Events
                                         .FindAll(eve => eve.OpenHouseDateTime < DateTime.Now)

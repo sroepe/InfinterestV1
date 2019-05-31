@@ -113,7 +113,7 @@
             <div class="allevents">
               <div class="eventhead">
                 <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
-                <a href="event-detail/@eve.EventId"><h5>@eve.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @eve.OpenHouseDateTime.Date.ToString("h:mm tt")</h5></a>
+                <a href="/event-detail/@eve.EventId"><h5>@eve.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @eve.OpenHouseDateTime.Date.ToString("h:mm tt")</h5></a>
                 @{
                   foreach (Area ar in @eve.AreaOfHouse) 
                   {
@@ -155,7 +155,7 @@
                 <div class="eventdetails">
                 <div>
                   <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
-                  <a href="/event-detail/@events.EventId"><h6>@events.Event.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @events.Event.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
+                  <a href="/event-detail/@events.Event.EventId"><h6>@events.Event.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @events.Event.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
                   <h6>Address: @events.Event.Listing.Address.addressLine1, @events.Event.Listing.Address.city, @events.Event.Listing.Address.state</h6> 
                   <a href="/broker-profile/@events.Event.Listing.Broker.UserId"><h6>Broker: @events.Event.Listing.Broker.FirstName @events.Event.Listing.Broker.LastName</h6></a>
                   @{
@@ -176,14 +176,14 @@
             foreach (VendorToEvent reqEvent in Model.usersEvents)
             {
               /*NEED TO UPDATE IF STATEMENT AFTER DB ADDRESSED FOR PULLING FROM EVENTSVENDORS*/
-              @if(reqEvent.RequestStatus.Equals("Requested")){
+              if(reqEvent.RequestStatus.Equals("Requested")){
               <div class="eventdetails">
                 <div>
                   <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
-                  <a href="event-detail/@reqEvent.EventId"><h5>@reqEvent.Event.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @reqEvent.Event.OpenHouseDateTime.Date.ToString("h:mm tt")</h5></a>
+                  <a href="/event-detail/@reqEvent.Event.EventId"><h5>@reqEvent.Event.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @reqEvent.Event.OpenHouseDateTime.Date.ToString("h:mm tt")</h5></a>
                   
                   <h6>@reqEvent.Event.Listing.Address.addressLine1, @reqEvent.Event.Listing.Address.city, @reqEvent.Event.Listing.Address.state @reqEvent.Event.Listing.Address.postalCode</h6> 
-                  <a href="broker-profile/@reqEvent.Event.Listing.Broker.UserId"><h6>Broker: @reqEvent.Event.Listing.Broker.FirstName @reqEvent.Event.Listing.Broker.LastName</h6></a>
+                  <a href="/broker-profile/@reqEvent.Event.Listing.BrokerId"><h6>Broker: @reqEvent.Event.Listing.Broker.FirstName @reqEvent.Event.Listing.Broker.LastName</h6></a>
                   //will have area(s) of house here
                 </div>
               </div>

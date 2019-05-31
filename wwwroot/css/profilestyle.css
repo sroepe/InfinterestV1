@@ -50,6 +50,14 @@ body, html, .profilecontainer{
   margin: 5% 1%;
 }
 
+.event-details {
+  background-color: lightgray;
+  color: black;
+  border-radius: 2.5px;
+  padding: 2%;
+  margin-bottom: 5%;
+}
+
 
 
 

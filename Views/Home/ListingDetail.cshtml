@@ -26,7 +26,7 @@
             <div class="dropdown show">
                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @Model.CurrentUser.FirstName!</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="broker-profile/@Model.CurrentUser.UserId">My Profile</a>
+                    <a class="dropdown-item" href="/broker-profile/@Model.CurrentUser.UserId">My Profile</a>
                     <a class="dropdown-item" href="/logoff">Sign out</a>
                 </div>
             </div>
@@ -102,7 +102,7 @@
                             }
                         }
                         @if(Model.CurrentListing.BrokerId == Model.CurrentUser.UserId) {
-                            <a href="listing-detail/@Model.CurrentListing.ListingId/archive">Archive Listing</a>
+                            <a href="/listing-detail/@Model.CurrentListing.ListingId/archive">Archive Listing</a>
                             <form class="add-event-form">
                                 <button type="submit" class="btn btn-secondary" formaction="/add-event/@Model.CurrentListing.ListingId">Create Event</button>
                             </form>
@@ -116,7 +116,7 @@
                         @{
                             foreach (Event eve in Model.CurrentListing.Events)
                             {
-                                @if(eve.Confirmed == true) {
+                                @if(eve.Confirmed.Equals(true) && eve.OpenHouseDateTime > DateTime.Now) {
                                     <div class="event-info">
                                         <h5>
                                             <a class="event-link" href="/event-detail/@eve.EventId">

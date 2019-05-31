@@ -25,8 +25,8 @@
             <li><a href="/dashboard">Home</a></li>
             <div class="dropdown show">
                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @Model.CurrentUser.FirstName!</a>
-                
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="/broker-profile/@Model.CurrentUser.UserId">My Profile</a>
                     <a class="dropdown-item" href="/logoff">Sign out</a>
                 </div>
             </div>
@@ -43,7 +43,7 @@
             
             <div class="row">
                 <div class="resinfo col-4">
-                    <img src="../images/home7.jpg" alt="kitchenpic" class="respic" height="150" width="200">
+                    <img src="@Model.CurrentEvent.Listing.ImgUrl" alt="Picture of Home" class="respic" height="150" width="200">
                     <form>
                         <button type="submit" formaction="/listing-details/@Model.CurrentEvent.ListingId">
                             <h4>@Model.CurrentEvent.Listing.Address.addressLine1</h4>
@@ -76,33 +76,22 @@
                                         <p>Contact: @ven.Vendor.FirstName @ven.Vendor.LastName</p>
                                         <p>@ven.Vendor.BusinessCategory</p>
                                         //add vendor area of house
-                                    }
-                                }
-                            }
-                                    
-                                    
-                            @if(Model.CurrentEvent.BrokerId == Model.CurrentUser.UserId)
-                            {
-                            <h4>Requested Vendors</h4>
-                            
-                                foreach (VendorToEvent vend in Model.CurrentEvent.EventVendors)
-                                {    
-                                    if(vend.RequestStatus.Equals("Requested")) 
-                                    {
-                                        <div class="vendor-req">
-                                            <img src="@vend.Vendor.ImgUrl" height="100" width="100"> 
-                                            <p>@vend.Vendor.Company</p>
-                                            <form>
-                                                <button type="submit" class="accept-vendor btn btn-secondary" formaction="/event-detail/@Model.CurrentEvent.EventId/@vend.VendorId/confirm">Accept</button>
-                                                <button type="submit" class="deny-vendor btn btn-secondary" formaction="/event-detail/@Model.CurrentEvent.EventId/@vend.VendorId/deny">Deny</button>
-                                            </form>
-                                            <!-- <a href="/event-detail/@Model.CurrentEvent.EventId/@vend.VendorId/confirm">Accept</a>
-                                            <a href="/event-detail/@Model.CurrentEvent.EventId/@vend.VendorId/deny">Deny</a> -->
-                                        </div>
-                                    }
-                                }
-                            }
+                                    }    
 
+                                    else if(Model.CurrentEvent.BrokerId.Equals(Model.CurrentUser.UserId) && ven.RequestStatus.Equals("Requested"))
+                                    {
+                        <h4>Requested Vendors</h4>
+                                    <img src="@ven.Vendor.ImgUrl" height="100" width="100"> 
+                                    <p>@ven.Vendor.Company</p>
+                                    <form>
+                                        <button type="submit" class="accept-vendor btn btn-secondary" ><a href="/event-detail/@Model.CurrentEvent.EventId/@ven.VendorId/confirm">Accept</a></button>
+                                        <button type="submit" class="deny-vendor btn btn-secondary" formaction="/event-detail/@Model.CurrentEvent.EventId/@ven.VendorId/deny">Deny</button>
+                                    </form>
+                                    <!-- <a href="/event-detail/@Model.CurrentEvent.EventId/@ven.VendorId/confirm">Accept</a>
+                                    <a href="/event-detail/@Model.CurrentEvent.EventId/@ven.VendorId/deny">Deny</a> -->
+                                    }
+                                }
+                            }
                     </div>
                 </div>
                 <div id="right-section" class="col-4">  
@@ -118,13 +107,12 @@
                     @{
                         foreach(VendorToEvent ven in Model.CurrentEvent.EventVendors)
                         {
-                            @if(!ven.VendorId.Equals(Model.CurrentUser.UserId))
+                            if(!ven.RequestStatus.Equals("Requested") && @Model.CurrentUser.UserType.Equals("Vendor"))
                             {
                             <form>
                                 <button type="submit" class="join btn btn-secondary" formaction="/event-detail/@Model.CurrentEvent.EventId/request"><p>Join<br>Event</p></button>
                             </form>
                             }
-                            else {}
                         }
                     }
                                
