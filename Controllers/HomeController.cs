@@ -22,11 +22,6 @@ namespace Infinterest.Controllers
         // Signin and login page
         public IActionResult Index()
         {
-            // if (string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
-            // {
-            //     HttpContext.Session.SetString("Login", "False");
-            //     HttpContext.Session.SetInt32("UserId", 0);
-            // }  
             ViewBag.Error = TempData["Error"];
             ViewBag.ErrorReg = TempData["ErrorReg"];
             return View("Index");
@@ -65,10 +60,10 @@ namespace Infinterest.Controllers
                 }
                 ViewModel.SelectedUser = thisBroker;
                 ViewModel.UpcomingEvents = thisBroker.Events
-                                        .FindAll(eve => eve.Confirmed.Equals(true) && eve.OpenHouseDateTime > DateTime.Now)
+                                        .FindAll(eve => eve.Confirmed.Equals(true) && eve.OpenHouseDate > DateTime.Now)
                                         .ToList();
                 ViewModel.PastEvents = thisBroker.Events
-                                        .FindAll(eve => eve.OpenHouseDateTime < DateTime.Now)
+                                        .FindAll(eve => eve.OpenHouseDate < DateTime.Now)
                                         .ToList();
                 return View("BrokerProfile", ViewModel);
             }
@@ -106,10 +101,10 @@ namespace Infinterest.Controllers
                                             .Select(eve => eve.Event)
                                             .ToList();
                 ViewModel.UpcomingEvents = ConfrimedEvents
-                                        .FindAll(eve => eve.OpenHouseDateTime > DateTime.Now)
+                                        .FindAll(eve => eve.OpenHouseDate > DateTime.Now)
                                         .ToList();
                 ViewModel.PastEvents = ConfrimedEvents
-                                        .FindAll(eve => eve.OpenHouseDateTime < DateTime.Now)
+                                        .FindAll(eve => eve.OpenHouseDate < DateTime.Now)
                                         .ToList();
                 return View("VendorProfile", ViewModel);
             }

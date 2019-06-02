@@ -75,7 +75,7 @@
           <div class="eventdetails">
             <div>
               <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
-              <a href="/event-detail/@myEvent.EventId"><h6>@myEvent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @myEvent.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
+              <a href="/event-detail/@myEvent.EventId"><h6>@myEvent.OpenHouseDate.Date.ToString("dddd MMM dd, yyyy") @myEvent.OpenHouseTime.Date.ToString("h:mm tt")</h6></a>
              
               
               <h6>Featured Home Area: @myEvent.AreaOfHouse</h6>
@@ -93,7 +93,7 @@
           <div class="eventdetails">
             <div>
               <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
-              <a href="/event-detail/@past.EventId"><h6>@past.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @past.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
+              <a href="/event-detail/@past.EventId"><h6>@past.OpenHouseDate.Date.ToString("dddd MMM dd, yyyy") @past.OpenHouseTime.Date.ToString("h:mm tt")</h6></a>
              
               
               <h6>Featured Home Area: @past.AreaOfHouse</h6>

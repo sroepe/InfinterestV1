@@ -16,7 +16,8 @@ namespace Infinterest.Models
         public Broker Broker {get; set;}
         public List<Area> AreaOfHouse {get; set;}
 
-        public DateTime OpenHouseDateTime {get; set;}
+        public DateTime OpenHouseDate {get; set;}
+        public DateTime OpenHouseTime {get; set;}
         public virtual List<VendorToEvent> EventVendors {get;set;}
     }
 }

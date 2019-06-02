@@ -52,7 +52,7 @@ namespace Infinterest.Controllers
                                     .Include (eve => eve.EventVendors)
                                         .ThenInclude(ev => ev.Vendor)
                                     .Include (eve => eve.AreaOfHouse)
-                                    .Where (eve => eve.OpenHouseDateTime > DateTime.Now)
+                                    .Where (eve => eve.OpenHouseDate > DateTime.Now)
                                     .Where (eve => eve.Confirmed == false)
                                 .Where(eve => !viewModel.usersEvents.Any(ue=>ue.EventId == eve.EventId))
                                     .ToList();
