@@ -230,8 +230,8 @@ namespace Infinterest.Controllers
                     return RedirectToAction("DashboardBroker", "Broker");
                 }
             }
-                //fake code
-                return Redirect("/dashboardfail");
+                
+                return Redirect("/");
         }
         
         // [HttpGet("messaging")]

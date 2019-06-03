@@ -271,11 +271,12 @@ namespace Infinterest.Controllers
                 
                 Event eventToConfirm = _context.events
                     .Include(eve => eve.EventVendors)
+                    .ThenInclude(ve => ve.Vendor)
                     .FirstOrDefault(eve => eve.EventId == id);
 
                 if(Int32.TryParse(VendorId, out int vid))
                 {
-                    VendorToEvent Request = eventToConfirm.EventVendors.Find(re => re.VendorId == vid);
+                    VendorToEvent Request = eventToConfirm.EventVendors.Find(re => re.Vendor.UserId == vid);
 
                     if(Request == null)
                     {
@@ -311,11 +312,13 @@ namespace Infinterest.Controllers
                 
                 Event eventToConfirm = _context.events
                     .Include(eve => eve.EventVendors)
+                    .ThenInclude(ve => ve.Vendor)
                     .FirstOrDefault(eve => eve.EventId == id);
 
                 if(Int32.TryParse(VendorId, out int vid))
                 {
-                    VendorToEvent Request = eventToConfirm.EventVendors.Find(re => re.VendorId == vid);
+                    VendorToEvent Request = eventToConfirm.EventVendors.Find(re => re.Vendor.UserId == vid);
+
 
                     if(Request == null)
                     {

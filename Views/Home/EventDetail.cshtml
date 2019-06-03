@@ -84,8 +84,8 @@
                                     <img src="@ven.Vendor.ImgUrl" height="100" width="100"> 
                                     <p>@ven.Vendor.Company</p>
                                     <form>
-                                        <button type="submit" class="accept-vendor btn btn-secondary" ><a href="/event-detail/@Model.CurrentEvent.EventId/@ven.VendorId/confirm">Accept</a></button>
-                                        <button type="submit" class="deny-vendor btn btn-secondary"><a href="/event-detail/@Model.CurrentEvent.EventId/@ven.VendorId/deny">Deny</a></button>
+                                        <button type="submit" class="accept-vendor btn btn-secondary" ><a href="/event-detail/@Model.CurrentEvent.EventId/@ven.Vendor.UserId/confirm">Accept</a></button>
+                                        <button type="submit" class="deny-vendor btn btn-secondary"><a href="/event-detail/@Model.CurrentEvent.EventId/@ven.Vendor.UserId/deny">Deny</a></button>
                                     </form>
                                     <!-- <a href="/event-detail/@Model.CurrentEvent.EventId/@ven.VendorId/confirm">Accept</a> -->
                                     <a href="/event-detail/@Model.CurrentEvent.EventId/@ven.VendorId/deny">Deny</a> 
