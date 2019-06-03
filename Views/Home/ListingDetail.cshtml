@@ -71,7 +71,7 @@
                                 <div class="event-info">
                                     <h5>    
                                         <a class="event-link" href="/event-detail/@eve.EventId">
-                                        Open House @eve.OpenHouseDate.Date.ToString("dddd MMM dd, yyyy") @eve.OpenHouseTime.Date.ToString("h:mm tt")
+                                        Open House @eve.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @eve.OpenHouseDateTime.Date.ToString("h:mm tt")
                                         </a>
                                     </h5>
                                     <h5>Confirmed Vendors:</h5>
@@ -116,11 +116,11 @@
                         @{
                             foreach (Event eve in Model.CurrentListing.Events)
                             {
-                                @if(eve.Confirmed.Equals(true) && eve.OpenHouseDate > DateTime.Now) {
+                                @if(eve.Confirmed.Equals(true) && eve.OpenHouseDateTime > DateTime.Now) {
                                     <div class="event-info">
                                         <h5>
                                             <a class="event-link" href="/event-detail/@eve.EventId">
-                                            Open House @eve.OpenHouseDate.Date.ToString("dddd MMM dd, yyyy") @eve.OpenHouseTime.Date.ToString("h:mm tt")</a>
+                                            Open House @eve.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @eve.OpenHouseDateTime.Date.ToString("h:mm tt")</a>
                                         </h5>
                                         <h5>Confirmed Vendors:</h5>
                                         @foreach (VendorToEvent vend in eve.EventVendors)
@@ -139,11 +139,11 @@
                         @{
                             foreach (Event eve in Model.CurrentListing.Events)
                             {
-                                @if(eve.Confirmed.Equals(true) && eve.OpenHouseDate < DateTime.Now) {
+                                @if(eve.Confirmed.Equals(true) && eve.OpenHouseDateTime < DateTime.Now) {
                                     <div class="event-info">
                                         <h5>
                                             <a class="event-link" href="/event-detail/@eve.EventId">
-                                            Open House @eve.OpenHouseDate.Date.ToString("dddd MMM dd, yyyy") @eve.OpenHouseTime.Date.ToString("h:mm tt")</a>
+                                            Open House @eve.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @eve.OpenHouseDateTime.Date.ToString("h:mm tt")</a>
                                         </h5>
                                         <h5>Confirmed Vendors:</h5>
                                         @foreach (VendorToEvent vend in eve.EventVendors)

@@ -16,8 +16,33 @@ namespace Infinterest.Models
         public Broker Broker {get; set;}
         public List<Area> AreaOfHouse {get; set;}
 
-        public DateTime OpenHouseDate {get; set;}
-        public DateTime OpenHouseTime {get; set;}
+        public DateTime OpenHouseDateTime {get; set;}
         public virtual List<VendorToEvent> EventVendors {get;set;}
+
+        public Event()
+        {
+
+        }
+
+        public Event(EventForm Input)
+        {
+            Confirmed = false;
+            EventVendors = new List<VendorToEvent>();
+            AreaOfHouse = Input.AreaOfHouse;
+            OpenHouseDateTime = new DateTime(Input.OpenHouseDate.Ticks + Input.OpenHouseTime.Ticks);
+
+        }
+
+        public Event(EventForm Input, Broker broker, Listing listing)
+        {
+            Confirmed = false;
+            EventVendors = new List<VendorToEvent>();
+            AreaOfHouse = Input.AreaOfHouse;
+            OpenHouseDateTime = new DateTime(Input.OpenHouseDate.Ticks + Input.OpenHouseTime.Ticks);
+            Broker = broker;
+            BrokerId = broker.UserId;
+            Listing = listing;
+            ListingId = listing.ListingId;
+        }
     }
 }

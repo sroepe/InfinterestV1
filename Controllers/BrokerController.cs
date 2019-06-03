@@ -102,18 +102,14 @@ namespace Infinterest.Controllers
         }
 
         [HttpPost("add-event/{ListingId}")]
-        public IActionResult CreateEvent(Event NewEvent, String ListingId)
+        public IActionResult CreateEvent(EventForm Input, String ListingId)
         {
             if (ModelState.IsValid)
             {
                 if(Int32.TryParse(ListingId, out int id))
                 {
-                    NewEvent.EventVendors = new List<VendorToEvent>();
-                    NewEvent.ListingId = id;
                     Listing thisListing = _context.listings
                     .FirstOrDefault(l => l.ListingId == id);
-                    NewEvent.Listing = thisListing;
-
                     
                     int? ID = HttpContext.Session.GetInt32("userid");           
                     Broker user = _context.users
@@ -121,17 +117,20 @@ namespace Infinterest.Controllers
                         .Where(broker => broker.UserId == ID)
                         .FirstOrDefault();
 
+                    if(user == null)
+                    {
+                        return Redirect("/");
+                    }
                     if(thisListing.BrokerId != user.UserId)
                     {
-                        //fake code
                         return Redirect("/notrightuser");
                     }
 
-                    NewEvent.Broker = user;
-                    NewEvent.BrokerId = user.UserId;
-                    user.Events.Add(NewEvent);
+                    Event NewEvent = new Event(Input, user, thisListing);
+
 
                     _context.events.Add(NewEvent);
+                    user.Events.Add(NewEvent);
                     thisListing.Events.Add(NewEvent);
 
                     _context.SaveChanges();

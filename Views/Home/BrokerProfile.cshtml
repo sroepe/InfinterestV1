@@ -63,7 +63,7 @@
         <div class="event-details">
           <div>
             <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
-            <a href="/event-detail/@futureEvent.EventId"><h6>@futureEvent.OpenHouseDate.Date.ToString("dddd MMM dd, yyyy") @futureEvent.OpenHouseTime.Date.ToString("h:mm tt")</h6></a>
+            <a href="/event-detail/@futureEvent.EventId"><h6>@futureEvent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @futureEvent.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
             <h6>Address: @futureEvent.Listing.Address.addressLine1, @futureEvent.Listing.Address.city, @futureEvent.Listing.Address.state</h6> 
             <a href="/broker-profile/@futureEvent.Listing.Broker.UserId"><h6>Broker: @futureEvent.Listing.Broker.FirstName @futureEvent.Listing.Broker.LastName</h6></a>
             <h6>Featured Home Area: @futureEvent.AreaOfHouse</h6>
@@ -79,7 +79,7 @@
         <div class="event-details">
           <div>
             <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
-            <a href="event-detail/@pastEvent.EventId"><h6>@pastEvent.OpenHouseDate.Date.ToString("dddd MMM dd, yyyy") @pastEvent.OpenHouseTime.Date.ToString("h:mm tt")</h6></a>
+            <a href="event-detail/@pastEvent.EventId"><h6>@pastEvent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @pastEvent.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
             <h6>Address: @pastEvent.Listing.Address.addressLine1, @pastEvent.Listing.Address.city, @pastEvent.Listing.Address.state</h6> 
             <a href="broker-profile/@pastEvent.Listing.Broker.UserId"><h6>Broker: @pastEvent.Listing.Broker.FirstName @pastEvent.Listing.Broker.LastName</h6></a>
             <h6>Featured Home Area: @pastEvent.AreaOfHouse</h6>
