@@ -31,6 +31,9 @@ namespace Infinterest.Controllers
                     .ThenInclude(ve => ve.Event)
                         .ThenInclude(ev => ev.Listing)
                             .ThenInclude(li => li.Address)
+                .Include(vend => vend.Events)
+                    .ThenInclude(eve => eve.Event)
+                        .ThenInclude(eve => eve.AreaOfHouse)
                 .FirstOrDefault(vendor => vendor.UserId == ID);
             
             if (user == null)
@@ -54,7 +57,7 @@ namespace Infinterest.Controllers
                                     .Include (eve => eve.AreaOfHouse)
                                     .Where (eve => eve.OpenHouseDate > DateTime.Now)
                                     .Where (eve => eve.Confirmed == false)
-                                .Where(eve => !viewModel.usersEvents.Any(ue=>ue.EventId == eve.EventId))
+                                .Where(eve => !viewModel.usersEvents.Any(ue=>ue.Event.EventId == eve.EventId))
                                     .ToList();
 
             return View ("DashboardVendor", viewModel);
