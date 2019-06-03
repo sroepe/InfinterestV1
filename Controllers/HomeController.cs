@@ -131,15 +131,22 @@ namespace Infinterest.Controllers
                     .Include(ev => ev.Broker)
                     .Include(ev => ev.AreaOfHouse)
                     .Include(ev => ev.Listing)
-                    .ThenInclude(li => li.Address)
+                        .ThenInclude(li => li.Address)
                     .Include(ev => ev.EventVendors)
-                    .ThenInclude(ev => ev.Vendor)  
-                    .ThenInclude(bus => bus.BusinessCategory)  
-                   
-                        
+                        .ThenInclude(ev => ev.Vendor)  
+                        .ThenInclude(bus => bus.BusinessCategory)
                     .FirstOrDefault(ev => ev.EventId == id);
 
                     EventDetailView ViewModel = new EventDetailView(user, thisEvent);
+
+                    if(user.UserType == "Vendor")
+                    {
+                        if(thisEvent.EventVendors.Find(ev => ev.Vendor.UserId == user.UserId) == null)
+                        {
+                            ViewModel.ShowJoinButton = true;
+                        }
+                    }
+
                 return View(ViewModel);
             }
             return RedirectToAction ("Dashboard");

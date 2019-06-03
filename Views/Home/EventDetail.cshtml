@@ -104,18 +104,12 @@
                                 </form>
                             }
                         }    
-                    @{
-                        foreach(VendorToEvent ven in Model.CurrentEvent.EventVendors)
-                        {
-                            if(!ven.RequestStatus.Equals("Requested") && @Model.CurrentUser.UserType.Equals("Vendor"))
-                            {
-                            <form>
-                                <button type="submit" class="join btn btn-secondary" formaction="/event-detail/@Model.CurrentEvent.EventId/request"><p>Join<br>Event</p></button>
-                            </form>
-                            }
-                        }
+                    @if(@Model.ShowJoinButton == true)
+                    {
+                        <form>
+                            <button type="submit" class="join btn btn-secondary" formaction="/event-detail/@Model.CurrentEvent.EventId/request"><p>Join<br>Event</p></button>
+                        </form>
                     }
-                               
                     <form>
                         <button class="close" type="submit" formaction="/dashboard">&times;</button>
                     </form>  

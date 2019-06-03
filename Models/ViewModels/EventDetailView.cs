@@ -12,10 +12,13 @@ namespace Infinterest.Models
 
         public Event CurrentEvent {get;set;}
 
+        public Boolean ShowJoinButton {get;set;}
+
         public EventDetailView(User userInput, Event eventInput)
         {
             CurrentUser = userInput;
             CurrentEvent = eventInput;
+            ShowJoinButton = false;
         }
     }
 }
