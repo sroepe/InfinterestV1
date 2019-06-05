@@ -86,6 +86,8 @@ namespace Infinterest.Controllers
 
             DisplayModel.AvailableVendors = _context.users
             .OfType<Vendor>()
+                .Include(ven => ven.BusinessCategory)
+                .Include(ven => ven.AreaOfHouse)
             .ToList();
 
             return View("DashboardBroker", DisplayModel);

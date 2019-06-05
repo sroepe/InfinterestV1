@@ -38,7 +38,7 @@ namespace Infinterest.Models
             Confirmed = false;
             EventVendors = new List<VendorToEvent>();
             AreaOfHouse = Input.AreaOfHouse;
-            OpenHouseDateTime = new DateTime(Input.OpenHouseDate.Ticks + Input.OpenHouseTime.Ticks);
+            OpenHouseDateTime = new DateTime(Input.OpenHouseDate.Ticks + Input.OpenHouseTime.TimeOfDay.Ticks);
             Broker = broker;
             BrokerId = broker.UserId;
             Listing = listing;

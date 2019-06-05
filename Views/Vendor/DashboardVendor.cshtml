@@ -184,7 +184,12 @@
                   
                   <h6>@reqEvent.Event.Listing.Address.addressLine1, @reqEvent.Event.Listing.Address.city, @reqEvent.Event.Listing.Address.state @reqEvent.Event.Listing.Address.postalCode</h6> 
                   <a href="/broker-profile/@reqEvent.Event.Listing.BrokerId"><h6>Broker: @reqEvent.Event.Listing.Broker.FirstName @reqEvent.Event.Listing.Broker.LastName</h6></a>
-                  //will have area(s) of house here
+                  <!-- will have area(s) of house here -->
+                  <h6>Areas Of House:</h6>
+                  @foreach (Area are in reqEvent.Event.AreaOfHouse)
+                  {
+                      <span>@are.area</span>
+                  }
                 </div>
               </div>
               }

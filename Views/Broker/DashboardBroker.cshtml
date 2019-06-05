@@ -132,9 +132,21 @@
                         <div class="venContact">
                             <h4>@vendorAvailable.Company</h4>
                             <h5>Name: @vendorAvailable.FirstName @vendorAvailable.LastName</h5>
-                            //will have foreach to loop through area of house and business category
                             <h5>Website: @vendorAvailable.Website</h5>
                             <h5>Phone: @vendorAvailable.Contact</h5>
+                            <!-- will have foreach to loop through area of house and business category -->
+                            <h5>Buisness Catergory: 
+                                @foreach (Business cat in vendorAvailable.BusinessCategory)
+                                {
+                                    <span>@cat.business</span>
+                                }
+                            </h5>
+                            <h5>Area Of House: 
+                                @foreach (Area ar in vendorAvailable.AreaOfHouse)
+                                {
+                                    <span>ar.area</span>
+                                }
+                            </h5>
                         </div>
                     </button>
                 </form>
