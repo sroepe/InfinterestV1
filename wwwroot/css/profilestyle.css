@@ -38,13 +38,13 @@ body, html, .profilecontainer{
   margin-top: 25%;
 }
 
-.user-conf-events {
+.user-confup-events {
   display: inline-block;
   vertical-align: top;
   margin: 5% 1%;
 }
 
-.user-pend-events {
+.user-past-events {
   display: inline-block;
   vertical-align: top;
   margin: 5% 1%;

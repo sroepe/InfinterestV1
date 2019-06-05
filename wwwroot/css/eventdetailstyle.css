@@ -54,11 +54,10 @@ h5.resinfo {
     height: 75px;   
 }
 
-.join.btn.btn-secondary {
+.join.btn.btn-secondary, .accept-vendor.btn.btn-secondary, .deny-vendor.btn.btn-secondary {
     border-radius: 50%;
     width: 75px;
     height: 75px;
-    
 }
 
 /* Phone devices */

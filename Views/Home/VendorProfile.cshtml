@@ -6,13 +6,15 @@
 @using Microsoft.AspNetCore.Http;
 
 @section css {  
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
   <link href="@Url.Content("~/css/nav.css")" rel="stylesheet" type="text/css" />
   <link href="@Url.Content("~/css/profilestyle.css")" rel="stylesheet" type="text/css" />
 }
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 
 <header>
@@ -65,7 +67,7 @@
   
   <!-- End of content/profile -->
   </div>
-  <div class="col-5 user-conf-events">
+  <div class="col-5 user-confup-events">
     <h4>Upcoming Confirmed Events</h4>
       @{
         foreach (Event myEvent in Model.UpcomingEvents)
@@ -86,6 +88,8 @@
           }
         }
       }
+  </div>
+  <div class="col-3 user-past-events">
     <h4>Past Confirmed Events</h4>
      @{
         foreach (Event past in Model.PastEvents)
@@ -93,7 +97,7 @@
           <div class="eventdetails">
             <div>
               <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
-              <a href="/event-detail/@past.EventId"><h6>@past.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @past.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
+              <a href="/event-detail/@past.EventId"><h6>@past.OpenHouseDateTime.ToString("dddd MMM dd, yyyy" + " h:mm tt")</h6></a>
              
               
               <h6>Featured Home Area: @past.AreaOfHouse</h6>
@@ -103,9 +107,5 @@
           </div>
         }
       }
-  </div>
-  <div class="col-3 user-pend-events">
-    <h4>Pending Events</h4>
-    <p>We need something in the ViewModel to grab this I think?</p>
   </div>
 </div>

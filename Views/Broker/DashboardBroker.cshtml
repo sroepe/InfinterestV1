@@ -6,9 +6,15 @@
 @using Microsoft.AspNetCore.Http;
 
 @section css {
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="@Url.Content("~/css/dashboardstyle.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/css/nav.css")" rel="stylesheet" type="text/css" />
 }
+
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <head>
     <meta charset="utf-8">
 </head>
@@ -135,10 +141,10 @@
                             <h5>Website: @vendorAvailable.Website</h5>
                             <h5>Phone: @vendorAvailable.Contact</h5>
                             <!-- will have foreach to loop through area of house and business category -->
-                            <h5>Buisness Catergory: 
+                            <h5>Business Category: 
                                 @foreach (Business cat in vendorAvailable.BusinessCategory)
                                 {
-                                    <span>@cat.business</span>
+                                    <span>cat.business</span>
                                 }
                             </h5>
                             <h5>Area Of House: 
@@ -183,10 +189,10 @@
                     @{
                         foreach (Event listevent in list.Events)
                         {     
-                            if(listevent.Confirmed.Equals(true) && listevent.OpenHouseDateTime.Date > DateTime.Now){
+                            if(listevent.Confirmed.Equals(true)){
                                 <form>
                                     <button class="btn btn-secondary" formaction="/event-detail/@listevent.EventId">
-                                        <h6>@listevent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @listevent.OpenHouseDateTime.Date.ToString("h:mm tt")</h6>
+                                        <h6>@listevent.OpenHouseDateTime.ToString("dddd MMM dd, yyyy" + " h:mm tt")</h6>
                                         <h6><span class="confirmed">CONFIRMED</span></h6>
                                     </button>
                                 </form>
@@ -195,7 +201,7 @@
                             {
                                 <form>
                                     <button class="btn btn-secondary" formaction="/event-detail/@listevent.EventId">
-                                        <h6>@listevent.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @listevent.OpenHouseDateTime.Date.ToString("h:mm tt")</h6>
+                                        <h6>@listevent.OpenHouseDateTime.ToString("dddd MMM dd, yyyy" + " h:mm tt")</h6>
                                         <h6>Requests <span id="reqsbadge" class="badge"> @listevent.EventVendors.Where(ev => ev.RequestStatus == "Requested").Count()</span></h6>
                                     </button>
                                 </form>

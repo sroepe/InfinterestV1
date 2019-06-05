@@ -7,6 +7,7 @@
 @model ListingDetailView
 
 @section css {
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
@@ -14,7 +15,8 @@
     <link href="@Url.Content("~/css/nav.css")" rel="stylesheet" type="text/css" />
 }
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 
 <header>
@@ -71,7 +73,7 @@
                                 <div class="event-info">
                                     <h5>    
                                         <a class="event-link" href="/event-detail/@eve.EventId">
-                                        Open House @eve.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @eve.OpenHouseDateTime.Date.ToString("h:mm tt")
+                                        Open House @eve.OpenHouseDateTime.ToString("dddd MMM dd, yyyy" + " h:mm tt")
                                         </a>
                                     </h5>
                                     <h5>Confirmed Vendors:</h5>
@@ -102,7 +104,7 @@
                             }
                         }
                         @if(Model.CurrentListing.BrokerId == Model.CurrentUser.UserId) {
-                            <a href="/listing-detail/@Model.CurrentListing.ListingId/archive">Archive Listing</a>
+                            <a href="/listing/@Model.CurrentListing.ListingId/archive">Archive Listing</a>
                             <form class="add-event-form">
                                 <button type="submit" class="btn btn-secondary" formaction="/add-event/@Model.CurrentListing.ListingId">Create Event</button>
                             </form>
@@ -120,7 +122,7 @@
                                     <div class="event-info">
                                         <h5>
                                             <a class="event-link" href="/event-detail/@eve.EventId">
-                                            Open House @eve.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @eve.OpenHouseDateTime.Date.ToString("h:mm tt")</a>
+                                            Open House @eve.OpenHouseDateTime.ToString("dddd MMM dd, yyyy" + " h:mm tt")</a>
                                         </h5>
                                         <h5>Confirmed Vendors:</h5>
                                         @foreach (VendorToEvent vend in eve.EventVendors)
@@ -143,7 +145,7 @@
                                     <div class="event-info">
                                         <h5>
                                             <a class="event-link" href="/event-detail/@eve.EventId">
-                                            Open House @eve.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @eve.OpenHouseDateTime.Date.ToString("h:mm tt")</a>
+                                            Open House @eve.OpenHouseDateTime.ToString("dddd MMM dd, yyyy" + " h:mm tt")</a>
                                         </h5>
                                         <h5>Confirmed Vendors:</h5>
                                         @foreach (VendorToEvent vend in eve.EventVendors)

@@ -4,9 +4,15 @@
 @model DashboardVendorView;
 
 @section css {
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="@Url.Content("~/css/dashboardstyle.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/css/nav.css")" rel="stylesheet" type="text/css" />
 }
+
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <header>
     <img src="../images/white-nosub-inflogo.png" alt="logo" class="white-logo">
     <input type="checkbox" id="nav-toggle" class="nav-toggle">
@@ -113,7 +119,7 @@
             <div class="allevents">
               <div class="eventhead">
                 <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
-                <a href="/event-detail/@eve.EventId"><h5>@eve.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @eve.OpenHouseDateTime.Date.ToString("h:mm tt")</h5></a>
+                <a href="/event-detail/@eve.EventId"><h5>@eve.OpenHouseDateTime.ToString("dddd MMM dd, yyyy" + " h:mm tt")</h5></a>
                 @{
                   foreach (Area ar in @eve.AreaOfHouse) 
                   {
@@ -151,13 +157,13 @@
           @{
             foreach (VendorToEvent events in Model.usersEvents)
             {
-              @if(events.RequestStatus.Equals("Accepted") && events.Event.Confirmed.Equals(true)){
+              @if(events.RequestStatus.Equals("Accepted")){
                 <div class="eventdetails">
                 <div>
                   <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
-                  <a href="/event-detail/@events.Event.EventId"><h6>@events.Event.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @events.Event.OpenHouseDateTime.Date.ToString("h:mm tt")</h6></a>
+                  <a href="/event-detail/@events.Event.EventId"><h6>@events.Event.OpenHouseDateTime.ToString("dddd MMM dd, yyyy" + " h:mm tt")</h6></a>
                   <h6>Address: @events.Event.Listing.Address.addressLine1, @events.Event.Listing.Address.city, @events.Event.Listing.Address.state</h6> 
-                  <a href="/broker-profile/@events.Event.Listing.Broker.UserId"><h6>Broker: @events.Event.Listing.Broker.FirstName @events.Event.Listing.Broker.LastName</h6></a>
+                  
                   @{
                     foreach (Area ar in @events.Event.AreaOfHouse) 
                     {
@@ -180,10 +186,10 @@
               <div class="eventdetails">
                 <div>
                   <!--HAILEY TO UPDATE DB TO STORE EVENT TIME-->
-                  <a href="/event-detail/@reqEvent.Event.EventId"><h5>@reqEvent.Event.OpenHouseDateTime.Date.ToString("dddd MMM dd, yyyy") @reqEvent.Event.OpenHouseDateTime.Date.ToString("h:mm tt")</h5></a>
+                  <a href="/event-detail/@reqEvent.Event.EventId"><h5>@reqEvent.Event.OpenHouseDateTime.ToString("dddd MMM dd, yyyy" + " h:mm tt")</h5></a>
                   
                   <h6>@reqEvent.Event.Listing.Address.addressLine1, @reqEvent.Event.Listing.Address.city, @reqEvent.Event.Listing.Address.state @reqEvent.Event.Listing.Address.postalCode</h6> 
-                  <a href="/broker-profile/@reqEvent.Event.Listing.BrokerId"><h6>Broker: @reqEvent.Event.Listing.Broker.FirstName @reqEvent.Event.Listing.Broker.LastName</h6></a>
+                 
                   <!-- will have area(s) of house here -->
                   <h6>Areas Of House:</h6>
                   @foreach (Area are in reqEvent.Event.AreaOfHouse)

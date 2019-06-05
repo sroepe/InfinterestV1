@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 @{
-    ViewData["Title"] = "Broker Registration";
+    ViewData["Title"] = "Vendor Registration";
 }
 
 @model VendorReg2
 @using Microsoft.AspNetCore.Http;
 
 @section css {
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="@Url.Content("~/css/registrationstyle.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/css/nav.css")" rel="stylesheet" type="text/css" />
 }
 
-<head>
-</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <header>
   <img src="../images/white-nosub-inflogo.png" alt="logo" class="white-logo">
@@ -46,7 +47,7 @@
                         @if(homeArea.AreaId >= 1 && homeArea.AreaId <= 4){
                             <div class="col-4">
                                 <div class="checkboxes">
-                                    <input type="checkbox" id="homearea" value="@homeArea.area">
+                                    <input type="checkbox" id="homearea" value="@homeArea.AreaId">
                                     <label for="homearea">@homeArea.area</label>
                                 </div>
                             </div>   
@@ -54,7 +55,7 @@
                         @if(homeArea.AreaId >= 5 && homeArea.AreaId <= 8){
                             <div class="col-4">
                                 <div class="checkboxes">
-                                    <input type="checkbox" id="homearea" value="@homeArea.area">
+                                    <input type="checkbox" id="homearea" value="@homeArea.AreaId">
                                     <label for="homearea">@homeArea.area</label>
                                 </div>
                             </div>
@@ -62,7 +63,7 @@
                         @if(homeArea.AreaId >= 9 && homeArea.AreaId <= 12){
                             <div class="col-4">
                                 <div class="checkboxes">
-                                    <input type="checkbox" id="homearea" value="@homeArea.area">
+                                    <input type="checkbox" id="homearea" value="@homeArea.AreaId">
                                     <label for="homearea">@homeArea.area</label>
                                 </div>
                             </div>
@@ -81,7 +82,7 @@
                             @if(busCat.BusinessId >= 1 && busCat.BusinessId <= 6){
                                 <div class="col-4">
                                     <div class="checkboxes">
-                                        <input type="checkbox" id="buscat" value="@busCat.business">
+                                        <input type="checkbox" id="buscat" value="@busCat.BusinessId">
                                         <label for="homearea">@busCat.business</label>
                                     </div>
                                 </div>   
@@ -89,7 +90,7 @@
                             @if(busCat.BusinessId >= 7 && busCat.BusinessId <= 12){
                                 <div class="col-4">
                                     <div class="checkboxes">
-                                        <input type="checkbox" id="buscat" value="@busCat.business">
+                                        <input type="checkbox" id="buscat" value="@busCat.BusinessId">
                                         <label for="buscat">@busCat.business</label>
                                     </div>
                                 </div>   
@@ -97,7 +98,7 @@
                             @if(busCat.BusinessId >= 13){
                                 <div class="col-4">
                                     <div class="checkboxes">
-                                        <input type="checkbox" id="buscat" value="@busCat.business">
+                                        <input type="checkbox" id="buscat" value="@busCat.BusinessId">
                                         <label for="buscat">@busCat.business</label>
                                     </div>
                                 </div>   
